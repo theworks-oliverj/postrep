@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://virgil-protocol.example/schemas/merge_report.schema.json",
+  "title": "Merge report",
+  "description": "Report.",
+  "type": "object",
+  "properties": {
+    "generated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When."
+    },
+    "ok": {
+      "type": "boolean",
+      "description": "true when there are no error-level issues."
+    },
+    "counts": {
+      "type": "object",
+      "description": "Numbers: files_read, candidates_in, candidates_out, replaced, exact_duplicates_dropped, near_duplicates, overrides_applied, screening_rows_in/out, ranked_out_purged, unscored_records."
+    },
+    "issues": {
+      "type": "array",
+      "description": "All issues.",
+      "items": {
+        "type": "object",
+        "description": "One merge issue.",
+        "properties": {
+          "level": {
+            "enum": [
+              "error",
+              "warning",
+              "info"
+            ],
+            "description": "error stops 'ok'; warning is informational."
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine code."
+          },
+          "message": {
+            "type": "string",
+            "description": "Human text."
+          },
+          "ref": {
+            "type": "string",
+            "description": "File, id or country the issue refers to."
+          }
+        },
+        "required": [
+          "level",
+          "code",
+          "message"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "exact_duplicates_dropped": {
+      "type": "array",
+      "description": "Records removed by the exact-key rule.",
+      "items": {
+        "type": "object",
+        "description": "One drop.",
+        "properties": {
+          "kept": {
+            "type": "string",
+            "description": "Kept id."
+          },
+          "dropped": {
+            "type": "string",
+            "description": "Dropped id."
+          },
+          "key": {
+            "type": "string",
+            "description": "Normalised key."
+          }
+        },
+        "required": [
+          "kept",
+          "dropped",
+          "key"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "near_duplicates": {
+      "type": "array",
+      "description": "Flag-only pairs with similarity >= threshold.",
+      "items": {
+        "type": "object",
+        "description": "One pair.",
+        "properties": {
+          "a": {
+            "type": "string",
+            "description": "Id/label A."
+          },
+          "b": {
+            "type": "string",
+            "description": "Id/label B."
+          },
+          "ratio": {
+            "type": "number",
+            "description": "difflib ratio.",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "same_track": {
+            "type": "boolean",
+            "description": "Same track (likely a true duplicate)?"
+          }
+        },
+        "required": [
+          "a",
+          "b",
+          "ratio"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "overrides_applied": {
+      "type": "array",
+      "description": "Applied overrides with the original value found.",
+      "items": {
+        "type": "object"
+      }
+    },
+    "overrides_unmatched": {
+      "type": "array",
+      "description": "Overrides whose target id was not found.",
+      "items": {
+        "type": "object"
+      }
+    },
+    "delta_vs_baseline": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Counts of axis changes vs baseline (up/down/same/filled_from_unknown/lost_to_unknown)."
+    },
+    "countries": {
+      "type": "object",
+      "description": "slug -> {status, status_effective, followup_files, records}.",
+      "additionalProperties": {
+        "type": "object"
+      }
+    }
+  },
+  "required": [
+    "generated",
+    "ok",
+    "counts",
+    "issues"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,288 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://virgil-protocol.example/schemas/search_plan.schema.json",
+  "title": "Search plan",
+  "description": "Search plan.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Schema version."
+    },
+    "rubric_version": {
+      "type": "string",
+      "description": "Rubric version used for all state vectors in this run."
+    },
+    "created": {
+      "type": "string",
+      "format": "date",
+      "description": "Creation date."
+    },
+    "countries": {
+      "type": "array",
+      "description": "Countries to search.",
+      "items": {
+        "type": "object",
+        "description": "One country.",
+        "properties": {
+          "slug": {
+            "type": "string",
+            "description": "Lower-case slug (file stem).",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name."
+          },
+          "depth": {
+            "enum": [
+              "deep",
+              "standard",
+              "quick"
+            ],
+            "description": "deep = many relevant institutions, full-record cap N = 12; standard = N = 8; quick = N = 4 (the only depth whose cap_n may be omitted)."
+          },
+          "cap_n": {
+            "type": "integer",
+            "description": "Max full records written before the cap (the rest go to ranked_out). Protocol defaults: deep 12, standard 8, quick 4. Optional only for depth 'quick' (default 4); deep/standard should state it (validate.py warns).",
+            "minimum": 1
+          },
+          "wave": {
+            "type": "integer",
+            "description": "Wave number (waves run sequentially, countries in a wave in parallel).",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "slug",
+          "name",
+          "depth",
+          "wave"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "crosscuts": {
+      "type": "array",
+      "description": "Cross-country scans.",
+      "items": {
+        "type": "object",
+        "description": "One cross-cut.",
+        "properties": {
+          "slug": {
+            "type": "string",
+            "description": "File stem in 04_search/crosscuts.",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name."
+          },
+          "kind": {
+            "enum": [
+              "programme_scan",
+              "funding_route"
+            ],
+            "description": "programme_scan = scans multi-country programmes (candidates join the ranking); funding_route = verifies one scheme that is not tied to a country (kept as an overlay)."
+          },
+          "description": {
+            "type": "string",
+            "description": "What it covers."
+          }
+        },
+        "required": [
+          "slug",
+          "name",
+          "kind",
+          "description"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "overlay_policy": {
+      "type": "string",
+      "description": "How schemes with strings attached (return obligations, competitive awards) are shown, e.g. 'overlay only: never raise the base funding score; show effect and obligations next to it'."
+    },
+    "wave_weights": {
+      "type": "object",
+      "description": "Cost weights used to size a wave (a wave should not exceed the capacity of one usage window). Defaults when absent: deep 1.5, standard 1, quick 0.5, crosscut 0.75.",
+      "properties": {
+        "deep": {
+          "type": "number",
+          "description": "Weight of a deep country agent.",
+          "minimum": 0
+        },
+        "standard": {
+          "type": "number",
+          "description": "Weight of a standard country agent.",
+          "minimum": 0
+        },
+        "quick": {
+          "type": "number",
+          "description": "Weight of a quick country agent.",
+          "minimum": 0
+        },
+        "crosscut": {
+          "type": "number",
+          "description": "Weight of a cross-cut agent.",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "benchmarks_ref": {
+      "type": "string",
+      "description": "Path to benchmarks.json relative to RUN_DIR (02_map/benchmarks.json)."
+    },
+    "funded_definition": {
+      "type": "object",
+      "description": "What 'funded' means in this run (copied from life_plan.money; LP-G3 turned into numbers).",
+      "properties": {
+        "type": {
+          "enum": [
+            "stipend_and_tuition",
+            "tuition_only",
+            "affordable"
+          ],
+          "description": "stipend_and_tuition = tuition-free AND a living stipend; tuition_only = tuition covered, living costs paid by the person; affordable = the person pays, below max_out_of_pocket."
+        },
+        "max_total_tuition": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Ceiling for total tuition over the whole degree (null = none)."
+        },
+        "max_out_of_pocket": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Ceiling for everything the applicant pays themselves over the whole degree (null = none)."
+        },
+        "living_support_required_monthly": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Monthly living support the funding must provide for the whole household (null = none)."
+        },
+        "household_size": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "People the living support must cover (applicant + dependants).",
+          "minimum": 1
+        },
+        "currency": {
+          "type": "string",
+          "description": "ISO 4217 code of all amounts."
+        },
+        "min_funding_score": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3,
+          "description": "Lowest funding-axis score that still counts as 'funded' for this applicant. Used by the follow-up stop rule. Default if absent: 3 for stipend_and_tuition, 2 for tuition_only, 1 for affordable (followups.py prints which value it used)."
+        }
+      },
+      "required": [
+        "type",
+        "currency"
+      ],
+      "additionalProperties": false
+    },
+    "eligibility_facts_ref": {
+      "type": "string",
+      "description": "Pointer to the eligibility facts, normally '01_life_plan/life_plan.json#eligibility_facts'. Facts are not duplicated here."
+    },
+    "exclusions": {
+      "type": "array",
+      "description": "Countries/regions/programme types excluded, with the reason. Either {country, reason} objects (preferred) or plain strings such as 'X: reason'.",
+      "items": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object",
+            "description": "One exclusion.",
+            "properties": {
+              "country": {
+                "type": "string",
+                "description": "Country, region or programme type excluded."
+              },
+              "reason": {
+                "type": "string",
+                "description": "Why."
+              }
+            },
+            "required": [
+              "country",
+              "reason"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "session_plan": {
+      "type": "object",
+      "description": "How the search is spread over usage windows.",
+      "properties": {
+        "waves": {
+          "type": "array",
+          "description": "Waves.",
+          "items": {
+            "type": "object",
+            "description": "One wave.",
+            "properties": {
+              "wave": {
+                "type": "integer",
+                "description": "Wave number.",
+                "minimum": 1
+              },
+              "countries": {
+                "type": "array",
+                "description": "Slugs.",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "expected_windows": {
+                "type": "number",
+                "description": "Expected usage windows.",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "wave",
+              "countries",
+              "expected_windows"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "agents_per_window_estimate": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Agents that fit in one usage window (update from run_state.agents_per_window_observed)."
+        }
+      },
+      "required": [
+        "waves"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "countries",
+    "crosscuts",
+    "funded_definition",
+    "session_plan"
+  ],
+  "additionalProperties": false
+}

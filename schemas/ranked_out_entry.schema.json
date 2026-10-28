@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://virgil-protocol.example/schemas/ranked_out_entry.schema.json",
+  "title": "Ranked-out entry",
+  "description": "One ranked-out programme.",
+  "type": "object",
+  "properties": {
+    "institution": {
+      "type": "string",
+      "description": "Institution name."
+    },
+    "programme": {
+      "type": "string",
+      "description": "Programme name."
+    },
+    "prelim_state_vector": {
+      "$ref": "state_vector.schema.json",
+      "description": "Cheap preliminary vector (notes optional)."
+    },
+    "why_below_cut": {
+      "type": "string",
+      "description": "One line: why it is below the cap."
+    },
+    "promote": {
+      "type": "boolean",
+      "description": "true = the agent believes this should be promoted to a full record (late-found strong candidate, or evidence incomplete). Triggers followups.py 'promote_flag'."
+    },
+    "promote_reason": {
+      "type": "string",
+      "description": "Required in practice when promote is true: what evidence would justify promotion."
+    }
+  },
+  "required": [
+    "institution",
+    "programme",
+    "prelim_state_vector",
+    "why_below_cut",
+    "promote"
+  ],
+  "additionalProperties": false
+}

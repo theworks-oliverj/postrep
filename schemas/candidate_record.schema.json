@@ -1,0 +1,780 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://virgil-protocol.example/schemas/candidate_record.schema.json",
+  "title": "Candidate programme record",
+  "description": "One fully-evidenced programme. Written by country/follow-up/cross-cut agents through checkpoint.py add-candidate. Fields prefixed '_' are added by merge.py and may not be written by agents.",
+  "type": "object",
+  "required": [
+    "id",
+    "prior_id",
+    "status",
+    "institution",
+    "programme",
+    "track",
+    "city",
+    "degree_type_and_length",
+    "sources",
+    "axis_1_curriculum",
+    "axis_1_verdict",
+    "axis_2_pathway",
+    "practical_component",
+    "progression",
+    "language",
+    "tuition",
+    "funding",
+    "deadlines",
+    "state_vector",
+    "benchmark_comparison",
+    "confidence",
+    "open_questions"
+  ],
+  "additionalProperties": false,
+  "patternProperties": {
+    "^_": {
+      "description": "Computed by merge.py (e.g. _total, _rank, _overrides_applied). Not written by agents."
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "<PREFIX><yy>-<nn>, e.g. IT26-03. PREFIX = 2-4 capitals (ISO country code, or a cross-cut code). An optional trailing capital letter is allowed for follow-up revisions.",
+      "pattern": "^[A-Z]{2,4}[0-9]{2}-[0-9]{2,3}[A-Z]?$"
+    },
+    "prior_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Id in the prior ledger / baseline when this re-verifies a known entry; null for net-new."
+    },
+    "status": {
+      "enum": [
+        "net_new",
+        "update_of_existing",
+        "reconfirmed"
+      ],
+      "description": "net_new = not in the prior ledger; update_of_existing = re-assessed prior entry with changes; reconfirmed = re-assessed, unchanged."
+    },
+    "replaces": {
+      "type": "string",
+      "description": "Follow-up only: id of the first-pass record this one supersedes. merge.py keeps the replaced id and stores the old vector."
+    },
+    "provenance": {
+      "type": "object",
+      "description": "Which pass produced this record.",
+      "properties": {
+        "pass": {
+          "enum": [
+            "first_pass",
+            "followup",
+            "crosscut"
+          ],
+          "description": "Where the record came from."
+        },
+        "agent": {
+          "type": "string",
+          "description": "Agent/model label."
+        },
+        "session": {
+          "type": "integer",
+          "description": "Session number from run_state.sessions."
+        },
+        "recorded_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the record was written."
+        }
+      },
+      "additionalProperties": false
+    },
+    "institution": {
+      "type": "string",
+      "description": "Institution name (include faculty/department if it matters)."
+    },
+    "programme": {
+      "type": "string",
+      "description": "Programme name."
+    },
+    "track": {
+      "type": "string",
+      "description": "Specialisation/track, or '' if none."
+    },
+    "city": {
+      "type": "string",
+      "description": "City of study (programme location)."
+    },
+    "country": {
+      "type": "string",
+      "description": "Country name (optional; merge adds a slug)."
+    },
+    "degree_type_and_length": {
+      "type": "string",
+      "description": "e.g. 'MSc, 120 credits / 2 years; thesis-based' or 'MBA, 12 months full-time'. State the credit system used by the institution."
+    },
+    "sources": {
+      "type": "array",
+      "description": "One entry per evidence claim. Replaces the old fixed source_urls object. source_type and accessed_date are strongly recommended and are REQUIRED when a record is written through checkpoint.py (older/converted data may omit them; validate.py warns).",
+      "items": {
+        "type": "object",
+        "description": "One source.",
+        "properties": {
+          "claim_field": {
+            "type": "string",
+            "description": "What the source supports. Conventional values: programme, study_plan, pathway, admissions_language, tuition, scholarship, deadline. Free-form others allowed."
+          },
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The page opened. Must be a page the agent actually opened, or null (then add a note and an open_question). Never invent a URL."
+          },
+          "source_type": {
+            "enum": [
+              "official",
+              "aggregator",
+              "pdf",
+              "news",
+              "other"
+            ],
+            "description": "official = institution/government/funder page; aggregator = scholarship or ranking portal; pdf = document download; news; other."
+          },
+          "accessed_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date the agent opened the page (YYYY-MM-DD)."
+          },
+          "note": {
+            "type": "string",
+            "description": "What the page shows / why url is null."
+          }
+        },
+        "required": [
+          "claim_field",
+          "url"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "axis_1_curriculum": {
+      "type": "object",
+      "description": "Coverage by user-defined knowledge domain. Keys are the domain ids in study_pathway_map.domains (pattern ^[A-Z][A-Z0-9_]*$) - NOT a fixed A-J list.",
+      "minProperties": 1,
+      "patternProperties": {
+        "^[A-Z][A-Z0-9_]*$": {
+          "type": "object",
+          "description": "Coverage of one knowledge domain by one programme.",
+          "properties": {
+            "grade": {
+              "enum": [
+                "None",
+                "Weak",
+                "Moderate",
+                "Strong",
+                "Unavailable"
+              ],
+              "description": "Evidence-based grade from NAMED modules in an official study plan. 'Unavailable' = study plan could not be located; never guess from a description page."
+            },
+            "evidence": {
+              "type": "string",
+              "description": "Module names/codes or the reason the grade is a judgement."
+            },
+            "confidence": {
+              "enum": [
+                "confirmed",
+                "inferred",
+                "verification_needed",
+                "unknown"
+              ],
+              "description": "How firm the evidence is."
+            },
+            "module_ids": {
+              "type": "array",
+              "description": "Module codes or titles that justify the grade.",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "grade",
+            "evidence"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "axis_1_verdict": {
+      "type": "string",
+      "description": "One-paragraph curriculum verdict."
+    },
+    "axis_2_pathway": {
+      "type": "object",
+      "description": "Pathway evidence: the people and organisations connected to this programme that lead towards the person's goal (supervisors and labs, industry partners, internship or placement schemes, professional bodies).",
+      "properties": {
+        "people_and_partners": {
+          "type": "array",
+          "description": "People and organisations relevant to the pathway signals. 'Exists at the institution' is not 'available to this programme's students': record that in takes_students.",
+          "items": {
+            "type": "object",
+            "description": "One person-or-partner entry.",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the group, lab, company, scheme or body."
+              },
+              "type": {
+                "enum": [
+                  "research_group",
+                  "lab",
+                  "industry_partner",
+                  "internship_programme",
+                  "placement_scheme",
+                  "professional_body",
+                  "other"
+                ],
+                "description": "What kind of entry this is."
+              },
+              "url": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Page the agent actually opened, or null (then add a note and an open_question). Never invent a URL."
+              },
+              "contacts": {
+                "type": "array",
+                "description": "Named people at this group or organisation.",
+                "items": {
+                  "type": "object",
+                  "description": "One named contact.",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Full name as published."
+                    },
+                    "role": {
+                      "type": "string",
+                      "description": "Role or title, e.g. professor, programme director, placement lead, hiring manager."
+                    },
+                    "focus": {
+                      "type": "string",
+                      "description": "Focus relevant to the pathway signals."
+                    },
+                    "recent_work": {
+                      "type": "string",
+                      "description": "Recent publications, projects or placements, or 'not extracted'."
+                    },
+                    "url": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "Staff, group or company page the agent actually opened, or null (then add a note and an open_question). Never invent a URL."
+                    },
+                    "takes_students": {
+                      "enum": [
+                        "confirmed",
+                        "inferred",
+                        "verification_needed"
+                      ],
+                      "description": "confirmed = a page or the person says students of THIS programme can work with them (supervision, placement, internship, sponsored project); inferred = plausible from programme design; verification_needed = the entity exists but access for this programme's students is unknown."
+                    },
+                    "evidence": {
+                      "type": "string",
+                      "description": "Short note supporting the takes_students claim."
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "role",
+                    "focus",
+                    "recent_work",
+                    "url",
+                    "takes_students"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "name",
+              "type",
+              "url",
+              "contacts"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "summary": {
+          "type": "string",
+          "description": "What the pathway evidence adds up to."
+        }
+      },
+      "required": [
+        "people_and_partners",
+        "summary"
+      ],
+      "additionalProperties": false
+    },
+    "practical_component": {
+      "type": "object",
+      "description": "The practical element of the programme (thesis, internship, placement, capstone, co-op, studio or clinic).",
+      "properties": {
+        "type": {
+          "enum": [
+            "thesis",
+            "internship",
+            "industry_placement",
+            "capstone",
+            "co_op",
+            "studio_or_clinic",
+            "none",
+            "other"
+          ],
+          "description": "Kind of practical component."
+        },
+        "credits": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Credits it carries, in the institution's own credit system (null = not found)."
+        },
+        "self_proposed": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "May the student propose the topic or project? null = unknown."
+        },
+        "external_host_allowed": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "May the practical component be done at an external host (company, other institution)? null = unknown."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Credit system, duration, constraints, evidence."
+        }
+      },
+      "required": [
+        "type",
+        "credits",
+        "self_proposed",
+        "external_host_allowed"
+      ],
+      "additionalProperties": false
+    },
+    "progression": {
+      "type": "string",
+      "description": "How the programme connects to what comes next: doctorate (formal pipeline or only informal?), graduate scheme, licensing or accreditation, promotion route."
+    },
+    "language": {
+      "type": "object",
+      "description": "Three-way split; never infer from the language of the web page.",
+      "properties": {
+        "core": {
+          "type": "string",
+          "description": "Language of core courses."
+        },
+        "electives": {
+          "type": "string",
+          "description": "Language of electives."
+        },
+        "admission_requirement": {
+          "type": "string",
+          "description": "Language test/level required for admission, or 'not stated'."
+        },
+        "source_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Official page stating the language requirement (http/https URL) or null. Only real URLs go here; explanatory text goes in source_note. Must be a page the agent actually opened. Never invent a URL.",
+          "pattern": "^https?://"
+        },
+        "source_note": {
+          "type": "string",
+          "description": "Free text about the source or why source_url is null (e.g. 'stated in the PDF study regulations, section 3')."
+        }
+      },
+      "required": [
+        "core",
+        "electives",
+        "admission_requirement",
+        "source_url"
+      ],
+      "additionalProperties": false
+    },
+    "household_fit": {
+      "type": "object",
+      "description": "Fit for the applicant's household (dependants, partner, family funding). Optional: fill it whenever the life plan lists dependants or a partner (household.dependants > 0 or partner_moves = true).",
+      "properties": {
+        "dependants_allowed": {
+          "enum": [
+            "yes",
+            "no",
+            "conditional",
+            "unknown"
+          ],
+          "description": "May the applicant bring dependants (residence rules for students)? conditional = only above an income/housing threshold."
+        },
+        "partner_work_rights": {
+          "enum": [
+            "yes",
+            "no",
+            "conditional",
+            "unknown"
+          ],
+          "description": "Does the partner get the right to work on a student's family permit?"
+        },
+        "family_allowance": {
+          "type": "string",
+          "description": "Child/family allowance or dependant top-up with amount and period, or '' if none was found."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Rules, thresholds and caveats (income proof for dependants, childcare, housing)."
+        },
+        "confidence": {
+          "enum": [
+            "confirmed",
+            "inferred",
+            "verification_needed",
+            "unknown"
+          ],
+          "description": "Confidence in this household assessment."
+        }
+      },
+      "additionalProperties": false
+    },
+    "tuition": {
+      "type": "object",
+      "description": "Tuition for the applicant's fee category.",
+      "properties": {
+        "amount_text": {
+          "type": "string",
+          "description": "As published, with currency, year and cycle. Highest-error field in the reference run: always give the academic year."
+        },
+        "applies_to": {
+          "type": "string",
+          "description": "Fee category the amount applies to, in the institution's own words (e.g. 'international', 'home', 'all')."
+        },
+        "currency": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "ISO 4217 code if a single currency applies."
+        },
+        "annual_amount": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Numeric per-year amount in `currency`, if unambiguous."
+        },
+        "academic_year": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "e.g. '2026/27'."
+        },
+        "confidence": {
+          "enum": [
+            "confirmed",
+            "inferred",
+            "verification_needed",
+            "unknown"
+          ],
+          "description": "Confidence in this figure for the intake the applicant would use."
+        }
+      },
+      "required": [
+        "amount_text",
+        "applies_to",
+        "confidence"
+      ],
+      "additionalProperties": false
+    },
+    "funding": {
+      "type": "object",
+      "description": "Funding routes and verdict.",
+      "properties": {
+        "routes": {
+          "type": "array",
+          "description": "Routes the applicant could use.",
+          "items": {
+            "type": "object",
+            "description": "One funding route.",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Scheme name."
+              },
+              "amount": {
+                "type": "string",
+                "description": "Amount with currency and period, as published."
+              },
+              "applicant_eligible": {
+                "enum": [
+                  "confirmed",
+                  "inferred",
+                  "unknown",
+                  "n/a"
+                ],
+                "description": "Is the APPLICANT (given the facts in the life plan) eligible? confirmed = rule read and checked against the applicant's facts; inferred; unknown; n/a = not applicable."
+              },
+              "eligibility_detail": {
+                "type": "string",
+                "description": "The rule that drives the eligibility call (nationality, age, years since degree, residence...)."
+              },
+              "competitiveness": {
+                "type": "string",
+                "description": "e.g. 'guaranteed', 'competitive', 'income-tested'."
+              },
+              "url": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Official page for the scheme. Must be a page the agent actually opened, or null (then add a note and an open_question). Never invent a URL."
+              }
+            },
+            "required": [
+              "name",
+              "amount",
+              "applicant_eligible",
+              "competitiveness",
+              "url"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "verdict": {
+          "enum": [
+            "funded_confirmed",
+            "tuition_free_no_stipend",
+            "low_cost",
+            "competitive_scholarship_only",
+            "fails",
+            "unknown"
+          ],
+          "description": "funded_confirmed = ~zero tuition AND confirmed stipend the applicant is eligible for; tuition_free_no_stipend; low_cost; competitive_scholarship_only; fails = funding CONFIRMED absent (never because evidence is missing); unknown."
+        }
+      },
+      "required": [
+        "routes",
+        "verdict"
+      ],
+      "additionalProperties": false
+    },
+    "overlays": {
+      "type": "array",
+      "description": "Schemes kept OUT of the base funding score (e.g. home-country scholarships with return obligations). effect is the funding score IF the scheme is awarded.",
+      "items": {
+        "type": "object",
+        "description": "One overlay.",
+        "properties": {
+          "scheme": {
+            "type": "string",
+            "description": "Scheme name."
+          },
+          "effect": {
+            "type": "integer",
+            "description": "Funding score (0-3) the record would have if this scheme is awarded.",
+            "minimum": 0,
+            "maximum": 3
+          },
+          "obligations": {
+            "type": "string",
+            "description": "Return/work/residence obligations attached."
+          },
+          "status": {
+            "enum": [
+              "eligible",
+              "ineligible",
+              "unknown",
+              "applied",
+              "awarded"
+            ],
+            "description": "Applicant's standing for the scheme."
+          }
+        },
+        "required": [
+          "scheme",
+          "effect",
+          "obligations",
+          "status"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "deadlines": {
+      "type": "array",
+      "description": "Application and funding deadlines, structured so they can be sorted and checked.",
+      "items": {
+        "type": "object",
+        "description": "One deadline.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "e.g. 'Programme application (autumn 2027)'."
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date. For date_type 'pattern' this is last cycle's date used as a proxy."
+          },
+          "date_type": {
+            "enum": [
+              "confirmed",
+              "pattern",
+              "inferred"
+            ],
+            "description": "confirmed = published for the intake the applicant would use; pattern = same date as previous cycle, new one not yet published; inferred = derived from other information."
+          },
+          "source_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Page that states the date (null only for inferred)."
+          },
+          "cycle": {
+            "type": "string",
+            "description": "Intake/cycle label, e.g. '2027/28'."
+          }
+        },
+        "required": [
+          "name",
+          "date",
+          "date_type",
+          "source_url"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "intake": {
+      "type": "string",
+      "description": "Intake months / rolling admission, free text."
+    },
+    "state_vector": {
+      "$ref": "state_vector.schema.json"
+    },
+    "benchmark_comparison": {
+      "type": "object",
+      "description": "One sentence per benchmark axis: how this record compares to the run's three benchmarks.",
+      "properties": {
+        "vs_funding_benchmark": {
+          "type": "string",
+          "description": "vs the funding benchmark."
+        },
+        "vs_programme_benchmark": {
+          "type": "string",
+          "description": "vs the programme (curriculum) benchmark."
+        },
+        "vs_pathway_benchmark": {
+          "type": "string",
+          "description": "vs the pathway benchmark."
+        }
+      },
+      "required": [
+        "vs_funding_benchmark",
+        "vs_programme_benchmark",
+        "vs_pathway_benchmark"
+      ],
+      "additionalProperties": false
+    },
+    "confidence": {
+      "type": "object",
+      "minProperties": 1,
+      "description": "Per-claim confidence. Recommended keys: curriculum, pathway, tuition, funding, deadlines, language. Use 'overall' if only one value is available.",
+      "additionalProperties": {
+        "enum": [
+          "confirmed",
+          "inferred",
+          "verification_needed",
+          "unknown"
+        ],
+        "description": "Confidence level."
+      }
+    },
+    "confidence_note": {
+      "type": "string",
+      "description": "Free-text explanation of the confidence levels."
+    },
+    "open_questions": {
+      "type": "array",
+      "description": "Things still unknown (mean 3.2 per record in the reference run).",
+      "items": {
+        "type": "string"
+      }
+    },
+    "contact_actions": {
+      "type": "array",
+      "description": "Concrete questions to send to a named role before relying on the record.",
+      "items": {
+        "type": "object",
+        "description": "One action.",
+        "properties": {
+          "question": {
+            "type": "string",
+            "description": "The exact question."
+          },
+          "who": {
+            "type": "string",
+            "description": "Role to ask (e.g. 'programme coordinator', 'PI of group X')."
+          },
+          "channel": {
+            "enum": [
+              "email",
+              "web_form",
+              "phone",
+              "in_person",
+              "other"
+            ],
+            "description": "How to ask."
+          }
+        },
+        "required": [
+          "question",
+          "who",
+          "channel"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "consortium": {
+      "type": "object",
+      "description": "Multi-institution programmes only (cross-cut scans).",
+      "properties": {
+        "full_members": {
+          "type": "array",
+          "description": "Institutions in the consortium.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "path": {
+          "type": "string",
+          "description": "Mobility path."
+        },
+        "source": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Consortium page. Must be a page the agent actually opened, or null (then add a note and an open_question). Never invent a URL."
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

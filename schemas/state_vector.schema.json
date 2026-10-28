@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://virgil-protocol.example/schemas/state_vector.schema.json",
+  "title": "State vector",
+  "description": "Three 0-3 scores (funding, programme, pathway) plus the rubric version they were assigned under. Not to be confused with the run's continuation state vector (continuation_state_vector.schema.json).",
+  "type": "object",
+  "properties": {
+    "funding": {
+      "description": "Funding axis score. Financial fit against the run's funded_definition. Integer 0-3, or the string '?' when evidence is insufficient. '?' means MISSING DATA, never zero.",
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        {
+          "const": "?"
+        }
+      ]
+    },
+    "programme": {
+      "description": "Programme axis score. Curriculum fit against the knowledge domains of the Study & Pathway Map. Integer 0-3, or the string '?' when evidence is insufficient. '?' means MISSING DATA, never zero.",
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        {
+          "const": "?"
+        }
+      ]
+    },
+    "pathway": {
+      "description": "Pathway axis score. Fit of the people, partners, placements or schemes connected to the programme against the pathway signals of the Study & Pathway Map, and whether students of THIS programme can reach them. Integer 0-3, or the string '?' when evidence is insufficient. '?' means MISSING DATA, never zero.",
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        {
+          "const": "?"
+        }
+      ]
+    },
+    "rubric_version": {
+      "type": "string",
+      "description": "Version of the rubric/anchors used to assign these scores (e.g. '1.0'). Lets a later run tell methodology change from real change."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Free-text justification per axis. If an override changes a score, the override record (not this text) is the source of truth."
+    }
+  },
+  "required": [
+    "funding",
+    "programme",
+    "pathway"
+  ],
+  "additionalProperties": false
+}

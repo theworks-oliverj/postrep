@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://virgil-protocol.example/schemas/funding_route_crosscut.schema.json",
+  "title": "Cross-cutting funding route verification",
+  "description": "Funding route cross-cut.",
+  "type": "object",
+  "properties": {
+    "crosscut_kind": {
+      "const": "funding_route",
+      "description": "Discriminator: this cross-cut verifies one funding route."
+    },
+    "route": {
+      "type": "string",
+      "description": "Scheme name, e.g. a home-country scholarship or a regional programme's scholarship."
+    },
+    "route_type": {
+      "enum": [
+        "regional_programme",
+        "home_country_scheme",
+        "loan",
+        "other"
+      ],
+      "description": "regional_programme = multi-country programme scheme (e.g. a joint-degree consortium); home_country_scheme = granted by the applicant's own government/funder; loan; other."
+    },
+    "checked_at": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the verification."
+    },
+    "status": {
+      "enum": [
+        "in_progress",
+        "complete",
+        "complete_with_gaps",
+        "partial_budget_exhausted"
+      ],
+      "description": "in_progress = agent still working (or cut off); complete; complete_with_gaps; partial_budget_exhausted. Set with `checkpoint.py set-status --crosscut SLUG`; merge.py reports a funding-route cross-cut that is still in_progress. Optional for older files."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Free-text run notes (set-status --note)."
+    },
+    "budget_notes": {
+      "type": "string",
+      "description": "What budget/limits were hit and what was therefore skipped (set-status --budget-notes)."
+    },
+    "findings": {
+      "type": "array",
+      "description": "One entry per verification question (coverage, amounts, priority areas, obligations, eligibility, combinability...).",
+      "items": {
+        "type": "object",
+        "description": "One finding.",
+        "properties": {
+          "question": {
+            "type": "string",
+            "description": "The question asked."
+          },
+          "answer": {
+            "type": "string",
+            "description": "The answer."
+          },
+          "confidence": {
+            "enum": [
+              "confirmed",
+              "inferred",
+              "verification_needed",
+              "unknown"
+            ],
+            "description": "Confidence."
+          },
+          "urls": {
+            "type": "array",
+            "description": "Pages opened.",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "question",
+          "answer",
+          "confidence",
+          "urls"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "obligations": {
+      "type": "string",
+      "description": "Return/work obligations in one paragraph (feeds candidate.overlays)."
+    },
+    "verdict": {
+      "type": "string",
+      "description": "One-paragraph conclusion."
+    },
+    "open_questions": {
+      "type": "array",
+      "description": "Still unknown.",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "crosscut_kind",
+    "route",
+    "route_type",
+    "findings",
+    "verdict",
+    "open_questions"
+  ],
+  "additionalProperties": false
+}

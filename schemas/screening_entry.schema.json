@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://virgil-protocol.example/schemas/screening_entry.schema.json",
+  "title": "Institution screening entry",
+  "description": "One screening decision.",
+  "type": "object",
+  "properties": {
+    "institution": {
+      "type": "string",
+      "description": "Institution (or consortium) name."
+    },
+    "programmes_considered": {
+      "type": "string",
+      "description": "Master's programmes looked at, free text."
+    },
+    "decision": {
+      "enum": [
+        "pass",
+        "fail",
+        "unscreened"
+      ],
+      "description": "pass = meets the screening rule or unsure (unsure -> pass); fail = clearly does not; unscreened = NOT examined (budget/session ran out). Never record an unexamined institution as pass or fail."
+    },
+    "entry_path": {
+      "enum": [
+        "A",
+        "B",
+        "both",
+        "none"
+      ],
+      "description": "Which discovery path justified the decision: A = curriculum-first, B = people/partner-first, both, none."
+    },
+    "reason": {
+      "type": "string",
+      "description": "One line. For unscreened, say why (budget, blocked site)."
+    },
+    "qualifier": {
+      "type": "string",
+      "description": "Optional caveat that used to be typed into the decision text, e.g. 'weak, ranked_out' or 'marginal'."
+    }
+  },
+  "required": [
+    "institution",
+    "decision",
+    "entry_path",
+    "reason"
+  ],
+  "additionalProperties": false
+}

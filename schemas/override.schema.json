@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://virgil-protocol.example/schemas/override.schema.json",
+  "title": "Overrides (overrides.json)",
+  "description": "List of overrides.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "description": "One override.",
+    "properties": {
+      "target_id": {
+        "type": "string",
+        "description": "Candidate id the override applies to."
+      },
+      "field": {
+        "type": "string",
+        "description": "Dotted path inside the candidate, e.g. 'state_vector.funding' or 'deadlines.0.date'."
+      },
+      "original_value": {
+        "description": "The value the decision-maker saw (any JSON type). If it no longer matches at merge time, merge.py warns that the override may be stale but still applies it."
+      },
+      "new_value": {
+        "description": "The replacement value (any JSON type)."
+      },
+      "reason": {
+        "type": "string",
+        "description": "Why. Mandatory: an unexplained override is indistinguishable from a bug."
+      },
+      "decided_by": {
+        "type": "string",
+        "description": "Who decided (alias or role, e.g. 'orchestrator', 'applicant')."
+      },
+      "date": {
+        "type": "string",
+        "format": "date",
+        "description": "Decision date."
+      }
+    },
+    "required": [
+      "target_id",
+      "field",
+      "original_value",
+      "new_value",
+      "reason",
+      "decided_by",
+      "date"
+    ],
+    "additionalProperties": false
+  }
+}

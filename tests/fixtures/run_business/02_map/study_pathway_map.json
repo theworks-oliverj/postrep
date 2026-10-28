@@ -1,0 +1,132 @@
+{
+  "schema_version": "1.0",
+  "generated": "2026-10-02",
+  "objective": {
+    "one_line": "Lead service-design teams at a consultancy after a one-year master's with a real client placement.",
+    "nearest_frameworks": [
+      "MSc Service Design",
+      "MSc Innovation Management"
+    ],
+    "commitments": [
+      "a paid placement or internship of at least 3 months"
+    ],
+    "non_goals": [
+      "purely theoretical management degrees"
+    ]
+  },
+  "domains": [
+    {
+      "id": "STRAT",
+      "label": "Domain STRAT",
+      "priority": "critical",
+      "coverage_keywords": [
+        "strat"
+      ],
+      "self_teachable": "no"
+    },
+    {
+      "id": "DES",
+      "label": "Domain DES",
+      "priority": "critical",
+      "coverage_keywords": [
+        "des"
+      ],
+      "self_teachable": "no"
+    },
+    {
+      "id": "FIN",
+      "label": "Domain FIN",
+      "priority": "high",
+      "coverage_keywords": [
+        "fin"
+      ],
+      "self_teachable": "partly"
+    },
+    {
+      "id": "OPS",
+      "label": "Domain OPS",
+      "priority": "high",
+      "coverage_keywords": [
+        "ops"
+      ],
+      "self_teachable": "yes"
+    },
+    {
+      "id": "LEAD",
+      "label": "Domain LEAD",
+      "priority": "high",
+      "coverage_keywords": [
+        "lead"
+      ],
+      "self_teachable": "unknown"
+    },
+    {
+      "id": "ANA",
+      "label": "Domain ANA",
+      "priority": "high",
+      "coverage_keywords": [
+        "ana"
+      ],
+      "self_teachable": "yes"
+    }
+  ],
+  "pathway_signals": {
+    "people_topic_signals": [
+      "service design studios",
+      "consultancy placements",
+      "client projects",
+      "innovation labs",
+      "employer-sponsored capstones",
+      "design thinking"
+    ],
+    "organisation_type_signals": [
+      "design schools with agency partners",
+      "business schools with studio partners"
+    ],
+    "known_people_or_orgs": []
+  },
+  "practical_component_needed": {
+    "type": "internship",
+    "credits": 60,
+    "credit_system": "UK credits (CATS)",
+    "notes": "Host may be chosen by the student; paid."
+  },
+  "false_positive_traps": [
+    "general MBA programmes without a design strand"
+  ],
+  "connectedness_check": {
+    "connected": true,
+    "notes": "Strategy and design methods connect to the leadership goal."
+  },
+  "progression": {
+    "intent": "graduate scheme or consultancy hire",
+    "notes": "Placement partners should recruit from the programme."
+  },
+  "scoring_anchors": {
+    "funding": {
+      "0": "none",
+      "1": "weak",
+      "2": "good",
+      "3": "benchmark level"
+    },
+    "programme": {
+      "0": "none",
+      "1": "weak",
+      "2": "good",
+      "3": "benchmark level"
+    },
+    "pathway": {
+      "0": "none",
+      "1": "weak",
+      "2": "good",
+      "3": "benchmark level"
+    }
+  },
+  "screening_rule": {
+    "description": "Pass if the curriculum covers >= 2 critical domains OR a named placement partner hits a pathway signal.",
+    "min_domains_for_pass": 2,
+    "research_signal_pass": true,
+    "unsure_policy": "pass"
+  },
+  "benchmarks_ref": "02_map/benchmarks.json"
+}

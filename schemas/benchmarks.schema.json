@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://virgil-protocol.example/schemas/benchmarks.schema.json",
+  "title": "Benchmarks",
+  "description": "The three benchmark programmes of the Study & Pathway Map (PM-G4): one anchors funding, one programme, one pathway.",
+  "type": "object",
+  "properties": {
+    "benchmarks": {
+      "type": "array",
+      "description": "Exactly three entries, one per axis.",
+      "items": {
+        "type": "object",
+        "description": "One benchmark programme.",
+        "properties": {
+          "axis": {
+            "enum": [
+              "funding",
+              "programme",
+              "pathway"
+            ],
+            "description": "The axis this programme anchors (it is the reference for a 3 on that axis)."
+          },
+          "institution": {
+            "type": "string",
+            "description": "Institution."
+          },
+          "programme": {
+            "type": "string",
+            "description": "Programme."
+          },
+          "baseline_vector": {
+            "$ref": "state_vector.schema.json",
+            "description": "Its own vector. No benchmark needs to be 3/3/3; say so in notes."
+          },
+          "evidence_urls": {
+            "type": "array",
+            "description": "Pages that justify the benchmark.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "enum": [
+              "verified",
+              "provisional"
+            ],
+            "description": "verified = checked on official pages this run (evidence_urls must then list them); provisional = taken from earlier work or a scout, to be verified."
+          },
+          "notes": {
+            "type": "string",
+            "description": "Why it anchors this axis, and its weaknesses."
+          }
+        },
+        "required": [
+          "axis",
+          "institution",
+          "programme",
+          "baseline_vector",
+          "evidence_urls",
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 3,
+      "maxItems": 3
+    }
+  },
+  "required": [
+    "benchmarks"
+  ],
+  "additionalProperties": false
+}

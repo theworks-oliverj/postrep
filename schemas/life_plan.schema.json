@@ -1,0 +1,710 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://virgil-protocol.example/schemas/life_plan.schema.json",
+  "title": "Life plan",
+  "description": "Machine view of the Life & Career Plan (session 1): purpose, post-degree route, money, eligibility facts, geography and language, timeline, household. Human view: 01_life_plan/life_plan.md. Private file; published outputs use profile_summary only.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Schema version."
+    },
+    "applicant_alias": {
+      "type": "string",
+      "description": "Alias used in all outputs (never the real name)."
+    },
+    "profile_summary": {
+      "type": "string",
+      "description": "One public-safe line used in reports, e.g. 'Applicant B, career changer, five years in marketing'. No names, employers, places or dates of birth."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update."
+    },
+    "purpose_horizon": {
+      "type": "object",
+      "description": "LP-G1: why a postgraduate degree, over what horizon (rubric: purpose and horizon_years present).",
+      "properties": {
+        "purpose": {
+          "type": "string",
+          "description": "What the degree is for, stated as work or outcomes rather than a title."
+        },
+        "horizon_years": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Years until the goal (the 3-5 year picture)."
+        },
+        "declared_unknown": {
+          "type": "boolean",
+          "description": "true = the applicant consciously leaves this open (counts as declared_unknown in the rubric)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "post_degree_intent": {
+      "type": "object",
+      "description": "LP-G2: the route after the degree (rubric: intent present; if several routes are open, keep_open_is says whether keeping them open is a requirement or a hedge).",
+      "properties": {
+        "intent": {
+          "enum": [
+            "doctorate",
+            "industry",
+            "public_sector",
+            "own_venture",
+            "career_switch",
+            "undecided",
+            "other"
+          ],
+          "description": "Main intended route after the degree."
+        },
+        "routes_open": {
+          "type": "array",
+          "description": "Every route the person wants to keep open, using the same vocabulary as intent.",
+          "items": {
+            "enum": [
+              "doctorate",
+              "industry",
+              "public_sector",
+              "own_venture",
+              "career_switch",
+              "undecided",
+              "other"
+            ]
+          }
+        },
+        "keep_open_is": {
+          "enum": [
+            "requirement",
+            "hedge",
+            "not_applicable"
+          ],
+          "description": "If several routes are open: is keeping them all open a requirement of the programme, or only a hedge? not_applicable when only one route is open."
+        },
+        "detail": {
+          "type": "string",
+          "description": "Detail, e.g. target organisations or sectors."
+        },
+        "declared_unknown": {
+          "type": "boolean",
+          "description": "true = the person consciously leaves this open (counts as declared_unknown in the rubric)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "money": {
+      "type": "object",
+      "description": "LP-G3: money turned into testable numbers (rubric: funded_type + at least one number + currency + debt_acceptable stated).",
+      "properties": {
+        "funded_type": {
+          "enum": [
+            "stipend_and_tuition",
+            "tuition_only",
+            "affordable"
+          ],
+          "description": "stipend_and_tuition = tuition-free AND a living stipend; tuition_only = tuition covered, living costs paid by the applicant; affordable = the applicant pays, below a ceiling."
+        },
+        "max_total_tuition": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Ceiling for TOTAL tuition over the whole degree, in `currency` (null = no ceiling stated)."
+        },
+        "max_out_of_pocket": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Ceiling for everything the applicant can pay themselves over the whole degree (tuition + one-off costs + the part of living costs not covered), in `currency`."
+        },
+        "living_support_required_monthly": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Monthly living support the programme/funding must provide for the whole household (see household_size), in `currency`."
+        },
+        "household_size": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "People the living support must cover (applicant + dependants). 1 = applicant alone.",
+          "minimum": 1
+        },
+        "currency": {
+          "type": "string",
+          "description": "ISO 4217 code of all amounts in this section."
+        },
+        "debt_acceptable": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "May the applicant take on debt (student loan) to study? null = not asked yet."
+        },
+        "debt_limit": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Maximum debt in `currency` if debt_acceptable is true."
+        },
+        "income_during_degree": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Monthly income the applicant keeps during the degree (job, remote work, savings drawdown), in `currency`; null = unknown, 0 = none."
+        },
+        "dependants_on_income": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Number of people who depend on the applicant's income today.",
+          "minimum": 0
+        },
+        "hardness": {
+          "enum": [
+            "hard",
+            "soft",
+            "keep_and_flag"
+          ],
+          "description": "hard = reject below; soft = prefer; keep_and_flag = keep record, flag the failure."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Context (savings, income lost while studying...)."
+        },
+        "declared_unknown": {
+          "type": "boolean",
+          "description": "true = the applicant consciously leaves this open (counts as declared_unknown in the rubric)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "eligibility_facts": {
+      "type": "object",
+      "description": "LP-G4: facts that decide scholarship and admission eligibility (rubric: citizenships, residence country and region, highest degree with field, graduation year, grade and scale, and language-certificate status). Use categories, not identifiers.",
+      "properties": {
+        "citizenships": {
+          "type": "array",
+          "description": "Citizenship(s) as country names or ISO codes. Many schemes depend on them; dual citizens list both.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "residence_country": {
+          "type": "string",
+          "description": "Country of residence now (scheme residency rules, fee status)."
+        },
+        "residence_region": {
+          "type": "string",
+          "description": "Region/state inside the country of residence. Write '' if no rule depends on it; the key must be present."
+        },
+        "highest_degree": {
+          "type": "object",
+          "description": "Highest completed degree.",
+          "properties": {
+            "field": {
+              "type": "string",
+              "description": "Field of study."
+            },
+            "country": {
+              "type": "string",
+              "description": "Country where it was awarded."
+            },
+            "graduation_year": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Year of graduation (many schemes cap years since graduation; a year never goes stale, an age does)."
+            },
+            "grade": {
+              "type": "string",
+              "description": "Final grade as printed."
+            },
+            "grade_scale": {
+              "type": "string",
+              "description": "Scale of the grade, e.g. '0-100', '4.0 GPA', 'first-class honours'."
+            }
+          },
+          "additionalProperties": false
+        },
+        "language_certificates": {
+          "type": "array",
+          "description": "Language certificates held or planned (with dates). May be empty ONLY if language_certificates_note says 'none'.",
+          "items": {
+            "type": "object",
+            "description": "One certificate.",
+            "properties": {
+              "test": {
+                "type": "string",
+                "description": "Test name, e.g. IELTS Academic, TOEFL iBT, DELF B2."
+              },
+              "score": {
+                "type": "string",
+                "description": "Score or level."
+              },
+              "date_taken": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date",
+                "description": "Date of the test."
+              },
+              "expires": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date",
+                "description": "Expiry date (many are valid 2 years); null if it does not expire."
+              }
+            },
+            "required": [
+              "test"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "language_certificates_note": {
+          "type": "string",
+          "description": "Status of certificates: 'none' if the applicant holds none, or e.g. 'IELTS booked for 2027-03'."
+        },
+        "age_bracket": {
+          "type": "string",
+          "description": "e.g. '30-34' (many schemes cap age)."
+        },
+        "fee_status": {
+          "type": "string",
+          "description": "Fee status the universities are expected to assign, in the vocabulary of the target regions (e.g. 'international', 'home', 'overseas'). Free text and optional: it is not a gate."
+        },
+        "languages": {
+          "type": "array",
+          "description": "Languages the person speaks, with level (CEFR or plain words).",
+          "items": {
+            "type": "object",
+            "description": "One language.",
+            "properties": {
+              "language": {
+                "type": "string",
+                "description": "Language."
+              },
+              "level": {
+                "type": "string",
+                "description": "CEFR level or test score."
+              }
+            },
+            "required": [
+              "language",
+              "level"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "notes": {
+          "type": "string",
+          "description": "Other eligibility-relevant facts."
+        },
+        "declared_unknown": {
+          "type": "boolean",
+          "description": "true = the applicant consciously leaves this open (counts as declared_unknown in the rubric)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "geography": {
+      "type": "object",
+      "description": "LP-G5: where and in which language (rubric: considered countries non-empty).",
+      "properties": {
+        "considered": {
+          "type": "array",
+          "description": "Countries in scope. If the applicant names a region, list its countries here after a keep/drop per country.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excluded": {
+          "type": "array",
+          "description": "Countries out of scope with the reason (so the reason survives into the search plan).",
+          "items": {
+            "type": "object",
+            "description": "One exclusion.",
+            "properties": {
+              "country": {
+                "type": "string",
+                "description": "Country."
+              },
+              "reason": {
+                "type": "string",
+                "description": "Why it is excluded."
+              }
+            },
+            "required": [
+              "country",
+              "reason"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "languages_willing_c1": {
+          "type": "array",
+          "description": "Languages the applicant is willing to learn to C1 before or during the degree.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "teaching_languages_accepted": {
+          "type": "array",
+          "description": "Languages of instruction the applicant accepts today.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "string",
+          "description": "Notes."
+        },
+        "declared_unknown": {
+          "type": "boolean",
+          "description": "true = the applicant consciously leaves this open (counts as declared_unknown in the rubric)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "timeline": {
+      "type": "object",
+      "description": "LP-G6: when the person can start (rubric: earliest_start, latest_start, immovable_dates list (may be empty), wait_one_cycle true/false).",
+      "properties": {
+        "earliest_start": {
+          "type": "string",
+          "description": "Earliest acceptable start, e.g. '2027-09'."
+        },
+        "latest_start": {
+          "type": "string",
+          "description": "Latest acceptable start, e.g. '2028-09'."
+        },
+        "immovable_dates": {
+          "type": "array",
+          "description": "Dates that cannot move (visa expiry, contract end, family events), each as 'YYYY-MM-DD: what'. Empty list = none.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "wait_one_cycle": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Would the applicant wait a whole application cycle for a clearly better option? null = not asked."
+        },
+        "application_window": {
+          "type": "string",
+          "description": "When applications must go out."
+        },
+        "flexibility": {
+          "type": "string",
+          "description": "How movable."
+        },
+        "declared_unknown": {
+          "type": "boolean",
+          "description": "true = the applicant consciously leaves this open (counts as declared_unknown in the rubric)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "household": {
+      "type": "object",
+      "description": "LP-G7: household and obligations (rubric: dependants number, partner_moves true/false, return_obligation_stance, deal_breakers list (an explicit empty list = none)). If a partner moves, partner_work_needed says whether they need work rights.",
+      "properties": {
+        "dependants": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Number of dependants who would travel with, or stay behind because of, the degree.",
+          "minimum": 0
+        },
+        "partner_moves": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Would a partner move too? Write false when there is no partner. null = not asked yet (gate LP-G7 requires true or false)."
+        },
+        "partner_work_needed": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Must the partner be allowed to work abroad? null = not applicable."
+        },
+        "return_obligation_stance": {
+          "enum": [
+            "acceptable",
+            "unacceptable",
+            "depends",
+            "unknown"
+          ],
+          "description": "Attitude to schemes that require returning home or working for a sponsor after the degree."
+        },
+        "deal_breakers": {
+          "type": "array",
+          "description": "Conditions that rule an option out, one per entry.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "string",
+          "description": "Other obligations (job, contracts, care duties)."
+        },
+        "declared_unknown": {
+          "type": "boolean",
+          "description": "true = the applicant consciously leaves this open (counts as declared_unknown in the rubric)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "strengths": {
+      "type": "object",
+      "description": "LP-S1.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Strengths.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "declared_unknown": {
+          "type": "boolean",
+          "description": "true = the applicant consciously leaves this open (counts as declared_unknown in the rubric)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "gaps_self_teachable": {
+      "type": "object",
+      "description": "LP-S2.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Gaps.",
+          "items": {
+            "type": "object",
+            "description": "One gap.",
+            "properties": {
+              "gap": {
+                "type": "string",
+                "description": "The gap."
+              },
+              "self_teachable": {
+                "type": [
+                  "boolean",
+                  "null"
+                ],
+                "description": "Can be learned alone?"
+              }
+            },
+            "required": [
+              "gap"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "declared_unknown": {
+          "type": "boolean",
+          "description": "true = the applicant consciously leaves this open (counts as declared_unknown in the rubric)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "long_term_role": {
+      "type": "object",
+      "description": "LP-S3.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A concrete target role or sector."
+        },
+        "declared_unknown": {
+          "type": "boolean",
+          "description": "true = the applicant consciously leaves this open (counts as declared_unknown in the rubric)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "tradeoff_ranking": {
+      "type": "object",
+      "description": "LP-S4.",
+      "properties": {
+        "ranked": {
+          "type": "array",
+          "description": "Criteria in order of importance, most important first.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "declared_unknown": {
+          "type": "boolean",
+          "description": "true = the applicant consciously leaves this open (counts as declared_unknown in the rubric)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "risk_tolerance": {
+      "type": "object",
+      "description": "LP-S5: appetite for financial risk and for long-shot options (low, medium or high for each).",
+      "properties": {
+        "money": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "description": "Risk tolerance on money (a funding route that may fall through)."
+        },
+        "long_shots": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "description": "Appetite for long-shot options (a programme whose pathway or funding is not yet confirmed)."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Notes."
+        },
+        "declared_unknown": {
+          "type": "boolean",
+          "description": "true = the applicant consciously leaves this open (counts as declared_unknown in the rubric)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "study_format": {
+      "type": "object",
+      "description": "LP-S6.",
+      "properties": {
+        "acceptable": {
+          "type": "array",
+          "description": "Formats accepted: e.g. 'full-time on campus', 'part-time', 'online', 'research-only', 'work-integrated'.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "string",
+          "description": "Notes."
+        },
+        "declared_unknown": {
+          "type": "boolean",
+          "description": "true = the applicant consciously leaves this open (counts as declared_unknown in the rubric)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "decision_criteria": {
+      "type": "object",
+      "description": "LP-S7.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "How the final choice will be made.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "declared_unknown": {
+          "type": "boolean",
+          "description": "true = the applicant consciously leaves this open (counts as declared_unknown in the rubric)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "support_assets": {
+      "type": "object",
+      "description": "LP-S8: application assets (referees, portfolio, publications, existing contacts).",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Referees, portfolio, publications, contacts, savings or family support.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "declared_unknown": {
+          "type": "boolean",
+          "description": "true = the applicant consciously leaves this open (counts as declared_unknown in the rubric)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "assumptions_log": {
+      "type": "object",
+      "description": "LP-S9.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Assumptions.",
+          "items": {
+            "type": "object",
+            "description": "One assumption.",
+            "properties": {
+              "assumption": {
+                "type": "string",
+                "description": "Text."
+              },
+              "status": {
+                "enum": [
+                  "untested",
+                  "confirmed",
+                  "refuted"
+                ],
+                "description": "Status."
+              }
+            },
+            "required": [
+              "assumption"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "declared_unknown": {
+          "type": "boolean",
+          "description": "true = the applicant consciously leaves this open (counts as declared_unknown in the rubric)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "lifestyle": {
+      "type": "object",
+      "description": "LP-S10.",
+      "properties": {
+        "notes": {
+          "type": "string",
+          "description": "City size, weather, distance from home, community; or 'no preference'."
+        },
+        "declared_unknown": {
+          "type": "boolean",
+          "description": "true = the applicant consciously leaves this open (counts as declared_unknown in the rubric)."
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "applicant_alias"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,37 @@
+name: Run report
+description: Share an anonymised due-diligence one-pager from your own run to help calibrate the protocol.
+labels: ["run-report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you. Calibration currently rests on very few runs, so every anonymised report helps. Generate the one-pager with `--no-examples` and read it through before posting.
+  - type: textarea
+    id: onepager
+    attributes:
+      label: Anonymised due-diligence one-pager
+      description: Paste the one-pager (Markdown is fine).
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Run context
+      description: In general terms only. Which AI product and plan, roughly how many usage windows the run took, and which fields or regions you searched.
+    validations:
+      required: false
+  - type: textarea
+    id: observations
+    attributes:
+      label: What worked and what did not
+      description: Anything about the protocol you would change.
+    validations:
+      required: false
+  - type: checkboxes
+    id: anonymised
+    attributes:
+      label: Privacy check
+      options:
+        - label: I removed names, employer, nationality, contact details.
+          required: true

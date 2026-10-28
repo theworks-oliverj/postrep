@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://virgil-protocol.example/schemas/people_reading_list.schema.json",
+  "title": "People reading list (optional)",
+  "description": "Optional reading list: representative works (papers, projects, case studies) of the people connected to the shortlisted programmes.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Schema version."
+    },
+    "generated": {
+      "type": "string",
+      "format": "date",
+      "description": "Date."
+    },
+    "purpose": {
+      "type": "string",
+      "description": "Why the list exists."
+    },
+    "people": {
+      "type": "array",
+      "description": "People.",
+      "items": {
+        "type": "object",
+        "description": "One person.",
+        "properties": {
+          "person_id": {
+            "type": "string",
+            "description": "Local id."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name (or role descriptor in public data)."
+          },
+          "institution": {
+            "type": "string",
+            "description": "Institution."
+          },
+          "position": {
+            "type": "string",
+            "description": "Position."
+          },
+          "profile_urls": {
+            "type": "array",
+            "description": "Profiles.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "correlated_programmes": {
+            "type": "array",
+            "description": "Programmes the person relates to.",
+            "items": {
+              "type": "object",
+              "description": "One link.",
+              "properties": {
+                "programme_id": {
+                  "type": "string",
+                  "description": "Candidate id."
+                },
+                "relevance": {
+                  "type": "string",
+                  "description": "Why."
+                }
+              },
+              "required": [
+                "programme_id"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "domain_ids": {
+            "type": "array",
+            "description": "Knowledge-domain ids the person's work matches.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "works": {
+            "type": "array",
+            "description": "Representative works.",
+            "items": {
+              "type": "object",
+              "description": "One work.",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "description": "Title."
+                },
+                "authors": {
+                  "type": "string",
+                  "description": "Authors."
+                },
+                "year": {
+                  "type": "integer",
+                  "description": "Year."
+                },
+                "venue": {
+                  "type": "string",
+                  "description": "Venue."
+                },
+                "url": {
+                  "type": "string",
+                  "description": "URL."
+                },
+                "abstract": {
+                  "type": "string",
+                  "description": "Abstract."
+                }
+              },
+              "required": [
+                "title"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "person_id",
+          "name",
+          "institution",
+          "position",
+          "works"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "not_yet_covered": {
+      "type": "array",
+      "description": "People still to cover.",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "generated",
+    "people"
+  ],
+  "additionalProperties": false
+}

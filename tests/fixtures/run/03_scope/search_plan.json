@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "rubric_version": "1.0",
+  "created": "2026-10-03",
+  "countries": [
+    {
+      "slug": "northland",
+      "name": "Northland",
+      "depth": "deep",
+      "cap_n": 3,
+      "wave": 1
+    },
+    {
+      "slug": "eastmark",
+      "name": "Eastmark",
+      "depth": "standard",
+      "cap_n": 2,
+      "wave": 1
+    }
+  ],
+  "crosscuts": [
+    {
+      "slug": "joint_masters",
+      "name": "Joint master's catalogue",
+      "kind": "programme_scan",
+      "description": "Multi-country joint degrees"
+    },
+    {
+      "slug": "home_scheme",
+      "name": "Home-country scholarship",
+      "kind": "funding_route",
+      "description": "Outbound scholarship of the applicant's government"
+    }
+  ],
+  "benchmarks_ref": "02_map/benchmarks.json",
+  "funded_definition": {
+    "type": "tuition_only",
+    "max_total_tuition": 4000,
+    "max_out_of_pocket": 9000,
+    "living_support_required_monthly": null,
+    "household_size": 1,
+    "currency": "EUR",
+    "min_funding_score": 2
+  },
+  "overlay_policy": "overlay only: never raise the base funding score; show effect and obligations next to it",
+  "wave_weights": {
+    "deep": 1.5,
+    "standard": 1,
+    "quick": 0.5,
+    "crosscut": 0.75
+  },
+  "eligibility_facts_ref": "01_life_plan/life_plan.json#eligibility_facts",
+  "exclusions": [
+    {
+      "country": "Westland",
+      "reason": "excluded by the applicant"
+    }
+  ],
+  "session_plan": {
+    "waves": [
+      {
+        "wave": 1,
+        "countries": [
+          "northland",
+          "eastmark"
+        ],
+        "expected_windows": 1
+      }
+    ],
+    "agents_per_window_estimate": 6
+  }
+}

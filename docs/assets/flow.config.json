@@ -1,0 +1,16 @@
+{
+  "theme": "base",
+  "flowchart": {
+    "htmlLabels": false,
+    "wrappingWidth": 560,
+    "curve": "basis",
+    "nodeSpacing": 60,
+    "rankSpacing": 44,
+    "padding": 16
+  },
+  "themeVariables": {
+    "fontFamily": "Inter, DejaVu Sans, Arial, sans-serif",
+    "fontSize": "17px",
+    "lineColor": "#44546A"
+  }
+}

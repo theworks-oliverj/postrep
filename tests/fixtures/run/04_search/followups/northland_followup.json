@@ -1,0 +1,412 @@
+{
+  "country": "Northland",
+  "slug": "northland",
+  "followup_of": "northland",
+  "run_date": "2026-10-22",
+  "status": "complete",
+  "path_b_done": true,
+  "screening": [
+    {
+      "institution": "Marsh Polytechnic",
+      "programmes_considered": "MSc programmes",
+      "decision": "pass",
+      "entry_path": "B",
+      "reason": "numerical analysis group"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "NL26-05",
+      "prior_id": null,
+      "status": "net_new",
+      "institution": "Westbrook Institute of Technology",
+      "programme": "MSc Applied Mathematics",
+      "track": "",
+      "city": "Springfield",
+      "degree_type_and_length": "MSc 120 ECTS / 2 yrs",
+      "sources": [
+        {
+          "claim_field": "programme",
+          "url": "https://example.edu/nl26-05/programme",
+          "note": "programme page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "study_plan",
+          "url": "https://example.edu/nl26-05/study_plan",
+          "note": "study_plan page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "pathway",
+          "url": "https://example.edu/nl26-05/pathway",
+          "note": "pathway page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "admissions_language",
+          "url": "https://example.edu/nl26-05/admissions_language",
+          "note": "admissions_language page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "tuition",
+          "url": "https://example.edu/nl26-05/tuition",
+          "note": "tuition page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "scholarship",
+          "url": "https://example.edu/nl26-05/scholarship",
+          "note": "scholarship page",
+          "source_type": "aggregator",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "deadline",
+          "url": null,
+          "source_type": "other",
+          "accessed_date": "2026-10-20",
+          "note": "not located"
+        }
+      ],
+      "axis_1_curriculum": {
+        "NEURO": {
+          "grade": "Moderate",
+          "evidence": "module list for NEURO",
+          "confidence": "confirmed"
+        },
+        "STAT": {
+          "grade": "Strong",
+          "evidence": "module list for STAT",
+          "confidence": "inferred"
+        },
+        "LEARN": {
+          "grade": "None",
+          "evidence": "module list for LEARN",
+          "confidence": "confirmed"
+        },
+        "SIG": {
+          "grade": "Weak",
+          "evidence": "module list for SIG",
+          "confidence": "inferred"
+        },
+        "PROG": {
+          "grade": "Moderate",
+          "evidence": "module list for PROG",
+          "confidence": "confirmed"
+        }
+      },
+      "axis_1_verdict": "Synthetic verdict.",
+      "axis_2_pathway": {
+        "people_and_partners": [
+          {
+            "name": "Group of Westbrook Institute of Technology",
+            "type": "research_group",
+            "url": "https://example.edu/nl26-05/group",
+            "contacts": [
+              {
+                "name": "Contact 1 (role: modelling lead)",
+                "role": "modelling lead",
+                "focus": "neural population models",
+                "recent_work": "n/a",
+                "url": null,
+                "takes_students": "confirmed"
+              }
+            ]
+          }
+        ],
+        "summary": "Synthetic pathway summary."
+      },
+      "practical_component": {
+        "type": "thesis",
+        "credits": 30,
+        "self_proposed": false,
+        "external_host_allowed": false,
+        "notes": "30 ECTS thesis"
+      },
+      "progression": "Informal via thesis group.",
+      "language": {
+        "core": "English",
+        "electives": "English",
+        "admission_requirement": "IELTS 6.5",
+        "source_url": "https://example.edu/nl26-05/lang",
+        "source_note": "admissions page"
+      },
+      "tuition": {
+        "amount_text": "EUR 1,000 per year (2026/27)",
+        "applies_to": "international",
+        "currency": "EUR",
+        "annual_amount": 1000,
+        "academic_year": "2026/27",
+        "confidence": "confirmed"
+      },
+      "funding": {
+        "routes": [
+          {
+            "name": "Excellence scholarship",
+            "amount": "EUR 10,000/yr",
+            "applicant_eligible": "inferred",
+            "eligibility_detail": "open to all international master's applicants",
+            "competitiveness": "competitive",
+            "url": "https://example.edu/nl26-05/schol"
+          }
+        ],
+        "verdict": "competitive_scholarship_only"
+      },
+      "deadlines": [],
+      "state_vector": {
+        "funding": 1,
+        "programme": 2,
+        "pathway": 2,
+        "rubric_version": "1.0",
+        "notes": "synthetic"
+      },
+      "benchmark_comparison": {
+        "vs_funding_benchmark": "weaker",
+        "vs_programme_benchmark": "similar",
+        "vs_pathway_benchmark": "weaker"
+      },
+      "confidence": {
+        "curriculum": "confirmed",
+        "pathway": "inferred",
+        "funding": "inferred"
+      },
+      "open_questions": [
+        "Does the group take MSc students?"
+      ],
+      "contact_actions": [
+        {
+          "question": "Do you supervise MSc theses on neural data analysis?",
+          "who": "PI of the group",
+          "channel": "email"
+        }
+      ],
+      "replaces": "NL26-02"
+    },
+    {
+      "id": "NL26-04",
+      "prior_id": null,
+      "status": "net_new",
+      "institution": "Northfield University",
+      "programme": "MSc Computational Data Science",
+      "track": "",
+      "city": "Springfield",
+      "degree_type_and_length": "MSc 120 ECTS / 2 yrs",
+      "sources": [
+        {
+          "claim_field": "programme",
+          "url": "https://example.edu/nl26-04/programme",
+          "note": "programme page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "study_plan",
+          "url": "https://example.edu/nl26-04/study_plan",
+          "note": "study_plan page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "pathway",
+          "url": "https://example.edu/nl26-04/pathway",
+          "note": "pathway page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "admissions_language",
+          "url": "https://example.edu/nl26-04/admissions_language",
+          "note": "admissions_language page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "tuition",
+          "url": "https://example.edu/nl26-04/tuition",
+          "note": "tuition page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "scholarship",
+          "url": "https://example.edu/nl26-04/scholarship",
+          "note": "scholarship page",
+          "source_type": "aggregator",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "deadline",
+          "url": null,
+          "source_type": "other",
+          "accessed_date": "2026-10-20",
+          "note": "not located"
+        }
+      ],
+      "axis_1_curriculum": {
+        "NEURO": {
+          "grade": "Moderate",
+          "evidence": "module list for NEURO",
+          "confidence": "confirmed"
+        },
+        "STAT": {
+          "grade": "Strong",
+          "evidence": "module list for STAT",
+          "confidence": "inferred"
+        },
+        "LEARN": {
+          "grade": "None",
+          "evidence": "module list for LEARN",
+          "confidence": "confirmed"
+        },
+        "SIG": {
+          "grade": "Weak",
+          "evidence": "module list for SIG",
+          "confidence": "inferred"
+        },
+        "PROG": {
+          "grade": "Moderate",
+          "evidence": "module list for PROG",
+          "confidence": "confirmed"
+        }
+      },
+      "axis_1_verdict": "Synthetic verdict.",
+      "axis_2_pathway": {
+        "people_and_partners": [
+          {
+            "name": "Group of Northfield University",
+            "type": "research_group",
+            "url": "https://example.edu/nl26-04/group",
+            "contacts": [
+              {
+                "name": "Contact 1 (role: modelling lead)",
+                "role": "modelling lead",
+                "focus": "neural population models",
+                "recent_work": "n/a",
+                "url": null,
+                "takes_students": "inferred"
+              }
+            ]
+          }
+        ],
+        "summary": "Synthetic pathway summary."
+      },
+      "practical_component": {
+        "type": "thesis",
+        "credits": 30,
+        "self_proposed": false,
+        "external_host_allowed": false,
+        "notes": "30 ECTS thesis"
+      },
+      "progression": "Informal via thesis group.",
+      "language": {
+        "core": "English",
+        "electives": "English",
+        "admission_requirement": "IELTS 6.5",
+        "source_url": "https://example.edu/nl26-04/lang",
+        "source_note": "admissions page"
+      },
+      "tuition": {
+        "amount_text": "EUR 1,000 per year (2026/27)",
+        "applies_to": "international",
+        "currency": "EUR",
+        "annual_amount": 1000,
+        "academic_year": "2026/27",
+        "confidence": "confirmed"
+      },
+      "funding": {
+        "routes": [
+          {
+            "name": "Excellence scholarship",
+            "amount": "EUR 10,000/yr",
+            "applicant_eligible": "confirmed",
+            "eligibility_detail": "open to all international master's applicants",
+            "competitiveness": "competitive",
+            "url": "https://example.edu/nl26-04/schol"
+          }
+        ],
+        "verdict": "competitive_scholarship_only"
+      },
+      "deadlines": [
+        {
+          "name": "Application autumn 2027",
+          "date": "2026-12-15",
+          "date_type": "inferred",
+          "source_url": null
+        }
+      ],
+      "state_vector": {
+        "funding": 1,
+        "programme": 2,
+        "pathway": 2,
+        "rubric_version": "1.0",
+        "notes": "synthetic"
+      },
+      "benchmark_comparison": {
+        "vs_funding_benchmark": "weaker",
+        "vs_programme_benchmark": "similar",
+        "vs_pathway_benchmark": "weaker"
+      },
+      "confidence": {
+        "curriculum": "confirmed",
+        "pathway": "inferred",
+        "funding": "inferred"
+      },
+      "open_questions": [
+        "Does the group take MSc students?"
+      ],
+      "contact_actions": [
+        {
+          "question": "Do you supervise MSc theses on neural data analysis?",
+          "who": "PI of the group",
+          "channel": "email"
+        }
+      ]
+    }
+  ],
+  "ranked_out": [],
+  "country_context": {
+    "funding_system": "Fee waiver applies to scholarship holders only."
+  },
+  "country_summary": "Follow-up: Path B found two groups; Westbrook replaced with confirmed supervision.",
+  "urgent_deadlines": [
+    {
+      "record_id": "NL26-01",
+      "name": "Scholarship round 1",
+      "date": "2026-11-20",
+      "date_type": "confirmed",
+      "source_url": "https://example.edu/nl26-01/dates"
+    }
+  ],
+  "path_b_people": [
+    {
+      "name": "Group leader, neural modelling (role descriptor)",
+      "affiliation": "Northfield University",
+      "focus": "population models",
+      "url": null,
+      "msc_link": "hosts MSc thesis students"
+    }
+  ],
+  "still_open": [
+    "Confirm 2027/28 scholarship call."
+  ],
+  "notes": "Marsh Polytechnic portal blocked for non-local IPs.",
+  "extras": {
+    "scheme_terms": {
+      "name": "Northland Master Grant",
+      "five_year_rule": true
+    }
+  },
+  "run_meta": {
+    "agent_model": "synthetic-agent",
+    "started_at": "2026-10-22T09:00:00Z",
+    "ended_at": "2026-10-22T10:00:00Z",
+    "limit_events": []
+  }
+}

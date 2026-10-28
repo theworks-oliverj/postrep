@@ -1,0 +1,403 @@
+{
+  "country": "Eastmark",
+  "slug": "eastmark",
+  "run_date": "2026-10-21",
+  "status": "complete_with_gaps",
+  "path_b_done": false,
+  "screening": [
+    {
+      "institution": "Eastmark Polytechnic",
+      "programmes_considered": "MSc programmes",
+      "decision": "pass",
+      "entry_path": "A",
+      "reason": "biomedical engineering"
+    },
+    {
+      "institution": "University of Ashgrove",
+      "programmes_considered": "MSc programmes",
+      "decision": "pass",
+      "entry_path": "A",
+      "reason": "mathematics"
+    },
+    {
+      "institution": "Riverton University",
+      "programmes_considered": "MSc programmes",
+      "decision": "fail",
+      "entry_path": "none",
+      "reason": "site blocked, not found"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "EA26-01",
+      "prior_id": null,
+      "status": "net_new",
+      "institution": "Eastmark Polytechnic",
+      "programme": "MSc Biomedical Engineering",
+      "track": "",
+      "city": "Eastgate",
+      "degree_type_and_length": "MSc 120 ECTS / 2 yrs",
+      "sources": [
+        {
+          "claim_field": "programme",
+          "url": "https://example.edu/ea26-01/programme",
+          "note": "programme page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "study_plan",
+          "url": "https://example.edu/ea26-01/study_plan",
+          "note": "study_plan page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "pathway",
+          "url": "https://example.edu/ea26-01/pathway",
+          "note": "pathway page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "admissions_language",
+          "url": "https://example.edu/ea26-01/admissions_language",
+          "note": "admissions_language page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "tuition",
+          "url": "https://example.edu/ea26-01/tuition",
+          "note": "tuition page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "scholarship",
+          "url": "https://example.edu/ea26-01/scholarship",
+          "note": "scholarship page",
+          "source_type": "aggregator",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "deadline",
+          "url": null,
+          "source_type": "other",
+          "accessed_date": "2026-10-20",
+          "note": "not located"
+        }
+      ],
+      "axis_1_curriculum": {
+        "NEURO": {
+          "grade": "Weak",
+          "evidence": "module list for NEURO",
+          "confidence": "confirmed"
+        },
+        "STAT": {
+          "grade": "Moderate",
+          "evidence": "module list for STAT",
+          "confidence": "inferred"
+        },
+        "LEARN": {
+          "grade": "Strong",
+          "evidence": "module list for LEARN",
+          "confidence": "confirmed"
+        },
+        "SIG": {
+          "grade": "None",
+          "evidence": "module list for SIG",
+          "confidence": "inferred"
+        },
+        "PROG": {
+          "grade": "Weak",
+          "evidence": "module list for PROG",
+          "confidence": "confirmed"
+        }
+      },
+      "axis_1_verdict": "Synthetic verdict.",
+      "axis_2_pathway": {
+        "people_and_partners": [
+          {
+            "name": "Group of Eastmark Polytechnic",
+            "type": "research_group",
+            "url": "https://example.edu/ea26-01/group",
+            "contacts": [
+              {
+                "name": "Contact 1 (role: modelling lead)",
+                "role": "modelling lead",
+                "focus": "neural population models",
+                "recent_work": "n/a",
+                "url": null,
+                "takes_students": "confirmed"
+              }
+            ]
+          }
+        ],
+        "summary": "Synthetic pathway summary."
+      },
+      "practical_component": {
+        "type": "thesis",
+        "credits": 30,
+        "self_proposed": false,
+        "external_host_allowed": false,
+        "notes": "30 ECTS thesis"
+      },
+      "progression": "Informal via thesis group.",
+      "language": {
+        "core": "English",
+        "electives": "English",
+        "admission_requirement": "IELTS 6.5",
+        "source_url": "https://example.edu/ea26-01/lang",
+        "source_note": "admissions page"
+      },
+      "tuition": {
+        "amount_text": "EUR 1,000 per year (2026/27)",
+        "applies_to": "international",
+        "currency": "EUR",
+        "annual_amount": 1000,
+        "academic_year": "2026/27",
+        "confidence": "confirmed"
+      },
+      "funding": {
+        "routes": [
+          {
+            "name": "Excellence scholarship",
+            "amount": "EUR 10,000/yr",
+            "applicant_eligible": "confirmed",
+            "eligibility_detail": "open to all international master's applicants",
+            "competitiveness": "competitive",
+            "url": "https://example.edu/ea26-01/schol"
+          }
+        ],
+        "verdict": "low_cost"
+      },
+      "deadlines": [],
+      "state_vector": {
+        "funding": 1,
+        "programme": 1,
+        "pathway": 1,
+        "rubric_version": "1.0",
+        "notes": "synthetic"
+      },
+      "benchmark_comparison": {
+        "vs_funding_benchmark": "weaker",
+        "vs_programme_benchmark": "similar",
+        "vs_pathway_benchmark": "weaker"
+      },
+      "confidence": {
+        "curriculum": "confirmed",
+        "pathway": "inferred",
+        "funding": "inferred"
+      },
+      "open_questions": [
+        "Does the group take MSc students?",
+        "Is the scholarship open to the applicant?"
+      ],
+      "contact_actions": [
+        {
+          "question": "Do you supervise MSc theses on neural data analysis?",
+          "who": "PI of the group",
+          "channel": "email"
+        }
+      ]
+    },
+    {
+      "id": "EA26-02",
+      "prior_id": null,
+      "status": "net_new",
+      "institution": "University of Ashgrove",
+      "programme": "MSc Mathematics",
+      "track": "",
+      "city": "Ashgrove",
+      "degree_type_and_length": "MSc 120 ECTS / 2 yrs",
+      "sources": [
+        {
+          "claim_field": "programme",
+          "url": "https://example.edu/ea26-02/programme",
+          "note": "programme page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "study_plan",
+          "url": "https://example.edu/ea26-02/study_plan",
+          "note": "study_plan page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "pathway",
+          "url": "https://example.edu/ea26-02/pathway",
+          "note": "pathway page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "admissions_language",
+          "url": "https://example.edu/ea26-02/admissions_language",
+          "note": "admissions_language page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "tuition",
+          "url": "https://example.edu/ea26-02/tuition",
+          "note": "tuition page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "scholarship",
+          "url": "https://example.edu/ea26-02/scholarship",
+          "note": "scholarship page",
+          "source_type": "aggregator",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "deadline",
+          "url": null,
+          "source_type": "other",
+          "accessed_date": "2026-10-20",
+          "note": "not located"
+        }
+      ],
+      "axis_1_curriculum": {
+        "NEURO": {
+          "grade": "Moderate",
+          "evidence": "module list for NEURO",
+          "confidence": "confirmed"
+        },
+        "STAT": {
+          "grade": "Strong",
+          "evidence": "module list for STAT",
+          "confidence": "inferred"
+        },
+        "LEARN": {
+          "grade": "None",
+          "evidence": "module list for LEARN",
+          "confidence": "confirmed"
+        },
+        "SIG": {
+          "grade": "Weak",
+          "evidence": "module list for SIG",
+          "confidence": "inferred"
+        },
+        "PROG": {
+          "grade": "Moderate",
+          "evidence": "module list for PROG",
+          "confidence": "confirmed"
+        }
+      },
+      "axis_1_verdict": "Synthetic verdict.",
+      "axis_2_pathway": {
+        "people_and_partners": [
+          {
+            "name": "Group of University of Ashgrove",
+            "type": "research_group",
+            "url": "https://example.edu/ea26-02/group",
+            "contacts": [
+              {
+                "name": "Contact 1 (role: modelling lead)",
+                "role": "modelling lead",
+                "focus": "neural population models",
+                "recent_work": "n/a",
+                "url": null,
+                "takes_students": "confirmed"
+              }
+            ]
+          }
+        ],
+        "summary": "Synthetic pathway summary."
+      },
+      "practical_component": {
+        "type": "thesis",
+        "credits": 30,
+        "self_proposed": false,
+        "external_host_allowed": false,
+        "notes": "30 ECTS thesis"
+      },
+      "progression": "Informal via thesis group.",
+      "language": {
+        "core": "English",
+        "electives": "English",
+        "admission_requirement": "IELTS 6.5",
+        "source_url": "https://example.edu/ea26-02/lang",
+        "source_note": "admissions page"
+      },
+      "tuition": {
+        "amount_text": "EUR 1,000 per year (2026/27)",
+        "applies_to": "international",
+        "currency": "EUR",
+        "annual_amount": 1000,
+        "academic_year": "2026/27",
+        "confidence": "confirmed"
+      },
+      "funding": {
+        "routes": [
+          {
+            "name": "Excellence scholarship",
+            "amount": "EUR 10,000/yr",
+            "applicant_eligible": "confirmed",
+            "eligibility_detail": "open to all international master's applicants",
+            "competitiveness": "competitive",
+            "url": "https://example.edu/ea26-02/schol"
+          }
+        ],
+        "verdict": "fails"
+      },
+      "deadlines": [],
+      "state_vector": {
+        "funding": 0,
+        "programme": 2,
+        "pathway": 1,
+        "rubric_version": "1.0",
+        "notes": "synthetic"
+      },
+      "benchmark_comparison": {
+        "vs_funding_benchmark": "weaker",
+        "vs_programme_benchmark": "similar",
+        "vs_pathway_benchmark": "weaker"
+      },
+      "confidence": {
+        "curriculum": "confirmed",
+        "pathway": "inferred",
+        "funding": "inferred"
+      },
+      "open_questions": [
+        "Does the group take MSc students?"
+      ],
+      "contact_actions": [
+        {
+          "question": "Do you supervise MSc theses on neural data analysis?",
+          "who": "PI of the group",
+          "channel": "email"
+        }
+      ]
+    }
+  ],
+  "ranked_out": [
+    {
+      "institution": "Eastmark Polytechnic",
+      "programme": "MSc Materials",
+      "prelim_state_vector": {
+        "funding": 0,
+        "programme": 1,
+        "pathway": 0
+      },
+      "why_below_cut": "weak fit",
+      "promote": false
+    }
+  ],
+  "corrections_to_prior": [],
+  "searched_not_surfaced": [
+    "Riverton University site blocked (403)."
+  ],
+  "country_summary": "Eastmark is expensive and has no stipends.",
+  "run_meta": {
+    "agent_model": "synthetic-agent",
+    "started_at": "2026-10-21T09:00:00Z",
+    "ended_at": "2026-10-21T10:30:00Z",
+    "limit_events": []
+  }
+}

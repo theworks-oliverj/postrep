@@ -1,0 +1,324 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://virgil-protocol.example/schemas/country_run_file.schema.json",
+  "title": "Country (or follow-up) run file",
+  "description": "Run file.",
+  "type": "object",
+  "properties": {
+    "country": {
+      "type": "string",
+      "description": "Country (or cross-cut scope) display name."
+    },
+    "slug": {
+      "type": "string",
+      "description": "Lower-case slug; must equal the file name stem (follow-ups: the stem before '_followup')."
+    },
+    "run_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the agent started."
+    },
+    "status": {
+      "enum": [
+        "in_progress",
+        "complete",
+        "complete_with_gaps",
+        "partial_budget_exhausted"
+      ],
+      "description": "in_progress = agent still working or was cut off (resume point); complete; complete_with_gaps = finished but gaps listed in searched_not_surfaced; partial_budget_exhausted = stopped because search/fetch budget ran out. An agent must never write 'complete' when gaps exist."
+    },
+    "path_b_done": {
+      "type": "boolean",
+      "description": "true once the people/partner-first path (Path B) has been run for this country. Skipped first when budgets run out, hence its own flag."
+    },
+    "budget_notes": {
+      "type": "string",
+      "description": "What budget/limits were hit and what was therefore skipped."
+    },
+    "screening": {
+      "type": "array",
+      "description": "Institution screening rows.",
+      "items": {
+        "$ref": "screening_entry.schema.json"
+      }
+    },
+    "candidates": {
+      "type": "array",
+      "description": "Full records (top-N by preliminary vector, plus promoted).",
+      "items": {
+        "$ref": "candidate_record.schema.json"
+      }
+    },
+    "ranked_out": {
+      "type": "array",
+      "description": "Passing programmes below the cap.",
+      "items": {
+        "$ref": "ranked_out_entry.schema.json"
+      }
+    },
+    "corrections_to_prior": {
+      "type": "array",
+      "description": "Corrections to entries of the prior ledger.",
+      "items": {
+        "type": "object",
+        "description": "One correction.",
+        "properties": {
+          "prior_id": {
+            "type": "string",
+            "description": "Prior ledger id."
+          },
+          "correction": {
+            "type": "string",
+            "description": "What was wrong and the corrected fact."
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "URL."
+          }
+        },
+        "required": [
+          "prior_id",
+          "correction"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "country_context": {
+      "type": "object",
+      "description": "Country-level facts that apply to all records.",
+      "properties": {
+        "funding_system": {
+          "type": "string",
+          "description": "How funding works for foreign students in this country."
+        },
+        "home_country_schemes": {
+          "type": "string",
+          "description": "Schemes specific to the applicant's home country/nationality (bilateral grants, priority quotas)."
+        },
+        "residence_pathway": {
+          "type": "string",
+          "description": "Visa/residence-permit route after the degree."
+        },
+        "dependant_pathway": {
+          "type": "string",
+          "description": "Rules for bringing a partner/children: family-reunification route, partner work rights, income proof, childcare. Fill when the life plan lists dependants."
+        },
+        "application_cycle": {
+          "type": "string",
+          "description": "Typical calendar of applications."
+        },
+        "additions": {
+          "type": "array",
+          "description": "Follow-up additions, filled by merge.py (kept separate so this object never changes type).",
+          "items": {
+            "type": "object",
+            "description": "One addition.",
+            "properties": {
+              "source": {
+                "type": "string",
+                "description": "Follow-up file name."
+              },
+              "context": {
+                "type": "object",
+                "description": "The follow-up's country_context object, verbatim."
+              }
+            },
+            "required": [
+              "source",
+              "context"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "searched_not_surfaced": {
+      "type": "array",
+      "description": "Honest gap log: what was searched and not found, or not searched at all.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "country_summary": {
+      "type": "string",
+      "description": "3-6 sentences."
+    },
+    "followup_of": {
+      "type": "string",
+      "description": "Follow-up files only: slug of the base country."
+    },
+    "run_meta": {
+      "type": "object",
+      "description": "Run telemetry used to plan usage windows.",
+      "properties": {
+        "agent_model": {
+          "type": "string",
+          "description": "Model/agent label."
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start."
+        },
+        "ended_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End (absent if cut off)."
+        },
+        "tool_calls": {
+          "type": "integer",
+          "description": "Approximate tool calls used.",
+          "minimum": 0
+        },
+        "limit_events": {
+          "type": "array",
+          "description": "Usage/search/fetch limits hit during the run.",
+          "items": {
+            "type": "object",
+            "description": "One event.",
+            "properties": {
+              "at": {
+                "type": "string",
+                "format": "date-time",
+                "description": "When."
+              },
+              "kind": {
+                "enum": [
+                  "usage_window",
+                  "search_budget",
+                  "fetch_budget",
+                  "context",
+                  "other"
+                ],
+                "description": "Type of limit."
+              },
+              "detail": {
+                "type": "string",
+                "description": "What was cut short."
+              }
+            },
+            "required": [
+              "kind"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "agent_model",
+        "started_at",
+        "limit_events"
+      ],
+      "additionalProperties": false
+    },
+    "urgent_deadlines": {
+      "type": "array",
+      "description": "Follow-up extra: deadlines the agent wants surfaced (kept by merge.py).",
+      "items": {
+        "type": "object",
+        "description": "One deadline.",
+        "properties": {
+          "record_id": {
+            "type": "string",
+            "description": "Related record id, if any."
+          },
+          "name": {
+            "type": "string",
+            "description": "Deadline name."
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date."
+          },
+          "date_type": {
+            "enum": [
+              "confirmed",
+              "pattern",
+              "inferred"
+            ],
+            "description": "Quality of the date."
+          },
+          "source_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Source page."
+          }
+        },
+        "required": [
+          "name",
+          "date",
+          "date_type",
+          "source_url"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "path_b_people": {
+      "type": "array",
+      "description": "Follow-up extra: people and partners found by the people/partner-first path (Path B).",
+      "items": {
+        "type": "object",
+        "description": "One person.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Full name."
+          },
+          "affiliation": {
+            "type": "string",
+            "description": "Institution/group."
+          },
+          "focus": {
+            "type": "string",
+            "description": "Focus relevant to the pathway signals."
+          },
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Profile page."
+          },
+          "msc_link": {
+            "type": "string",
+            "description": "How a student of the programme could reach them (supervision, internship, placement, sponsored project, employer link)."
+          }
+        },
+        "required": [
+          "name",
+          "affiliation",
+          "focus"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "still_open": {
+      "type": "array",
+      "description": "Follow-up extra: open items.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "notes": {
+      "type": "string",
+      "description": "Free-text run notes."
+    },
+    "extras": {
+      "type": "object",
+      "description": "Any other follow-up-specific structured findings (e.g. scheme terms). Kept verbatim by merge.py under countries[slug].followups[file].extras instead of being dropped."
+    }
+  },
+  "required": [
+    "country",
+    "run_date",
+    "status"
+  ],
+  "additionalProperties": false
+}

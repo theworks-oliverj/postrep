@@ -1,0 +1,594 @@
+{
+ "label": "reference run",
+ "today": "2026-10-27",
+ "scope": {
+  "run_id": null,
+  "applicant_alias": null,
+  "profile_summary": null,
+  "mode": "cloud",
+  "protocol_version": "1.0.0",
+  "countries": 12,
+  "country_names": [
+   "Country A",
+   "Country B",
+   "Country C",
+   "Country D",
+   "Country E",
+   "Country F",
+   "Country G",
+   "Country H",
+   "Country I",
+   "Country J",
+   "Country K",
+   "Country L"
+  ],
+  "crosscuts": 2,
+  "crosscut_kinds": {
+   "programme_scan": 1,
+   "funding_route": 1
+  },
+  "funded_definition": {
+   "type": "stipend_and_tuition",
+   "min_funding_score": 2
+  },
+  "exclusions": [
+   "1 region(s)/type(s) excluded, not listed"
+  ],
+  "benchmarks": [
+   {
+    "axis": "funding",
+    "institution": "funding benchmark",
+    "programme": "identity withheld",
+    "vector": [
+     3,
+     1,
+     2
+    ],
+    "total": 6,
+    "status": "provisional"
+   },
+   {
+    "axis": "programme",
+    "institution": "programme benchmark",
+    "programme": "identity withheld",
+    "vector": [
+     2,
+     3,
+     1
+    ],
+    "total": 6,
+    "status": "provisional"
+   },
+   {
+    "axis": "pathway",
+    "institution": "pathway benchmark",
+    "programme": "identity withheld",
+    "vector": [
+     1,
+     2,
+     3
+    ],
+    "total": 6,
+    "status": "provisional"
+   }
+  ]
+ },
+ "funnel": {
+  "screened_unique": 353,
+  "screened_raw_rows": 385,
+  "pass": 194,
+  "fail": 159,
+  "unscreened": 0,
+  "full_records": 128,
+  "ranked_out": 186,
+  "programme_level_entries": 314,
+  "per_country": [
+   {
+    "slug": "country_a",
+    "name": "Country A",
+    "kind": "country",
+    "screened": 96,
+    "pass": 23,
+    "fail": 73,
+    "unscreened": 0,
+    "records": 12,
+    "ranked_out": 14,
+    "cap": 12,
+    "cap_reached": true,
+    "followup_files": 1,
+    "open_triggers": 2,
+    "no_followup_suggested": false,
+    "status": "complete",
+    "depth": "deep",
+    "stop_reason": null
+   },
+   {
+    "slug": "country_b",
+    "name": "Country B",
+    "kind": "country",
+    "screened": 43,
+    "pass": 15,
+    "fail": 28,
+    "unscreened": 0,
+    "records": 12,
+    "ranked_out": 8,
+    "cap": 12,
+    "cap_reached": true,
+    "followup_files": 0,
+    "open_triggers": 1,
+    "no_followup_suggested": false,
+    "status": "complete",
+    "depth": "deep",
+    "stop_reason": null
+   },
+   {
+    "slug": "country_c",
+    "name": "Country C",
+    "kind": "country",
+    "screened": 38,
+    "pass": 34,
+    "fail": 4,
+    "unscreened": 0,
+    "records": 11,
+    "ranked_out": 22,
+    "cap": 12,
+    "cap_reached": false,
+    "followup_files": 2,
+    "open_triggers": 2,
+    "no_followup_suggested": false,
+    "status": "complete",
+    "depth": "deep",
+    "stop_reason": null
+   },
+   {
+    "slug": "country_d",
+    "name": "Country D",
+    "kind": "country",
+    "screened": 30,
+    "pass": 29,
+    "fail": 1,
+    "unscreened": 0,
+    "records": 12,
+    "ranked_out": 21,
+    "cap": 12,
+    "cap_reached": true,
+    "followup_files": 1,
+    "open_triggers": 1,
+    "no_followup_suggested": false,
+    "status": "complete",
+    "depth": "deep",
+    "stop_reason": null
+   },
+   {
+    "slug": "country_e",
+    "name": "Country E",
+    "kind": "country",
+    "screened": 27,
+    "pass": 24,
+    "fail": 3,
+    "unscreened": 0,
+    "records": 12,
+    "ranked_out": 19,
+    "cap": 12,
+    "cap_reached": true,
+    "followup_files": 1,
+    "open_triggers": 0,
+    "no_followup_suggested": false,
+    "status": "complete",
+    "depth": "deep",
+    "stop_reason": null
+   },
+   {
+    "slug": "country_f",
+    "name": "Country F",
+    "kind": "country",
+    "screened": 16,
+    "pass": 11,
+    "fail": 5,
+    "unscreened": 0,
+    "records": 9,
+    "ranked_out": 12,
+    "cap": 8,
+    "cap_reached": true,
+    "followup_files": 1,
+    "open_triggers": 2,
+    "no_followup_suggested": false,
+    "status": "complete",
+    "depth": "standard",
+    "stop_reason": null
+   },
+   {
+    "slug": "country_g",
+    "name": "Country G",
+    "kind": "country",
+    "screened": 16,
+    "pass": 11,
+    "fail": 5,
+    "unscreened": 0,
+    "records": 9,
+    "ranked_out": 18,
+    "cap": 8,
+    "cap_reached": true,
+    "followup_files": 1,
+    "open_triggers": 2,
+    "no_followup_suggested": false,
+    "status": "complete",
+    "depth": "standard",
+    "stop_reason": null
+   },
+   {
+    "slug": "country_h",
+    "name": "Country H",
+    "kind": "country",
+    "screened": 14,
+    "pass": 9,
+    "fail": 5,
+    "unscreened": 0,
+    "records": 10,
+    "ranked_out": 22,
+    "cap": 8,
+    "cap_reached": true,
+    "followup_files": 1,
+    "open_triggers": 1,
+    "no_followup_suggested": false,
+    "status": "complete",
+    "depth": "standard",
+    "stop_reason": null
+   },
+   {
+    "slug": "country_i",
+    "name": "Country I",
+    "kind": "country",
+    "screened": 14,
+    "pass": 10,
+    "fail": 4,
+    "unscreened": 0,
+    "records": 9,
+    "ranked_out": 12,
+    "cap": 8,
+    "cap_reached": true,
+    "followup_files": 1,
+    "open_triggers": 0,
+    "no_followup_suggested": false,
+    "status": "complete",
+    "depth": "standard",
+    "stop_reason": null
+   },
+   {
+    "slug": "country_j",
+    "name": "Country J",
+    "kind": "country",
+    "screened": 14,
+    "pass": 7,
+    "fail": 7,
+    "unscreened": 0,
+    "records": 8,
+    "ranked_out": 10,
+    "cap": 8,
+    "cap_reached": true,
+    "followup_files": 0,
+    "open_triggers": 2,
+    "no_followup_suggested": false,
+    "status": "complete",
+    "depth": "standard",
+    "stop_reason": null
+   },
+   {
+    "slug": "country_k",
+    "name": "Country K",
+    "kind": "country",
+    "screened": 11,
+    "pass": 4,
+    "fail": 7,
+    "unscreened": 0,
+    "records": 8,
+    "ranked_out": 13,
+    "cap": 8,
+    "cap_reached": true,
+    "followup_files": 0,
+    "open_triggers": 1,
+    "no_followup_suggested": false,
+    "status": "complete",
+    "depth": "standard",
+    "stop_reason": null
+   },
+   {
+    "slug": "country_l",
+    "name": "Country L",
+    "kind": "country",
+    "screened": 8,
+    "pass": 8,
+    "fail": 0,
+    "unscreened": 0,
+    "records": 8,
+    "ranked_out": 5,
+    "cap": 8,
+    "cap_reached": true,
+    "followup_files": 0,
+    "open_triggers": 1,
+    "no_followup_suggested": false,
+    "status": "complete",
+    "depth": "standard",
+    "stop_reason": null
+   },
+   {
+    "slug": "crosscut_a",
+    "name": "Cross-cut A (programme_scan)",
+    "kind": "programme_scan",
+    "screened": 26,
+    "pass": 9,
+    "fail": 17,
+    "unscreened": 0,
+    "records": 8,
+    "ranked_out": 10,
+    "cap": null,
+    "cap_reached": false,
+    "followup_files": 0,
+    "open_triggers": 0,
+    "no_followup_suggested": false,
+    "status": "complete",
+    "depth": null,
+    "stop_reason": null
+   }
+  ]
+ },
+ "novelty": {
+  "net_new": 95,
+  "update_of_existing": 33,
+  "reconfirmed": 0,
+  "corrections_to_prior": 96,
+  "prior_not_revisited": 2,
+  "baseline_used": true,
+  "delta_vs_baseline": {
+   "revisited_records": 32,
+   "axes": {
+    "funding": {
+     "same": 11,
+     "up": 11,
+     "down": 4,
+     "filled_from_unknown": 6,
+     "lost_to_unknown": 0
+    },
+    "programme": {
+     "same": 20,
+     "up": 3,
+     "down": 0,
+     "filled_from_unknown": 6,
+     "lost_to_unknown": 1
+    },
+    "pathway": {
+     "same": 21,
+     "up": 8,
+     "down": 1,
+     "filled_from_unknown": 1,
+     "lost_to_unknown": 0
+    }
+   }
+  }
+ },
+ "benchmark_position": {
+  "benchmark_totals": [
+   6,
+   6,
+   6
+  ],
+  "benchmark_max_total": 6,
+  "records_ge_benchmark_max": 14,
+  "records_gt_benchmark_max": 1,
+  "max_total": 7,
+  "records_funding_3": 0,
+  "records_programme_3": 0,
+  "total_histogram": {
+   "0": 1,
+   "1": 3,
+   "2": 9,
+   "3": 28,
+   "4": 40,
+   "5": 33,
+   "6": 13,
+   "7": 1
+  },
+  "axis_distribution": {
+   "funding": {
+    "0": 15,
+    "1": 84,
+    "2": 24,
+    "?": 5
+   },
+   "programme": {
+    "0": 5,
+    "1": 55,
+    "2": 51,
+    "?": 17
+   },
+   "pathway": {
+    "1": 33,
+    "2": 68,
+    "3": 19,
+    "?": 8
+   }
+  },
+  "top": [
+   {
+    "rank": 1,
+    "total": 7,
+    "vector": [
+     2,
+     2,
+     3
+    ]
+   },
+   {
+    "rank": 2,
+    "total": 6,
+    "vector": [
+     2,
+     1,
+     3
+    ]
+   },
+   {
+    "rank": 3,
+    "total": 6,
+    "vector": [
+     2,
+     1,
+     3
+    ]
+   },
+   {
+    "rank": 4,
+    "total": 6,
+    "vector": [
+     1,
+     2,
+     3
+    ]
+   },
+   {
+    "rank": 5,
+    "total": 6,
+    "vector": [
+     1,
+     2,
+     3
+    ]
+   }
+  ],
+  "records_pathway_3": 19
+ },
+ "evidence": {
+  "route_entries": 293,
+  "takes_students": {
+   "inferred": 83,
+   "confirmed": 38,
+   "verification_needed": 172
+  },
+  "pct_routes_confirmed": 13.0,
+  "pct_routes_verification_needed": 58.7,
+  "funding_routes": 293,
+  "funding_eligibility": {
+   "inferred": 96,
+   "unknown": 65,
+   "confirmed": 132
+  },
+  "pct_funding_eligibility_confirmed": 45.1,
+  "source_entries": 789,
+  "null_sources": 119,
+  "pct_null_sources": 15.1,
+  "null_by_claim_field": {
+   "tuition": 20,
+   "tuition_note": 1,
+   "study_plan": 33,
+   "admissions_language": 22,
+   "pathway": 30,
+   "scholarship": 10,
+   "programme": 3
+  },
+  "source_type_recorded": 0,
+  "pct_official": null,
+  "pct_aggregator": null,
+  "accessed_date_recorded": 0,
+  "distinct_urls": 732,
+  "distinct_domains": 299,
+  "mean_open_questions": 3.2,
+  "records_with_unscored_axis": 26
+ },
+ "verification": {
+  "available": true,
+  "records_checked": 12,
+  "claims_checked": 36,
+  "coverage_of_records": 9.4,
+  "pct_confirmed": 77.8,
+  "pct_wrong": 8.3,
+  "pct_not_found": 13.9,
+  "pct_disputed": 0.0,
+  "verdicts": {
+   "wrong": 3,
+   "confirmed": 28,
+   "not_found": 5
+  },
+  "by_claim_type": {
+   "fee": {
+    "wrong": 2,
+    "confirmed": 9,
+    "not_found": 1
+   },
+   "deadline": {
+    "confirmed": 7,
+    "not_found": 4,
+    "wrong": 1
+   },
+   "people_partner": {
+    "confirmed": 12
+   }
+  },
+  "by_sampling": {
+   "top_n": {
+    "wrong": 3,
+    "confirmed": 28,
+    "not_found": 5
+   }
+  },
+  "pct_numeric_claims_unreliable": 33.3,
+  "sampled_by": {
+   "top_n": 36
+  },
+  "random_sample_present": false,
+  "seed": null,
+  "method": null
+ },
+ "gaps": {
+  "searched_not_surfaced": 95,
+  "examples": [],
+  "agents_hit_budget": 1,
+  "agents_hit_budget_countries": [
+   "Country C"
+  ],
+  "blocked_site_mentions": 15,
+  "unscreened_institutions": 0,
+  "path_b_not_done": []
+ },
+ "time_sensitivity": {
+  "structured_deadlines": 0,
+  "by_date_type": {},
+  "window_days": 90,
+  "within_window": 0,
+  "within_window_by_type": {},
+  "rows": []
+ },
+ "caveats": {
+  "rubric_versions": {
+   "ref-2026-10": 128
+  },
+  "weighting": "unweighted sum of the three axes (ties: pathway, then funding)",
+  "overrides_applied": 8,
+  "overridden_records": 8,
+  "overridden_fields": [
+   "state_vector.funding"
+  ],
+  "unknown_axes_handling": "'?' = missing data: skipped in _total (understates unscored records), never counted as 0",
+  "near_duplicates_flagged": 7,
+  "exact_duplicates_dropped": 0,
+  "provisional_benchmarks": 3
+ },
+ "header": {
+  "protocol_version": "1.0.0",
+  "life_plan_rubric_version": null,
+  "pathway_map_rubric_version": null,
+  "state_vector_rubric_versions": [
+   "ref-2026-10"
+  ]
+ },
+ "effort": {
+  "sessions": null,
+  "limit_hits": null,
+  "agent_runs": 25,
+  "usage_windows": 4,
+  "approximate": true,
+  "waves_logged": [],
+  "planned_windows": null,
+  "agents_per_window_observed": null
+ },
+ "publish_safe": true
+}

@@ -1,0 +1,49 @@
+{
+  "benchmarks": [
+    {
+      "axis": "funding",
+      "institution": "Bench University A",
+      "programme": "MSc Funded Science",
+      "baseline_vector": {
+        "funding": 3,
+        "programme": 1,
+        "pathway": 2,
+        "rubric_version": "1.0"
+      },
+      "evidence_urls": [
+        "https://example.edu/benchA"
+      ],
+      "status": "verified"
+    },
+    {
+      "axis": "programme",
+      "institution": "Bench University B",
+      "programme": "MSc Computational Neuroscience",
+      "baseline_vector": {
+        "funding": 2,
+        "programme": 3,
+        "pathway": 1,
+        "rubric_version": "1.0"
+      },
+      "evidence_urls": [
+        "https://example.edu/benchB"
+      ],
+      "status": "verified"
+    },
+    {
+      "axis": "pathway",
+      "institution": "Bench University C",
+      "programme": "MSc Neural Systems",
+      "baseline_vector": {
+        "funding": 1,
+        "programme": 2,
+        "pathway": 3,
+        "rubric_version": "1.0"
+      },
+      "evidence_urls": [
+        "https://example.edu/benchC"
+      ],
+      "status": "provisional"
+    }
+  ]
+}
