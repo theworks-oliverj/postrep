@@ -13,6 +13,7 @@
 | Start a country file | S4-S7 | `python3 scripts/checkpoint.py RUN_DIR init-country --country SLUG --name NAME [--followup [X]] [--resume]`. Refuses unless both rubrics passed; `--force --reason T` logs a protocol override |
 | Start a cross-cut file | S7 | `python3 scripts/checkpoint.py RUN_DIR init-country --crosscut SLUG --kind programme_scan\|funding_route --name NAME` |
 | Append one unit (after **each** record) | S4-S7 | `python3 scripts/checkpoint.py RUN_DIR add-screening\|add-candidate\|add-ranked-out --country SLUG [--followup [X]] (--json STR \| --file PATH \| -)` |
+| Write a whole cross-cut file at once | S7 | `python3 scripts/checkpoint.py RUN_DIR put-crosscut --crosscut SLUG (--json STR \| --file PATH)` |
 | Append a funding finding | S7 | `python3 scripts/checkpoint.py RUN_DIR add-finding --crosscut SLUG --file finding.json` |
 | Close a file | S4-S7 | `python3 scripts/checkpoint.py RUN_DIR set-status --country SLUG [--status S] [--path-b-done true\|false] [--country-context FILE\|JSON] [--budget-notes T] [--add-gap T] [--limit-event KIND:DETAIL]` (use `--crosscut SLUG` for cross-cuts) |
 | Clear parked invalid records | any | `python3 scripts/checkpoint.py RUN_DIR clear-rejected [--id ID]` |

@@ -19,6 +19,8 @@ Turn many agent files into one clean, scored dataset, and measure how far it can
 | Keep extras | Decision-relevant detail | Keep follow-up deadlines, scheme terms, Path B people and promoted records |
 | Compute, don't type | Miscounts | Totals (ignoring "?"), the list of unscored axes, rank (total, then pathway, then funding) and the delta vs a previous run under the same rubric version all come from data |
 
+After a clean merge, update the state vector with `phase: merge → verify`.
+
 ## Verification rules
 
 | Rule | Protects | Behaviour |

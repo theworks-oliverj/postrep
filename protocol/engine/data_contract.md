@@ -29,7 +29,7 @@ Every file a run writes has a JSON Schema in `schemas/` (draft 2020-12). The sch
 
 | Field | Rule |
 |---|---|
-| `state_vector.{funding, programme, pathway}` | An integer 0-3, or `"?"`. Never a guess |
+| `candidate.state_vector.{funding, programme, pathway}` | An integer 0-3, or `"?"`. Never a guess. This is the scoring vector, not `run_state.state_vector`, which is the continuation vector |
 | `*.confidence`, `takes_students`, `applicant_eligible` | Fixed enums (`confirmed`, `inferred`, `verification_needed`, `unknown`). Absence of evidence is not `confirmed` |
 | `deadlines[].date_type` | `confirmed` (this cycle, official), `pattern` (last cycle's date) or `inferred` |
 | `sources[]` | Each entry has a `url` (or null with a note), `source_type` and `accessed_date` |

@@ -383,7 +383,9 @@ def build(root: Path, index: dict) -> tuple[str, list[str]]:
         "> Generated file - do not edit. Source: `protocol/` and the entry file "
         f"`{index['entry']}`. This single file contains everything an AI chat needs "
         "when it cannot fetch files from GitHub. Start with the entry section, "
-        "then load each module when its \"Load when\" condition applies."
+        "then load each module when its \"Load when\" condition applies. "
+        "**AI: you are reading the full bundle. Do not fetch anything from GitHub; "
+        "every module path below maps to its `module-<id>` section in this file.**"
     )
     out.append("")
     out.append("## Table of contents")

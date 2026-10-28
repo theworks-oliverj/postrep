@@ -1,6 +1,6 @@
 # Engine: lessons from the reference run
 
-*Module `lessons`. Not loaded during runs. It's for maintainers and curious readers: it explains why the rules exist. The reference run (Oct 2026) covered 12 countries and 2 cross-cuts, with about 25 agent runs. Specifics are anonymised.*
+*Module `lessons`. Not loaded during runs. It's for maintainers and curious readers: it explains why the rules exist. The reference run (2026) covered 12 countries and 2 cross-cuts, with about 25 agent runs. Specifics are anonymised.*
 
 | # | What went wrong or was missing | Discovered by | Rule it produced |
 |---|---|---|---|
@@ -23,3 +23,20 @@
 | 17 | Follow-up budget went to countries whose outcome couldn't change | Orchestrator judgement | Stop rule |
 | 18 | "Zero tuition" vs "affordable" was left open | Final comparison | LP-G3 requires numbers |
 | 19 | The protocol's first draft assumed one field (science, thesis-led) | Independent dry run with a different persona | Pathway axis; practical-component field; field-purpose rules instead of examples |
+
+## Worked partitioning example
+
+For 12 countries (5 deep, 7 standard, 2 cross-cuts; about 23 units including follow-ups):
+
+| Window | Work | Units |
+|---|---|---|
+| W1 | S0-S3 interviews (several short sittings) + benchmark scout | ≈1 |
+| W2 | Wave 1: 4 deep | 6 |
+| W3 | Wave 2: 1 deep + 4 standard | 5.5 |
+| W4 | Wave 3: 3 standard + 2 cross-cuts | 4.5 |
+| W5 | Triage + about 6-8 follow-ups | 4.5-6 |
+| W6 | Merge + verification + adjudication | ≈1.5 |
+| W7 | Deliverables | ≈1 |
+
+On a larger plan, W2-W4 often compress into two windows. `agents_per_window_observed` will show whether that's the case.
+

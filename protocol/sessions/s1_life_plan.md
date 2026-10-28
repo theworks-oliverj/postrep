@@ -17,7 +17,7 @@ Produce a plan precise enough that a research agent with no other context can ju
 
 ## Fields (what the plan must track)
 
-Gate fields (`G`) must be `pass`, or explicitly `declared_unknown`. Soft fields (`S`) are scored 0-2 × weight. In `life_plan.json` the gates live under `purpose_horizon`, `post_degree_intent`, `money`, `eligibility_facts`, `geography`, `timeline` and `household` (see `engine/data_contract.md`).
+Gate fields (`G`) must be `pass`, or explicitly `declared_unknown`. Soft fields (`S`) are scored 0-2 × weight. In `life_plan.json` the gates live under `purpose_horizon`, `post_degree_intent`, `money`, `eligibility_facts`, `geography`, `timeline` and `household` (see `engine/data_contract.md`). Soft fields use the IDs' names as JSON keys (e.g. `gaps_self_teachable`, `support_assets`).
 
 | ID | Field | Tracks | Done when | Seed question |
 |---|---|---|---|---|
@@ -29,13 +29,13 @@ Gate fields (`G`) must be `pass`, or explicitly `declared_unknown`. Soft fields 
 | LP-G6 | timeline | When the person can start | Earliest and latest start, immovable dates, and whether waiting one cycle is acceptable | "What's the earliest and latest start that works?" |
 | LP-G7 | household_dealbreakers | Dependants, partner, obligations | Dependants and partner situation (who moves, work rights needed), stance on post-degree return obligations, and deal-breakers are stated. An explicit "none" counts | "Who moves with you, and what would make you turn down an otherwise perfect programme?" |
 | LP-S1 | strengths (×1) | Assets the person brings | Three concrete strengths | |
-| LP-S2 | gaps (×2) | Knowledge or skill gaps, and which are self-teachable | Gaps are listed, each marked self-teachable or not | |
+| LP-S2 | gaps_self_teachable (×2) | Knowledge or skill gaps, and which are self-teachable | Gaps are listed, each marked self-teachable or not | |
 | LP-S3 | long_term_role (×2) | A concrete target role or sector | Specific enough to judge pathway fit | |
 | LP-S4 | tradeoff_ranking (×2) | The relative weight of funding, curriculum, pathway (people, partners, placements), location, prestige, post-study work rights | A ranked list | |
 | LP-S5 | risk_tolerance (×1) | Appetite for financial risk and for long-shot options | Low, medium or high for each | |
 | LP-S6 | study_format (×1) | Acceptable formats: full-time, part-time, online, research-only, work-integrated | Accepted and rejected formats listed | |
 | LP-S7 | decision_criteria (×2) | What would make the person say yes immediately | Explicit conditions | |
-| LP-S8 | application_assets (×1) | Referees, portfolio, publications, existing contacts | Listed | |
+| LP-S8 | support_assets (×1) | Referees, portfolio, publications, existing contacts | Listed | |
 | LP-S9 | assumptions_log (×1) | Pivots and assumptions surfaced during the interview | Logged, each with a basis | |
 | LP-S10 | lifestyle (×1) | City size, climate, distance from home, community | Stated, or "no preference" | |
 

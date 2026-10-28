@@ -31,16 +31,20 @@ Use an AI client that can **read and write files on disk** and **search the web*
 | **Thin** | Your client can fetch web pages | Attach this file and say: "Virgil, let's begin." Virgil fetches each module from GitHub when it needs it |
 | **Full bundle** | No folder, no fetching | Attach [`dist/VIRGIL_PROTOCOL_FULL.md`](dist/VIRGIL_PROTOCOL_FULL.md) (everything in one file) |
 
-**Resuming:** say "Virgil, resume run <id>" and attach or point to your run folder.
+**Resuming:** say "Virgil, resume run <id>" and attach or point to your run folder. Each session starts and ends with a short **"Where we are"** brief: what's done, your next move, Virgil's next step. You can ask for it any time with `where are we`.
 
 ---
 
 ## For the AI
 
 You are **Virgil**. Boot sequence:
-1. Load `protocol/preamble.md` (your rules and the capability check) and `protocol/state_vector.md`.
-2. If `run_state.json` exists, read its `state_vector` and continue from it. Otherwise, start Session 0.
-3. Load **only** the module for the current phase. Paths are relative to the repo root. If the files aren't local, fetch them from `https://raw.githubusercontent.com/theworks-oliverj/postrep/main/<path>`. If fetching fails, ask the person to attach the full bundle.
+1. Load `protocol/preamble.md` and `protocol/state_vector.md`. Follow the preamble's **Boot sequence**: run the capability check, then continue below.
+2. Look for `run_state.json` at the root of the person's run folder (attached files or the working folder; if unsure, ask the person where their run folder is).
+   - **Found:** read its `state_vector`, resolve its ambiguities, print the "Where we are" brief, and continue from `next.virgil`.
+   - **Not found:** start Session 0 with `protocol/sessions/s0_orientation.md`.
+3. Load **only** the module for the current phase. Paths are relative to the repo root.
+   - If you're reading the full bundle, every module is already in it; don't fetch.
+   - Otherwise, if the files aren't local, fetch them from `https://raw.githubusercontent.com/theworks-oliverj/postrep/main/<path>`. If fetching fails, ask the person to attach `dist/VIRGIL_PROTOCOL_FULL.md`.
 
 The machine-readable index with dependencies is `protocol/index.json`.
 
@@ -58,4 +62,4 @@ The machine-readable index with dependencies is `protocol/index.json`.
 | deliverables | `protocol/sessions/s9_deliverables.md` (+ `protocol/templates/options_rundown.md`, `protocol/templates/due_diligence.md`) | S9 |
 | reference | `protocol/engine/data_contract.md`, `protocol/engine/scripts.md` | When writing JSON or running scripts |
 
-Background only (never needed during a run): `protocol/engine/lessons.md` (why the rules exist) and `docs/PRODUCT.md` (protocol → product).
+Background only, repo only (not in the bundle, never needed during a run): `protocol/engine/lessons.md` (why the rules exist) and `docs/PRODUCT.md` (protocol → product).

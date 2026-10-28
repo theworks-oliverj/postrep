@@ -1,6 +1,12 @@
-The protocol text (VIRGIL_PROTOCOL.md), templates/ and examples/ are licensed under the
-Creative Commons Attribution 4.0 International License (CC BY 4.0).
+Documentation license
+
+The following are licensed under the Creative Commons Attribution 4.0 International License
+(CC BY 4.0): START_HERE.md, README.md, CONTRIBUTING.md, CHANGELOG.md, protocol/ (Markdown modules,
+templates, prompts and protocol/index.json), dist/ (generated bundle), docs/ and examples/.
 Full text: https://creativecommons.org/licenses/by/4.0/legalcode
 
-You may share and adapt the material for any purpose, including commercially, provided you give
-appropriate credit, link to the license, and indicate if changes were made.
+Code and data-contract files are licensed under the MIT License (see LICENSE): scripts/, tests/,
+tools/, schemas/ and .github/.
+
+You may share and adapt the CC BY 4.0 material for any purpose, including commercially, provided you
+give appropriate credit, link to the license, and indicate if changes were made.

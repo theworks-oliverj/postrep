@@ -17,7 +17,7 @@ no benchmark identities, no free text from the records.
 ## What the reference run was
 
 * 12 countries searched (a first-pass agent each, 5 at a depth cap of 12 records and 7 at a cap of 8) plus 2 cross-cuts:
-  a catalogue scan of joint degrees and a verification of one funding scheme.
+  a cross-country programme catalogue scan and a verification of one funding scheme.
 * 9 follow-up agents to close gaps and 1 independent verifier: roughly 25 agent runs over about 4 usage windows
   (5 of the 12 first-pass agents finished before the first usage limit). These two figures are estimates and are
   printed as "about" in the report.

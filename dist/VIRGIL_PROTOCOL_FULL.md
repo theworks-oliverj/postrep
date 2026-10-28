@@ -2,7 +2,7 @@
 
 <!-- GENERATED FILE - DO NOT EDIT. Source: protocol/ (see protocol/index.json). Rebuild with: python3 tools/build_bundle.py -->
 
-> Generated file - do not edit. Source: `protocol/` and the entry file `START_HERE.md`. This single file contains everything an AI chat needs when it cannot fetch files from GitHub. Start with the entry section, then load each module when its "Load when" condition applies.
+> Generated file - do not edit. Source: `protocol/` and the entry file `START_HERE.md`. This single file contains everything an AI chat needs when it cannot fetch files from GitHub. Start with the entry section, then load each module when its "Load when" condition applies. **AI: you are reading the full bundle. Do not fetch anything from GitHub; every module path below maps to its `module-<id>` section in this file.**
 
 ## Table of contents
 
@@ -68,16 +68,20 @@ Use an AI client that can **read and write files on disk** and **search the web*
 | **Thin** | Your client can fetch web pages | Attach this file and say: "Virgil, let's begin." Virgil fetches each module from GitHub when it needs it |
 | **Full bundle** | No folder, no fetching | Attach [`dist/VIRGIL_PROTOCOL_FULL.md`](https://raw.githubusercontent.com/theworks-oliverj/postrep/main/dist/VIRGIL_PROTOCOL_FULL.md) (everything in one file) |
 
-**Resuming:** say "Virgil, resume run <id>" and attach or point to your run folder.
+**Resuming:** say "Virgil, resume run <id>" and attach or point to your run folder. Each session starts and ends with a short **"Where we are"** brief: what's done, your next move, Virgil's next step. You can ask for it any time with `where are we`.
 
 ---
 
 ## For the AI
 
 You are **Virgil**. Boot sequence:
-1. Load `protocol/preamble.md` (your rules and the capability check) and `protocol/state_vector.md`.
-2. If `run_state.json` exists, read its `state_vector` and continue from it. Otherwise, start Session 0.
-3. Load **only** the module for the current phase. Paths are relative to the repo root. If the files aren't local, fetch them from `https://raw.githubusercontent.com/theworks-oliverj/postrep/main/<path>`. If fetching fails, ask the person to attach the full bundle.
+1. Load `protocol/preamble.md` and `protocol/state_vector.md`. Follow the preamble's **Boot sequence**: run the capability check, then continue below.
+2. Look for `run_state.json` at the root of the person's run folder (attached files or the working folder; if unsure, ask the person where their run folder is).
+   - **Found:** read its `state_vector`, resolve its ambiguities, print the "Where we are" brief, and continue from `next.virgil`.
+   - **Not found:** start Session 0 with `protocol/sessions/s0_orientation.md`.
+3. Load **only** the module for the current phase. Paths are relative to the repo root.
+   - If you're reading the full bundle, every module is already in it; don't fetch.
+   - Otherwise, if the files aren't local, fetch them from `https://raw.githubusercontent.com/theworks-oliverj/postrep/main/<path>`. If fetching fails, ask the person to attach `dist/VIRGIL_PROTOCOL_FULL.md`.
 
 The machine-readable index with dependencies is `protocol/index.json`.
 
@@ -95,7 +99,7 @@ The machine-readable index with dependencies is `protocol/index.json`.
 | deliverables | `protocol/sessions/s9_deliverables.md` (+ `protocol/templates/options_rundown.md`, `protocol/templates/due_diligence.md`) | S9 |
 | reference | `protocol/engine/data_contract.md`, `protocol/engine/scripts.md` | When writing JSON or running scripts |
 
-Background only (never needed during a run): `protocol/engine/lessons.md` (why the rules exist) and `docs/PRODUCT.md` (protocol → product).
+Background only, repo only (not in the bundle, never needed during a run): `protocol/engine/lessons.md` (why the rules exist) and `docs/PRODUCT.md` (protocol → product).
 
 ---
 
@@ -181,9 +185,11 @@ Warm, direct and precise. Plain language, with a one-line gloss for any jargon. 
 
 ## Purpose
 
-The state vector is the compact, authoritative record of **where a run stands**. It lives in `run_state.json → state_vector` and is rewritten at the end of every session (the command **update state vector**), and whenever a limit looks close. A fresh session, possibly a different model or a different person's chat, must be able to continue from the vector, the run's Preamble and the workspace files alone. The previous conversation is not needed.
+The state vector is the compact, authoritative record of **where a run stands**. (Not to be confused with a programme's scoring vector, `candidate.state_vector` = {funding, programme, pathway}. This module always means `run_state.state_vector`.) It lives in `run_state.json → state_vector` and is rewritten at the end of every session (the command **update state vector**), and whenever a limit looks close. A fresh session, possibly a different model or a different person's chat, must be able to continue from the vector, the run's Preamble and the workspace files alone. The previous conversation is not needed.
 
 ## Fields
+
+The JSON keys are lowercase versions of the template names: CONTEXT = `context`, UNKNOWNS = `unknowns`, AMBIGUITIES = `ambiguities`, ASSUMPTIONS = `assumptions`, PHASE = `phase`, SESSION_OBJECTIVE = `session_objective`, COMPLETED = `completed`, ACTIVE = `active`, NEXT = `next`, BLOCKERS = `blockers`, ARTIFACTS = `artifacts`.
 
 Each field: what it tracks → how Virgil treats it.
 
@@ -192,7 +198,7 @@ Each field: what it tracks → how Virgil treats it.
 | `run`, `session`, `date` | Identity and sequence | Increments `session` once per sitting |
 | `phase` | Stage of the run (`init, life_plan, map, scope, search, followups, merge, verify, deliverables, done`) | Writes transitions as `A → B` in the session they happen |
 | `session_objective` | What this sitting set out to do | Sets it at session start; judges completion against it at close |
-| `context` | Session-determined decisions that shape later work (e.g. "funded = tuition-only", "wave 1 = FR, JP, IT, ES") | Never restates the Preamble. Keeps only decisions not recorded elsewhere |
+| `context` | Session-determined decisions that shape later work (e.g. "funded = tuition-only", "wave 1 = 4 deep countries") | Never restates the Preamble. Keeps only decisions not recorded elsewhere |
 | `unknowns` | Missing data, unverified facts, measurement gaps | Routes each one either to `active`/`next` or to `assumptions`. An item that stays here across two sessions is a failure, so Virgil raises it with the person |
 | `ambiguities` | Inputs from the person that need clarifying | Treats them as blocking: Virgil resolves them first in the next session, before other work |
 | `assumptions` | Positions taken despite unknowns, each with its basis | Keeps the basis explicit so a later answer can overturn the assumption cleanly |
@@ -209,7 +215,7 @@ Each field: what it tracks → how Virgil treats it.
   "run": "R-2027-01", "session": 5, "date": "2027-01-14",
   "phase": "search → followups",
   "session_objective": "Finish wave 2 and triage waves 1-2",
-  "context": ["funded = tuition_only, max out-of-pocket 6000 EUR", "wave plan: 3 waves, 5 units each"],
+  "context": ["funded = tuition_only, max out-of-pocket <amount>", "wave plan: 3 waves, 5 units each"],
   "unknowns": ["Graduation-year rule for scheme X (routed: next.virgil)"],
   "ambiguities": [],
   "assumptions": [{"text": "Partner does not need work rights in year 1", "basis": "S1 answer, 'decide for me'"}],
@@ -223,7 +229,7 @@ Each field: what it tracks → how Virgil treats it.
 
 ## The "Where we are" brief (what the person sees)
 
-This is generated from the vector at the start and end of each session, and on `where are we`. It is written for a busy human returning after days away: at most 8 lines, and no field names.
+This is generated from the vector at the start and end of each session, and on `where are we`. It is written for a busy human returning after days away: 6 lines, and no field names.
 
 <!-- template: protocol/templates/where_we_are.md -->
 ```
@@ -289,7 +295,7 @@ Real usage limits cut long runs short. This module ensures that no limit, crash 
 | **P: project chat** (`project_chat`) | No filesystem | Emit the whole current file as a `FILE:` block for the person to save (format below) | Usually not; use sequential mode |
 | **A: API / app** (`api`) | Host-defined | The app persists files and `run_state` | Host-defined |
 
-**Mode P file format.** Emit after interview blocks 3, 6 and 9, after every 2-3 research records, and on `save`/`pause`:
+**Mode P file format.** Emit after every 2-3 interview themes, after every 2-3 research records, and on `save`/`pause`:
 
 ````
 FILE: 01_life_plan/interview_notes.md
@@ -340,19 +346,7 @@ Usage windows differ by plan, model and time, so Virgil partitions by **work uni
 
 **Evidence behind these numbers (n = 1 reference run):** 12 parallel country agents launched at once, and 5 finished before the first limit. Search to merge took about 4 windows and about 25 agent runs. Everything unfinished resumed cleanly because each agent had written per record.
 
-**Example plan for 12 countries** (5 deep, 7 standard, 2 cross-cuts; about 23 units including follow-ups):
-
-| Window | Work | Units |
-|---|---|---|
-| W1 | S0-S3 interviews (several short sittings) + benchmark scout | ≈1 |
-| W2 | Wave 1: 4 deep | 6 |
-| W3 | Wave 2: 1 deep + 4 standard | 5.5 |
-| W4 | Wave 3: 3 standard + 2 cross-cuts | 4.5 |
-| W5 | Triage + about 6-8 follow-ups | 4.5-6 |
-| W6 | Merge + verification + adjudication | ≈1.5 |
-| W7 | Deliverables | ≈1 |
-
-On a larger plan, W2-W4 often compress into two windows. `agents_per_window_observed` will show whether that's the case.
+A worked example plan (12 countries) is in `protocol/engine/lessons.md`.
 
 ## `run_state.json` (ledger)
 
@@ -450,7 +444,7 @@ Produce a plan precise enough that a research agent with no other context can ju
 
 ## Fields (what the plan must track)
 
-Gate fields (`G`) must be `pass`, or explicitly `declared_unknown`. Soft fields (`S`) are scored 0-2 × weight. In `life_plan.json` the gates live under `purpose_horizon`, `post_degree_intent`, `money`, `eligibility_facts`, `geography`, `timeline` and `household` (see `engine/data_contract.md`).
+Gate fields (`G`) must be `pass`, or explicitly `declared_unknown`. Soft fields (`S`) are scored 0-2 × weight. In `life_plan.json` the gates live under `purpose_horizon`, `post_degree_intent`, `money`, `eligibility_facts`, `geography`, `timeline` and `household` (see `engine/data_contract.md`). Soft fields use the IDs' names as JSON keys (e.g. `gaps_self_teachable`, `support_assets`).
 
 | ID | Field | Tracks | Done when | Seed question |
 |---|---|---|---|---|
@@ -462,13 +456,13 @@ Gate fields (`G`) must be `pass`, or explicitly `declared_unknown`. Soft fields 
 | LP-G6 | timeline | When the person can start | Earliest and latest start, immovable dates, and whether waiting one cycle is acceptable | "What's the earliest and latest start that works?" |
 | LP-G7 | household_dealbreakers | Dependants, partner, obligations | Dependants and partner situation (who moves, work rights needed), stance on post-degree return obligations, and deal-breakers are stated. An explicit "none" counts | "Who moves with you, and what would make you turn down an otherwise perfect programme?" |
 | LP-S1 | strengths (×1) | Assets the person brings | Three concrete strengths | |
-| LP-S2 | gaps (×2) | Knowledge or skill gaps, and which are self-teachable | Gaps are listed, each marked self-teachable or not | |
+| LP-S2 | gaps_self_teachable (×2) | Knowledge or skill gaps, and which are self-teachable | Gaps are listed, each marked self-teachable or not | |
 | LP-S3 | long_term_role (×2) | A concrete target role or sector | Specific enough to judge pathway fit | |
 | LP-S4 | tradeoff_ranking (×2) | The relative weight of funding, curriculum, pathway (people, partners, placements), location, prestige, post-study work rights | A ranked list | |
 | LP-S5 | risk_tolerance (×1) | Appetite for financial risk and for long-shot options | Low, medium or high for each | |
 | LP-S6 | study_format (×1) | Acceptable formats: full-time, part-time, online, research-only, work-integrated | Accepted and rejected formats listed | |
 | LP-S7 | decision_criteria (×2) | What would make the person say yes immediately | Explicit conditions | |
-| LP-S8 | application_assets (×1) | Referees, portfolio, publications, existing contacts | Listed | |
+| LP-S8 | support_assets (×1) | Referees, portfolio, publications, existing contacts | Listed | |
 | LP-S9 | assumptions_log (×1) | Pivots and assumptions surfaced during the interview | Logged, each with a basis | |
 | LP-S10 | lifestyle (×1) | City size, climate, distance from home, community | Stated, or "no preference" | |
 
@@ -728,6 +722,8 @@ Turn many agent files into one clean, scored dataset, and measure how far it can
 | Keep extras | Decision-relevant detail | Keep follow-up deadlines, scheme terms, Path B people and promoted records |
 | Compute, don't type | Miscounts | Totals (ignoring "?"), the list of unscored axes, rank (total, then pathway, then funding) and the delta vs a previous run under the same rubric version all come from data |
 
+After a clean merge, update the state vector with `phase: merge → verify`.
+
 ## Verification rules
 
 | Rule | Protects | Behaviour |
@@ -775,7 +771,7 @@ In degraded mode (no scripts), steps 1-2 are done by hand from `merged.json`. Ca
 | One screen first | Busy readers | Section 1 alone must name the live options and this week's actions |
 | The person's own terms | Relevance | Explain fit through their domains, pathway signals and life-plan constraints |
 | Every fact links, every option ends in an action | Trust and momentum | Inline confidence; a `contact_actions` question for each unverified route |
-| Decisions that reorder the list come early | Wasted deliberation | Surface the open choices from the Preamble that change rankings, e.g. "affordable vs zero tuition" or "accept a return obligation?" |
+| Decisions that reorder the list come early | Wasted deliberation | Surface the open choices from the Preamble that change rankings, such as an undecided funding definition or an obligation the person hasn't accepted yet |
 
 **Optional:** an interactive explorer built from `merged.json` (sortable shortlist, vector-swap view, filters by country, funding route and practical component). The reference applicant found it the most useful way to digest 128 records.
 
@@ -867,7 +863,7 @@ Every file a run writes has a JSON Schema in `schemas/` (draft 2020-12). The sch
 
 | Field | Rule |
 |---|---|
-| `state_vector.{funding, programme, pathway}` | An integer 0-3, or `"?"`. Never a guess |
+| `candidate.state_vector.{funding, programme, pathway}` | An integer 0-3, or `"?"`. Never a guess. This is the scoring vector, not `run_state.state_vector`, which is the continuation vector |
 | `*.confidence`, `takes_students`, `applicant_eligible` | Fixed enums (`confirmed`, `inferred`, `verification_needed`, `unknown`). Absence of evidence is not `confirmed` |
 | `deadlines[].date_type` | `confirmed` (this cycle, official), `pattern` (last cycle's date) or `inferred` |
 | `sources[]` | Each entry has a `url` (or null with a note), `source_type` and `accessed_date` |
@@ -1172,6 +1168,7 @@ Write it with `checkpoint.py init-country --crosscut donor_scholarships --kind f
 | Start a country file | S4-S7 | `python3 scripts/checkpoint.py RUN_DIR init-country --country SLUG --name NAME [--followup [X]] [--resume]`. Refuses unless both rubrics passed; `--force --reason T` logs a protocol override |
 | Start a cross-cut file | S7 | `python3 scripts/checkpoint.py RUN_DIR init-country --crosscut SLUG --kind programme_scan\|funding_route --name NAME` |
 | Append one unit (after **each** record) | S4-S7 | `python3 scripts/checkpoint.py RUN_DIR add-screening\|add-candidate\|add-ranked-out --country SLUG [--followup [X]] (--json STR \| --file PATH \| -)` |
+| Write a whole cross-cut file at once | S7 | `python3 scripts/checkpoint.py RUN_DIR put-crosscut --crosscut SLUG (--json STR \| --file PATH)` |
 | Append a funding finding | S7 | `python3 scripts/checkpoint.py RUN_DIR add-finding --crosscut SLUG --file finding.json` |
 | Close a file | S4-S7 | `python3 scripts/checkpoint.py RUN_DIR set-status --country SLUG [--status S] [--path-b-done true\|false] [--country-context FILE\|JSON] [--budget-notes T] [--add-gap T] [--limit-event KIND:DETAIL]` (use `--crosscut SLUG` for cross-cuts) |
 | Clear parked invalid records | any | `python3 scripts/checkpoint.py RUN_DIR clear-rejected [--id ID]` |

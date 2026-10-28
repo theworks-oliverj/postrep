@@ -34,7 +34,7 @@ Real usage limits cut long runs short. This module ensures that no limit, crash 
 | **P: project chat** (`project_chat`) | No filesystem | Emit the whole current file as a `FILE:` block for the person to save (format below) | Usually not; use sequential mode |
 | **A: API / app** (`api`) | Host-defined | The app persists files and `run_state` | Host-defined |
 
-**Mode P file format.** Emit after interview blocks 3, 6 and 9, after every 2-3 research records, and on `save`/`pause`:
+**Mode P file format.** Emit after every 2-3 interview themes, after every 2-3 research records, and on `save`/`pause`:
 
 ````
 FILE: 01_life_plan/interview_notes.md
@@ -85,19 +85,7 @@ Usage windows differ by plan, model and time, so Virgil partitions by **work uni
 
 **Evidence behind these numbers (n = 1 reference run):** 12 parallel country agents launched at once, and 5 finished before the first limit. Search to merge took about 4 windows and about 25 agent runs. Everything unfinished resumed cleanly because each agent had written per record.
 
-**Example plan for 12 countries** (5 deep, 7 standard, 2 cross-cuts; about 23 units including follow-ups):
-
-| Window | Work | Units |
-|---|---|---|
-| W1 | S0-S3 interviews (several short sittings) + benchmark scout | ≈1 |
-| W2 | Wave 1: 4 deep | 6 |
-| W3 | Wave 2: 1 deep + 4 standard | 5.5 |
-| W4 | Wave 3: 3 standard + 2 cross-cuts | 4.5 |
-| W5 | Triage + about 6-8 follow-ups | 4.5-6 |
-| W6 | Merge + verification + adjudication | ≈1.5 |
-| W7 | Deliverables | ≈1 |
-
-On a larger plan, W2-W4 often compress into two windows. `agents_per_window_observed` will show whether that's the case.
+A worked example plan (12 countries) is in `protocol/engine/lessons.md`.
 
 ## `run_state.json` (ledger)
 

@@ -25,7 +25,7 @@ In degraded mode (no scripts), steps 1-2 are done by hand from `merged.json`. Ca
 | One screen first | Busy readers | Section 1 alone must name the live options and this week's actions |
 | The person's own terms | Relevance | Explain fit through their domains, pathway signals and life-plan constraints |
 | Every fact links, every option ends in an action | Trust and momentum | Inline confidence; a `contact_actions` question for each unverified route |
-| Decisions that reorder the list come early | Wasted deliberation | Surface the open choices from the Preamble that change rankings, e.g. "affordable vs zero tuition" or "accept a return obligation?" |
+| Decisions that reorder the list come early | Wasted deliberation | Surface the open choices from the Preamble that change rankings, such as an undecided funding definition or an obligation the person hasn't accepted yet |
 
 **Optional:** an interactive explorer built from `merged.json` (sortable shortlist, vector-swap view, filters by country, funding route and practical component). The reference applicant found it the most useful way to digest 128 records.
 

@@ -4,9 +4,11 @@
 
 ## Purpose
 
-The state vector is the compact, authoritative record of **where a run stands**. It lives in `run_state.json → state_vector` and is rewritten at the end of every session (the command **update state vector**), and whenever a limit looks close. A fresh session, possibly a different model or a different person's chat, must be able to continue from the vector, the run's Preamble and the workspace files alone. The previous conversation is not needed.
+The state vector is the compact, authoritative record of **where a run stands**. (Not to be confused with a programme's scoring vector, `candidate.state_vector` = {funding, programme, pathway}. This module always means `run_state.state_vector`.) It lives in `run_state.json → state_vector` and is rewritten at the end of every session (the command **update state vector**), and whenever a limit looks close. A fresh session, possibly a different model or a different person's chat, must be able to continue from the vector, the run's Preamble and the workspace files alone. The previous conversation is not needed.
 
 ## Fields
+
+The JSON keys are lowercase versions of the template names: CONTEXT = `context`, UNKNOWNS = `unknowns`, AMBIGUITIES = `ambiguities`, ASSUMPTIONS = `assumptions`, PHASE = `phase`, SESSION_OBJECTIVE = `session_objective`, COMPLETED = `completed`, ACTIVE = `active`, NEXT = `next`, BLOCKERS = `blockers`, ARTIFACTS = `artifacts`.
 
 Each field: what it tracks → how Virgil treats it.
 
@@ -15,7 +17,7 @@ Each field: what it tracks → how Virgil treats it.
 | `run`, `session`, `date` | Identity and sequence | Increments `session` once per sitting |
 | `phase` | Stage of the run (`init, life_plan, map, scope, search, followups, merge, verify, deliverables, done`) | Writes transitions as `A → B` in the session they happen |
 | `session_objective` | What this sitting set out to do | Sets it at session start; judges completion against it at close |
-| `context` | Session-determined decisions that shape later work (e.g. "funded = tuition-only", "wave 1 = FR, JP, IT, ES") | Never restates the Preamble. Keeps only decisions not recorded elsewhere |
+| `context` | Session-determined decisions that shape later work (e.g. "funded = tuition-only", "wave 1 = 4 deep countries") | Never restates the Preamble. Keeps only decisions not recorded elsewhere |
 | `unknowns` | Missing data, unverified facts, measurement gaps | Routes each one either to `active`/`next` or to `assumptions`. An item that stays here across two sessions is a failure, so Virgil raises it with the person |
 | `ambiguities` | Inputs from the person that need clarifying | Treats them as blocking: Virgil resolves them first in the next session, before other work |
 | `assumptions` | Positions taken despite unknowns, each with its basis | Keeps the basis explicit so a later answer can overturn the assumption cleanly |
@@ -32,7 +34,7 @@ Each field: what it tracks → how Virgil treats it.
   "run": "R-2027-01", "session": 5, "date": "2027-01-14",
   "phase": "search → followups",
   "session_objective": "Finish wave 2 and triage waves 1-2",
-  "context": ["funded = tuition_only, max out-of-pocket 6000 EUR", "wave plan: 3 waves, 5 units each"],
+  "context": ["funded = tuition_only, max out-of-pocket <amount>", "wave plan: 3 waves, 5 units each"],
   "unknowns": ["Graduation-year rule for scheme X (routed: next.virgil)"],
   "ambiguities": [],
   "assumptions": [{"text": "Partner does not need work rights in year 1", "basis": "S1 answer, 'decide for me'"}],
@@ -46,7 +48,7 @@ Each field: what it tracks → how Virgil treats it.
 
 ## The "Where we are" brief (what the person sees)
 
-This is generated from the vector at the start and end of each session, and on `where are we`. It is written for a busy human returning after days away: at most 8 lines, and no field names.
+This is generated from the vector at the start and end of each session, and on `where are we`. It is written for a busy human returning after days away: 6 lines, and no field names.
 
 <!-- template: protocol/templates/where_we_are.md -->
 ```
