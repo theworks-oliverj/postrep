@@ -1,0 +1,100 @@
+{
+  "rubric": "pathway_map",
+  "rubric_version": "1.0",
+  "gates": [
+    {
+      "id": "PM-G1",
+      "status": "pass",
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "PM-G2",
+      "status": "pass",
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "PM-G3",
+      "status": "pass",
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "PM-G4",
+      "status": "pass",
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "PM-G5",
+      "status": "pass",
+      "note": "synthetic fixture"
+    }
+  ],
+  "soft": [
+    {
+      "id": "PM-S1",
+      "weight": 1,
+      "score": 2,
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "PM-S2",
+      "weight": 2,
+      "score": 2,
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "PM-S3",
+      "weight": 1,
+      "score": 2,
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "PM-S4",
+      "weight": 1,
+      "score": 2,
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "PM-S5",
+      "weight": 1,
+      "score": 2,
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "PM-S6",
+      "weight": 1,
+      "score": 2,
+      "note": "synthetic fixture"
+    }
+  ],
+  "soft_pct": 100.0,
+  "passed": true,
+  "scored_at": "2026-10-28T05:37:49Z",
+  "auto_checks": [
+    {
+      "id": "PM-G1",
+      "ok": true,
+      "detail": "objective has a one-line statement (and a status for any research question)"
+    },
+    {
+      "id": "PM-G2",
+      "ok": true,
+      "detail": "5 knowledge domains, all with coverage keywords"
+    },
+    {
+      "id": "PM-G3",
+      "ok": true,
+      "detail": "5 people/topic signals (need >= 5), 2 organisation-type signals (need >= 2)"
+    },
+    {
+      "id": "PM-G4",
+      "ok": true,
+      "detail": "3 benchmarks (one per axis) with real names and vectors"
+    },
+    {
+      "id": "PM-G5",
+      "ok": true,
+      "detail": "12/12 anchors filled; screening rule present=True"
+    }
+  ],
+  "problems": []
+}

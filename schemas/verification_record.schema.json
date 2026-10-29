@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://virgil-protocol.example/schemas/verification_record.schema.json",
+  "title": "Independent verification results",
+  "description": "Verification document.",
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": "array",
+      "description": "One checked claim.",
+      "items": {
+        "type": "object",
+        "description": "One verdict.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Candidate id."
+          },
+          "claim": {
+            "type": "string",
+            "description": "Claim checked."
+          },
+          "claim_type": {
+            "enum": [
+              "fee",
+              "deadline",
+              "people_partner",
+              "language",
+              "funding",
+              "curriculum",
+              "other"
+            ],
+            "description": "Kind of claim."
+          },
+          "verdict": {
+            "enum": [
+              "confirmed",
+              "wrong",
+              "not_found",
+              "disputed"
+            ],
+            "description": "confirmed = matches an official source; wrong = official source says otherwise; not_found = no source located; disputed = sources conflict."
+          },
+          "evidence_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Page that settles it."
+          },
+          "note": {
+            "type": "string",
+            "description": "What was found (state the correct value when wrong)."
+          },
+          "sampled_by": {
+            "enum": [
+              "top_n",
+              "random"
+            ],
+            "description": "How the record entered the sample."
+          }
+        },
+        "required": [
+          "id",
+          "claim",
+          "claim_type",
+          "verdict",
+          "evidence_url",
+          "note",
+          "sampled_by"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "summary": {
+      "type": "object",
+      "description": "Checker's overall summary.",
+      "properties": {
+        "notes": {
+          "type": "string",
+          "description": "Free text: patterns, caveats."
+        },
+        "checked_by": {
+          "type": "string",
+          "description": "Checker label."
+        },
+        "checked_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When."
+        }
+      },
+      "required": [
+        "notes"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "items",
+    "summary"
+  ],
+  "additionalProperties": false
+}

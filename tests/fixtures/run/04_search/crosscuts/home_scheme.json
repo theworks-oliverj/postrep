@@ -1,0 +1,28 @@
+{
+  "crosscut_kind": "funding_route",
+  "route": "Home-country outbound scholarship",
+  "route_type": "home_country_scheme",
+  "checked_at": "2026-10-24",
+  "status": "complete",
+  "findings": [
+    {
+      "question": "Return obligation?",
+      "answer": "Return within 12 months.",
+      "confidence": "confirmed",
+      "urls": [
+        "https://example.gov/scheme"
+      ]
+    },
+    {
+      "question": "2027 call dates?",
+      "answer": "Not published.",
+      "confidence": "unknown",
+      "urls": []
+    }
+  ],
+  "obligations": "Return within 12 months.",
+  "verdict": "Overlay only; do not fold into base scores.",
+  "open_questions": [
+    "Confirm 2027 window."
+  ]
+}

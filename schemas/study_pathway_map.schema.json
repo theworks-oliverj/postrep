@@ -1,0 +1,389 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://virgil-protocol.example/schemas/study_pathway_map.schema.json",
+  "title": "Study & Pathway Map",
+  "description": "Machine view of the Study & Pathway Map (session 2): what the person needs to learn (knowledge domains), which people and organisations lead where they want to go (pathway signals), the practical component they need, anchors and screening rule. Human view: 02_map/pathway_map.md.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Schema version, e.g. '1.0'."
+    },
+    "generated": {
+      "type": "string",
+      "format": "date",
+      "description": "Creation date."
+    },
+    "objective": {
+      "type": "object",
+      "description": "PM-G1: the study and career objective.",
+      "properties": {
+        "one_line": {
+          "type": "string",
+          "description": "The objective in one line."
+        },
+        "description": {
+          "type": "string",
+          "description": "Short elaboration."
+        },
+        "research_question": {
+          "type": "object",
+          "description": "Optional: a research question, if the person has one.",
+          "properties": {
+            "text": {
+              "type": "string",
+              "description": "The question."
+            },
+            "status": {
+              "enum": [
+                "settled",
+                "working",
+                "exploratory"
+              ],
+              "description": "How firm the question is."
+            }
+          },
+          "required": [
+            "text",
+            "status"
+          ],
+          "additionalProperties": false
+        },
+        "nearest_frameworks": {
+          "type": "array",
+          "description": "Existing programmes, fields or bodies of work closest to the goal (PM-S1).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "commitments": {
+          "type": "array",
+          "description": "What the person is committed to (PM-S2).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "non_goals": {
+          "type": "array",
+          "description": "What is explicitly out of scope (PM-S2).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "one_line"
+      ],
+      "additionalProperties": false
+    },
+    "domains": {
+      "type": "array",
+      "description": "Knowledge domains (PM-G2: 5-12). Ids are the keys used by candidate.axis_1_curriculum.",
+      "items": {
+        "type": "object",
+        "description": "One domain.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Short id, capital letters/digits/underscore.",
+            "pattern": "^[A-Z][A-Z0-9_]*$"
+          },
+          "label": {
+            "type": "string",
+            "description": "Human label."
+          },
+          "priority": {
+            "enum": [
+              "critical",
+              "high",
+              "medium",
+              "low"
+            ],
+            "description": "Importance for the objective."
+          },
+          "coverage_keywords": {
+            "type": "array",
+            "description": "Module-name keywords an agent looks for in study plans.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "self_teachable": {
+            "enum": [
+              "yes",
+              "no",
+              "partly",
+              "unknown"
+            ],
+            "description": "yes = the person can learn it alone, so a gap matters less; partly; no; unknown."
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "priority",
+          "coverage_keywords",
+          "self_teachable"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "pathway_signals": {
+      "type": "object",
+      "description": "PM-G3: what indicates a programme connects to the goal (needs >= 5 people/topic signals and >= 2 organisation-type signals).",
+      "properties": {
+        "people_topic_signals": {
+          "type": "array",
+          "description": "Topics, methods, employers, sectors or roles whose presence in a named person's or organisation's recent work counts (e.g. recent publications for research-led goals; employers or partner types for industry-led goals).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "organisation_type_signals": {
+          "type": "array",
+          "description": "Kinds of organisations or arrangements worth checking next to the universities (e.g. 'institutes co-located with a university', 'industry-sponsored capstones', 'accredited by body X').",
+          "items": {
+            "type": "string"
+          }
+        },
+        "known_people_or_orgs": {
+          "type": "array",
+          "description": "People or organisations the person already knows. They are signals, not targets.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "people_topic_signals",
+        "organisation_type_signals"
+      ],
+      "additionalProperties": false
+    },
+    "practical_component_needed": {
+      "type": "object",
+      "description": "PM-S4: the practical element the person needs and its constraints.",
+      "properties": {
+        "type": {
+          "enum": [
+            "thesis",
+            "internship",
+            "industry_placement",
+            "capstone",
+            "co_op",
+            "studio_or_clinic",
+            "none",
+            "other"
+          ],
+          "description": "Kind of practical component needed."
+        },
+        "credits": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Minimum credits it should carry, in the unit named by credit_system (null = no minimum)."
+        },
+        "credit_system": {
+          "type": "string",
+          "description": "Credit system the number refers to, e.g. 'ECTS', 'US semester credits', 'UK CATS'. Credit systems differ between regions."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Constraints: self-proposed topic, external host, duration."
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "false_positive_traps": {
+      "type": "array",
+      "description": "Look-alike programmes, groups or placement claims that must not count (PM-S3).",
+      "items": {
+        "type": "string"
+      }
+    },
+    "connectedness_check": {
+      "type": "object",
+      "description": "PM-S5: is the objective supported by the domains and signals?",
+      "properties": {
+        "connected": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Result of the check (null = skipped)."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Reasoning, or the reason it was skipped."
+        }
+      },
+      "additionalProperties": false
+    },
+    "progression": {
+      "type": "object",
+      "description": "PM-S6: preferences for what comes next.",
+      "properties": {
+        "intent": {
+          "type": "string",
+          "description": "What the person wants after the programme (integrated doctorate, fast-track, graduate scheme, licensing...)."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Requirements the programme must satisfy for that progression."
+        }
+      },
+      "additionalProperties": false
+    },
+    "scoring_anchors": {
+      "type": "object",
+      "description": "Anchors for each axis (PM-G5): what 0,1,2,3 mean for THIS run, written in terms of the person's benchmarks and funded definition.",
+      "properties": {
+        "funding": {
+          "type": "object",
+          "description": "Meaning of each score level for one axis.",
+          "properties": {
+            "0": {
+              "type": "string",
+              "description": "What a score of 0 means on this axis."
+            },
+            "1": {
+              "type": "string",
+              "description": "What a score of 1 means on this axis."
+            },
+            "2": {
+              "type": "string",
+              "description": "What a score of 2 means on this axis."
+            },
+            "3": {
+              "type": "string",
+              "description": "What a score of 3 means on this axis."
+            }
+          },
+          "required": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ],
+          "additionalProperties": false
+        },
+        "programme": {
+          "type": "object",
+          "description": "Meaning of each score level for one axis.",
+          "properties": {
+            "0": {
+              "type": "string",
+              "description": "What a score of 0 means on this axis."
+            },
+            "1": {
+              "type": "string",
+              "description": "What a score of 1 means on this axis."
+            },
+            "2": {
+              "type": "string",
+              "description": "What a score of 2 means on this axis."
+            },
+            "3": {
+              "type": "string",
+              "description": "What a score of 3 means on this axis."
+            }
+          },
+          "required": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ],
+          "additionalProperties": false
+        },
+        "pathway": {
+          "type": "object",
+          "description": "Meaning of each score level for one axis.",
+          "properties": {
+            "0": {
+              "type": "string",
+              "description": "What a score of 0 means on this axis."
+            },
+            "1": {
+              "type": "string",
+              "description": "What a score of 1 means on this axis."
+            },
+            "2": {
+              "type": "string",
+              "description": "What a score of 2 means on this axis."
+            },
+            "3": {
+              "type": "string",
+              "description": "What a score of 3 means on this axis."
+            }
+          },
+          "required": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "funding",
+        "programme",
+        "pathway"
+      ],
+      "additionalProperties": false
+    },
+    "screening_rule": {
+      "type": "object",
+      "description": "PM-G5: the step-1 pass criterion.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Plain-language rule, e.g. 'pass if the curriculum covers >= 2 critical domains OR a named person or partner hits a pathway signal'."
+        },
+        "min_domains_for_pass": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "How many (critical/high) domains the curriculum must cover."
+        },
+        "research_signal_pass": {
+          "type": "boolean",
+          "description": "Does a named person or partner hitting a pathway signal alone suffice?"
+        },
+        "unsure_policy": {
+          "enum": [
+            "pass",
+            "fail"
+          ],
+          "description": "What to do when evidence is ambiguous. 'pass' keeps recall high; cost is paid later in verification."
+        }
+      },
+      "required": [
+        "description",
+        "unsure_policy"
+      ],
+      "additionalProperties": false
+    },
+    "benchmarks_ref": {
+      "type": "string",
+      "description": "Relative path to benchmarks.json (02_map/benchmarks.json)."
+    }
+  },
+  "required": [
+    "schema_version",
+    "generated",
+    "objective",
+    "domains",
+    "pathway_signals",
+    "scoring_anchors",
+    "screening_rule"
+  ],
+  "additionalProperties": false
+}

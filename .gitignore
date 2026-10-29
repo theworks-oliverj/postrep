@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.bak
+*.lock
+*.tmp
+dist/*.tmp
+.venv/
+*.egg-info/
+
+# Personal runs: never commit (see CONTRIBUTING.md)
+/runs/
+/my_run*/

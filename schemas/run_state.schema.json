@@ -1,0 +1,272 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://virgil-protocol.example/schemas/run_state.schema.json",
+  "title": "Run state ledger",
+  "description": "The run ledger: phase, sessions, per-file checkpoints, assumptions, protocol overrides and the continuation state vector. The single file a fresh session reads first.",
+  "type": "object",
+  "properties": {
+    "protocol_version": {
+      "type": "string",
+      "description": "Protocol version."
+    },
+    "run_id": {
+      "type": "string",
+      "description": "Unique run id."
+    },
+    "applicant_alias": {
+      "type": "string",
+      "description": "Alias."
+    },
+    "mode": {
+      "enum": [
+        "local",
+        "cloud",
+        "project_chat",
+        "api"
+      ],
+      "description": "Where agents run: local = CLI on a computer; cloud = remote agent sandbox; project_chat = chat with project files; api = scripted API calls."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Creation."
+    },
+    "current_phase": {
+      "enum": [
+        "init",
+        "life_plan",
+        "map",
+        "scope",
+        "search",
+        "followups",
+        "merge",
+        "verify",
+        "deliverables",
+        "done"
+      ],
+      "description": "Current phase."
+    },
+    "sessions": {
+      "type": "array",
+      "description": "One entry per usage window / working session.",
+      "items": {
+        "type": "object",
+        "description": "One session.",
+        "properties": {
+          "n": {
+            "type": "integer",
+            "description": "Session number, 1-based.",
+            "minimum": 1
+          },
+          "started_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Start."
+          },
+          "ended_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "description": "End; null while open."
+          },
+          "phase": {
+            "enum": [
+              "init",
+              "life_plan",
+              "map",
+              "scope",
+              "search",
+              "followups",
+              "merge",
+              "verify",
+              "deliverables",
+              "done"
+            ],
+            "description": "Phase worked on."
+          },
+          "outcome": {
+            "type": "string",
+            "description": "e.g. 'ok', 'limit_hit', 'error', or free text."
+          },
+          "limit_hit": {
+            "type": "boolean",
+            "description": "Usage limit ended the session."
+          },
+          "agents_run": {
+            "type": "integer",
+            "description": "Agents launched in the session.",
+            "minimum": 0
+          },
+          "wave": {
+            "type": "integer",
+            "description": "Search wave worked on in this session (search_plan.session_plan.waves[].wave), if any.",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "n",
+          "started_at",
+          "phase",
+          "limit_hit"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "description": "Assumptions made when the person could not or did not answer, so they can be revisited later (ledger form; the state vector keeps a short list with bases).",
+      "items": {
+        "type": "object",
+        "description": "One assumption.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Short id, e.g. 'A1'."
+          },
+          "text": {
+            "type": "string",
+            "description": "The assumption in one sentence."
+          },
+          "made_in": {
+            "type": "string",
+            "description": "Where it was made: session number or phase, e.g. 'session 2, life_plan'."
+          },
+          "revisit": {
+            "type": "boolean",
+            "description": "true = check again before relying on results that depend on it."
+          }
+        },
+        "required": [
+          "id",
+          "text"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "overrides_of_protocol": {
+      "type": "array",
+      "description": "Every deliberate deviation from a protocol rule (a skipped gate, a changed limit), so a reader of the results can see it.",
+      "items": {
+        "type": "object",
+        "description": "One override.",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date of the deviation."
+          },
+          "rule": {
+            "type": "string",
+            "description": "The rule that was overridden, e.g. 'no gate, no search'."
+          },
+          "override": {
+            "type": "string",
+            "description": "What was done instead."
+          },
+          "reason": {
+            "type": "string",
+            "description": "Why."
+          }
+        },
+        "required": [
+          "date",
+          "rule",
+          "override",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "checkpoints": {
+      "type": "array",
+      "description": "Per-file progress map, updated by checkpoint.py after each record.",
+      "items": {
+        "type": "object",
+        "description": "One checkpoint.",
+        "properties": {
+          "file": {
+            "type": "string",
+            "description": "Path relative to RUN_DIR."
+          },
+          "status": {
+            "enum": [
+              "pending",
+              "in_progress",
+              "complete",
+              "complete_with_gaps",
+              "partial_budget_exhausted",
+              "validated",
+              "error"
+            ],
+            "description": "Status."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Last write."
+          },
+          "records": {
+            "type": "integer",
+            "description": "Records in the file (candidates), if applicable.",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "file",
+          "status",
+          "updated_at"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "heartbeat": {
+      "type": "object",
+      "description": "Last write by any agent (proves liveness).",
+      "properties": {
+        "at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When."
+        },
+        "file": {
+          "type": "string",
+          "description": "File written."
+        }
+      },
+      "required": [
+        "at"
+      ],
+      "additionalProperties": false
+    },
+    "next_action": {
+      "type": "string",
+      "description": "Plain-language next step for whoever resumes."
+    },
+    "agents_per_window_observed": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Mean agents run in windows that ended in a limit hit (falls back to mean of all windows). Feed into search_plan.session_plan."
+    },
+    "state_vector": {
+      "$ref": "continuation_state_vector.schema.json",
+      "description": "Continuation state vector (protocol/state_vector.md): where the run stands and what happens next."
+    }
+  },
+  "required": [
+    "protocol_version",
+    "run_id",
+    "applicant_alias",
+    "mode",
+    "current_phase",
+    "sessions",
+    "checkpoints",
+    "next_action",
+    "agents_per_window_observed",
+    "state_vector"
+  ],
+  "additionalProperties": false
+}

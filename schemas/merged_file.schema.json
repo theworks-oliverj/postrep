@@ -1,0 +1,208 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://virgil-protocol.example/schemas/merged_file.schema.json",
+  "title": "Merged file",
+  "description": "Merged document.",
+  "type": "object",
+  "properties": {
+    "generated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When merged."
+    },
+    "run_id": {
+      "type": "string",
+      "description": "Run id from run_state."
+    },
+    "protocol_version": {
+      "type": "string",
+      "description": "Protocol version."
+    },
+    "countries": {
+      "type": "object",
+      "description": "slug -> country block.",
+      "additionalProperties": {
+        "type": "object",
+        "description": "One country (or cross-cut programme scan) after folding follow-ups.",
+        "properties": {
+          "country": {
+            "type": "string",
+            "description": "Display name."
+          },
+          "slug": {
+            "type": "string",
+            "description": "Slug."
+          },
+          "kind": {
+            "enum": [
+              "country",
+              "crosscut"
+            ],
+            "description": "Origin kind."
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the base file."
+          },
+          "status_effective": {
+            "type": "string",
+            "description": "Status after follow-ups (the latest file's status)."
+          },
+          "path_b_done": {
+            "type": "boolean",
+            "description": "True if the base file or any follow-up ran the people/partner-first path (Path B)."
+          },
+          "screening": {
+            "type": "array",
+            "description": "Deduplicated screening rows (later pass wins).",
+            "items": {
+              "$ref": "screening_entry.schema.json"
+            }
+          },
+          "ranked_out": {
+            "type": "array",
+            "description": "Ranked-out rows with promoted programmes purged.",
+            "items": {
+              "$ref": "ranked_out_entry.schema.json"
+            }
+          },
+          "corrections_to_prior": {
+            "type": "array",
+            "description": "All corrections.",
+            "items": {
+              "type": "object"
+            }
+          },
+          "country_context": {
+            "type": "object",
+            "description": "Base context; follow-up context is in .additions (this object never changes type)."
+          },
+          "searched_not_surfaced": {
+            "type": "array",
+            "description": "Union of gap logs.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "country_summary": {
+            "type": "string",
+            "description": "Base summary plus labelled follow-up summaries (always a string)."
+          },
+          "budget_notes": {
+            "type": "string",
+            "description": "Concatenated budget notes."
+          },
+          "run_meta": {
+            "type": "array",
+            "description": "run_meta of every contributing file.",
+            "items": {
+              "type": "object"
+            }
+          },
+          "urgent_deadlines": {
+            "type": "array",
+            "description": "Follow-up deadlines kept.",
+            "items": {
+              "type": "object"
+            }
+          },
+          "path_b_people": {
+            "type": "array",
+            "description": "Path-B people (deduplicated).",
+            "items": {
+              "type": "object"
+            }
+          },
+          "still_open": {
+            "type": "array",
+            "description": "Open items from follow-ups.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "followup_files": {
+            "type": "array",
+            "description": "Follow-up files folded in.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "followups": {
+            "type": "object",
+            "description": "Per follow-up file: everything NOT merged into the lists above (notes, extras, status...), kept so nothing is dropped.",
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "candidate_ids": {
+            "type": "array",
+            "description": "Ids of this country's candidates.",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "country",
+          "slug",
+          "kind",
+          "status",
+          "status_effective",
+          "path_b_done"
+        ]
+      }
+    },
+    "crosscuts": {
+      "type": "object",
+      "description": "slug -> cross-cut block: funding_route cross-cuts verbatim; programme_scan cross-cuts without their candidates (see candidate_ids).",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "candidates": {
+      "type": "array",
+      "description": "All candidate records, ranked.",
+      "items": {
+        "$ref": "candidate_record.schema.json"
+      }
+    },
+    "prior_not_revisited": {
+      "type": "array",
+      "description": "Baseline ids in scope that no record references.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "benchmarks": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Copy of benchmarks.json."
+    },
+    "overrides_applied": {
+      "type": "array",
+      "description": "Flat list of applied overrides.",
+      "items": {
+        "type": "object"
+      }
+    },
+    "baseline_used": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Baseline ledger path, or null."
+    }
+  },
+  "required": [
+    "generated",
+    "countries",
+    "crosscuts",
+    "candidates",
+    "prior_not_revisited",
+    "benchmarks",
+    "overrides_applied"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://virgil-protocol.example/schemas/prior_programme_record.schema.json",
+  "title": "Prior programme record (optional)",
+  "description": "Prior record.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Prior id (any scheme, unique in the ledger)."
+    },
+    "institution": {
+      "type": "string",
+      "description": "Institution."
+    },
+    "programme": {
+      "type": "string",
+      "description": "Programme."
+    },
+    "track": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Track."
+    },
+    "country": {
+      "type": "string",
+      "description": "Country."
+    },
+    "sources": {
+      "type": "array",
+      "description": "Evidence sources (same shape as candidate.sources).",
+      "items": {
+        "type": "object"
+      }
+    },
+    "axis_1_curriculum": {
+      "type": [
+        "object",
+        "string"
+      ],
+      "description": "Domain grades keyed by domain id, or a plain string when unassessed."
+    },
+    "axis_1_verdict": {
+      "type": "string",
+      "description": "Verdict."
+    },
+    "scholarship_note": {
+      "type": "string",
+      "description": "Funding note."
+    },
+    "language_note": {
+      "type": "string",
+      "description": "Language note."
+    },
+    "confidence": {
+      "enum": [
+        "confirmed",
+        "inferred",
+        "verification_needed",
+        "unknown"
+      ],
+      "description": "Overall confidence."
+    },
+    "funding": {
+      "type": "string",
+      "description": "Funding summary."
+    },
+    "deadline": {
+      "type": "string",
+      "description": "Deadline text."
+    },
+    "deep_dive_recommended": {
+      "type": "boolean",
+      "description": "Worth a full record?"
+    },
+    "benchmark_position": {
+      "type": "object",
+      "description": "Comparison to benchmarks."
+    },
+    "axis_2_pathway": {
+      "type": "string",
+      "description": "Free text or 'UNASSESSED - ...'."
+    },
+    "practical_component": {
+      "type": "string",
+      "description": "Practical component and its credits (free text)."
+    },
+    "people_lead": {
+      "type": "string",
+      "description": "Lead person or partner (role descriptor in public data)."
+    }
+  },
+  "required": [
+    "id",
+    "institution",
+    "programme"
+  ],
+  "additionalProperties": false
+}

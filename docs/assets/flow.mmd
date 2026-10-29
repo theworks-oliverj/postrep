@@ -1,0 +1,63 @@
+%% Regenerate (from the repo root):
+%%   mmdc -i docs/assets/flow.mmd -c docs/assets/flow.config.json -o docs/assets/flow.svg -b white
+%%   mmdc -i docs/assets/flow.mmd -c docs/assets/flow.config.json -o docs/assets/flow.png -b white -w 1400 -s 2
+flowchart TB
+    subgraph ALL["EVERY SESSION: run_state.json + continuation state vector are updated, so any usage limit is survivable"]
+        direction TB
+        S0["`**S0  Orientation**
+Know the journey; jot down your life plan and study interests
+*Output: your notes*`"]
+
+        subgraph PRE["PREAMBLE (S1 + S2): locked once passed; changed only by an explicit amend-plan"]
+            direction TB
+            S1["`**S1  Life and Career Plan**  (interview with Virgil)
+**Why:** every programme is scored against YOUR life, money and constraints
+*Output: your life plan*`"]
+            G1{{"`**GATE:** must pass before search`"}}
+            S2["`**S2  Study and Pathway Map**  (interview + benchmark scout)
+**Why:** defines what fit means: what you will learn, and the people, labs, industry partners and internships that lead where you want
+*Output: pathway map + 3 benchmark examples*`"]
+            G2{{"`**GATE:** must pass before search`"}}
+            S1 --> G1 --> S2 --> G2
+        end
+
+        S3["`**S3  Scope and Agent Brief**
+**Why:** decides which countries, how deep, and what funded means
+*Output: search plan + agent brief*`"]
+
+        S4["`**S4 to S6  Search waves**  (one research agent per country)
+Path A: programme-first.  Path B: people- and partner-first.
+Saves a JSON file after every record, so nothing is lost
+*Output: one file per country*`"]
+
+        S7["`**S7  Triage**
+Follow-ups where gaps matter; stop where the answer cannot change; cross-country funding scans`"]
+
+        S8["`**S8  Merge and Verify**
+Scripts merge and score; an independent agent fact-checks a sample`"]
+
+        S9["`**S9  Deliverables**
+**Options Rundown** (your decision document)
+**Due-Diligence One-Pager** (proof of breadth and verification)`"]
+
+        S0 --> S1
+        G2 --> S3 --> S4 --> S7 --> S8 --> S9
+
+        PAUSE(["`**Usage limit hit at any point?**
+Stop safely: nothing is lost.
+A new chat reads run_state.json`"])
+        S4 -.-> PAUSE
+        PAUSE -. "resume from files" .-> S4
+    end
+
+    classDef step fill:#EAF2F8,stroke:#1F4E79,stroke-width:2px,color:#14213D;
+    classDef gate fill:#FFF4D6,stroke:#7A5200,stroke-width:2px,color:#3D2A00;
+    classDef out fill:#E3F4EA,stroke:#1E6B3A,stroke-width:2px,color:#0F3320;
+    classDef loop fill:#FFFFFF,stroke:#4B3A8C,stroke-width:2px,stroke-dasharray:5 4,color:#241A4D;
+    class S0,S1,S2,S3,S4,S7,S8 step;
+    class G1,G2 gate;
+    class S9 out;
+    class PAUSE loop;
+    style PRE fill:#F4F7FA,stroke:#1F4E79,stroke-width:2px,stroke-dasharray:6 4,color:#14213D
+    style ALL fill:#F8F6FC,stroke:#4B3A8C,stroke-width:2px,color:#241A4D
+    linkStyle 9,10 stroke:#4B3A8C,stroke-width:2px,stroke-dasharray:5 4

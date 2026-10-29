@@ -1,0 +1,144 @@
+{
+  "rubric": "life_plan",
+  "rubric_version": "1.0",
+  "gates": [
+    {
+      "id": "LP-G1",
+      "status": "pass",
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "LP-G2",
+      "status": "pass",
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "LP-G3",
+      "status": "pass",
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "LP-G4",
+      "status": "pass",
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "LP-G5",
+      "status": "pass",
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "LP-G6",
+      "status": "pass",
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "LP-G7",
+      "status": "pass",
+      "note": "synthetic fixture"
+    }
+  ],
+  "soft": [
+    {
+      "id": "LP-S1",
+      "weight": 1,
+      "score": 2,
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "LP-S2",
+      "weight": 2,
+      "score": 2,
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "LP-S3",
+      "weight": 2,
+      "score": 2,
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "LP-S4",
+      "weight": 2,
+      "score": 2,
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "LP-S5",
+      "weight": 1,
+      "score": 2,
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "LP-S6",
+      "weight": 1,
+      "score": 2,
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "LP-S7",
+      "weight": 2,
+      "score": 2,
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "LP-S8",
+      "weight": 1,
+      "score": 2,
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "LP-S9",
+      "weight": 1,
+      "score": 2,
+      "note": "synthetic fixture"
+    },
+    {
+      "id": "LP-S10",
+      "weight": 1,
+      "score": 2,
+      "note": "synthetic fixture"
+    }
+  ],
+  "soft_pct": 100.0,
+  "passed": true,
+  "scored_at": "2026-10-28T05:37:49Z",
+  "auto_checks": [
+    {
+      "id": "LP-G1",
+      "ok": true,
+      "detail": "purpose_horizon has a purpose and a horizon"
+    },
+    {
+      "id": "LP-G2",
+      "ok": true,
+      "detail": "post_degree_intent has an intent (and keep_open_is when several routes are open)"
+    },
+    {
+      "id": "LP-G3",
+      "ok": true,
+      "detail": "money has funded_type, the numbers its type needs, currency and debt_acceptable"
+    },
+    {
+      "id": "LP-G4",
+      "ok": true,
+      "detail": "eligibility_facts has citizenship, residence, degree details and certificate status"
+    },
+    {
+      "id": "LP-G5",
+      "ok": true,
+      "detail": "geography has considered countries, accepted languages, exclusions and languages willing to learn"
+    },
+    {
+      "id": "LP-G6",
+      "ok": true,
+      "detail": "timeline has earliest/latest start, immovable_dates and wait_one_cycle"
+    },
+    {
+      "id": "LP-G7",
+      "ok": true,
+      "detail": "household states dependants, partner, return-obligation stance and deal-breakers"
+    }
+  ],
+  "problems": []
+}

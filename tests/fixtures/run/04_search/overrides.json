@@ -1,0 +1,11 @@
+[
+  {
+    "target_id": "XC26-01",
+    "field": "state_vector.funding",
+    "original_value": 3,
+    "new_value": 2,
+    "reason": "Competitive consortium awards are capped at 2 for consistency with other competitive stipends.",
+    "decided_by": "orchestrator",
+    "date": "2026-10-25"
+  }
+]

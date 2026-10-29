@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://virgil-protocol.example/schemas/continuation_state_vector.schema.json",
+  "title": "Continuation state vector",
+  "description": "The compact, authoritative record of where a run stands (protocol/state_vector.md). Stored in run_state.json under 'state_vector' and rewritten at the end of every session (checkpoint.py update-vector). A fresh session continues from it.",
+  "type": "object",
+  "properties": {
+    "run": {
+      "type": "string",
+      "description": "Run id."
+    },
+    "session": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Sitting number; incremented once per sitting (0 before the first)."
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the last update."
+    },
+    "phase": {
+      "type": "string",
+      "pattern": "^(init|life_plan|map|scope|search|followups|merge|verify|deliverables|done)( (→|->) (init|life_plan|map|scope|search|followups|merge|verify|deliverables|done))?$",
+      "description": "Stage of the run: one of init, life_plan, map, scope, search, followups, merge, verify, deliverables, done. A transition is written 'A → B' in the session it happens."
+    },
+    "session_objective": {
+      "type": "string",
+      "description": "What this sitting set out to do."
+    },
+    "context": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Session-determined decisions that shape later work and are not recorded elsewhere (never restates the Preamble)."
+    },
+    "unknowns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Missing data, unverified facts, measurement gaps. Each must be routed to active/next or to assumptions."
+    },
+    "ambiguities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Inputs from the person that need clarifying. Blocking: resolved first in the next session."
+    },
+    "assumptions": {
+      "type": "array",
+      "description": "Positions taken despite unknowns, each with its basis.",
+      "items": {
+        "type": "object",
+        "description": "One assumption.",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "The assumption."
+          },
+          "basis": {
+            "type": "string",
+            "description": "Why it was made, so a later answer can overturn it cleanly."
+          }
+        },
+        "required": [
+          "text",
+          "basis"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "completed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Results, decisions and milestones (facts, not effort)."
+    },
+    "active": {
+      "type": "object",
+      "description": "Work in progress, split by owner (substantive actions only).",
+      "properties": {
+        "user": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "In progress on the person's side."
+        },
+        "virgil": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "In progress on Virgil's side."
+        }
+      },
+      "required": [
+        "user",
+        "virgil"
+      ],
+      "additionalProperties": false
+    },
+    "next": {
+      "type": "object",
+      "description": "The next concrete actions, split by owner. next.virgil[0] is the first thing the next session does.",
+      "properties": {
+        "user": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Next actions for the person."
+        },
+        "virgil": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Next actions for Virgil."
+        }
+      },
+      "required": [
+        "user",
+        "virgil"
+      ],
+      "additionalProperties": false
+    },
+    "blockers": {
+      "type": "array",
+      "description": "Dependencies, each with an owner.",
+      "items": {
+        "type": "object",
+        "description": "One blocker.",
+        "properties": {
+          "item": {
+            "type": "string",
+            "description": "What is blocking."
+          },
+          "owner": {
+            "enum": [
+              "USER",
+              "VIRGIL",
+              "EXTERNAL"
+            ],
+            "description": "Who can unblock it."
+          }
+        },
+        "required": [
+          "item",
+          "owner"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Files and links produced, as paths relative to the run directory."
+    }
+  },
+  "required": [
+    "run",
+    "session",
+    "date",
+    "phase",
+    "session_objective",
+    "context",
+    "unknowns",
+    "ambiguities",
+    "assumptions",
+    "completed",
+    "active",
+    "next",
+    "blockers",
+    "artifacts"
+  ],
+  "additionalProperties": false
+}

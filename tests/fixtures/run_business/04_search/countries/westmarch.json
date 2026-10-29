@@ -1,0 +1,221 @@
+{
+  "country": "Westmarch",
+  "slug": "westmarch",
+  "run_date": "2026-10-21",
+  "status": "complete",
+  "path_b_done": true,
+  "screening": [
+    {
+      "institution": "Westmarch Academy of Arts",
+      "programmes_considered": "MSc programmes",
+      "decision": "pass",
+      "entry_path": "A",
+      "reason": "design leadership"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "WM26-01",
+      "prior_id": null,
+      "status": "net_new",
+      "institution": "Westmarch Academy of Arts",
+      "programme": "MSc Design Leadership",
+      "track": "",
+      "city": "Marchton",
+      "degree_type_and_length": "MSc 180 credits / 12 months",
+      "sources": [
+        {
+          "claim_field": "programme",
+          "url": "https://example.edu/wm26-01/programme",
+          "note": "programme page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "study_plan",
+          "url": "https://example.edu/wm26-01/study_plan",
+          "note": "study_plan page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "pathway",
+          "url": "https://example.edu/wm26-01/pathway",
+          "note": "pathway page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "admissions_language",
+          "url": "https://example.edu/wm26-01/admissions_language",
+          "note": "admissions_language page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "tuition",
+          "url": "https://example.edu/wm26-01/tuition",
+          "note": "tuition page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "scholarship",
+          "url": "https://example.edu/wm26-01/scholarship",
+          "note": "scholarship page",
+          "source_type": "aggregator",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "deadline",
+          "url": null,
+          "source_type": "other",
+          "accessed_date": "2026-10-20",
+          "note": "not located"
+        }
+      ],
+      "axis_1_curriculum": {
+        "STRAT": {
+          "grade": "Moderate",
+          "evidence": "module list for STRAT",
+          "confidence": "confirmed"
+        },
+        "DES": {
+          "grade": "Strong",
+          "evidence": "module list for DES",
+          "confidence": "inferred"
+        },
+        "FIN": {
+          "grade": "None",
+          "evidence": "module list for FIN",
+          "confidence": "confirmed"
+        },
+        "OPS": {
+          "grade": "Weak",
+          "evidence": "module list for OPS",
+          "confidence": "inferred"
+        },
+        "LEAD": {
+          "grade": "Moderate",
+          "evidence": "module list for LEAD",
+          "confidence": "confirmed"
+        },
+        "ANA": {
+          "grade": "Strong",
+          "evidence": "module list for ANA",
+          "confidence": "inferred"
+        }
+      },
+      "axis_1_verdict": "Synthetic verdict.",
+      "axis_2_pathway": {
+        "people_and_partners": [
+          {
+            "name": "Placement office of Westmarch Academy of Arts",
+            "type": "internship_programme",
+            "url": "https://example.edu/wm26-01/group",
+            "contacts": [
+              {
+                "name": "Contact 1 (role: placement lead)",
+                "role": "placement lead",
+                "focus": "studio and consultancy placements",
+                "recent_work": "n/a",
+                "url": null,
+                "takes_students": "confirmed"
+              }
+            ]
+          }
+        ],
+        "summary": "Synthetic pathway summary."
+      },
+      "practical_component": {
+        "type": "internship",
+        "credits": 60,
+        "self_proposed": true,
+        "external_host_allowed": true,
+        "notes": "60-credit paid internship; the student may find the host (UK credits)"
+      },
+      "progression": "Graduate scheme route via partner employers.",
+      "language": {
+        "core": "English",
+        "electives": "English",
+        "admission_requirement": "IELTS 6.5",
+        "source_url": "https://example.edu/wm26-01/lang",
+        "source_note": "admissions page"
+      },
+      "tuition": {
+        "amount_text": "GBP 1,000 per year (2026/27)",
+        "applies_to": "international",
+        "currency": "GBP",
+        "annual_amount": 1000,
+        "academic_year": "2026/27",
+        "confidence": "confirmed"
+      },
+      "funding": {
+        "routes": [
+          {
+            "name": "Excellence scholarship",
+            "amount": "GBP 10,000/yr",
+            "applicant_eligible": "inferred",
+            "eligibility_detail": "open to all international master's applicants",
+            "competitiveness": "competitive",
+            "url": "https://example.edu/wm26-01/schol"
+          }
+        ],
+        "verdict": "low_cost"
+      },
+      "deadlines": [],
+      "state_vector": {
+        "funding": 1,
+        "programme": 2,
+        "pathway": 2,
+        "rubric_version": "1.0",
+        "notes": "synthetic"
+      },
+      "benchmark_comparison": {
+        "vs_funding_benchmark": "weaker",
+        "vs_programme_benchmark": "similar",
+        "vs_pathway_benchmark": "weaker"
+      },
+      "confidence": {
+        "curriculum": "confirmed",
+        "pathway": "inferred",
+        "funding": "inferred"
+      },
+      "open_questions": [
+        "Does the group take MSc students?",
+        "Is the scholarship open to the applicant?"
+      ],
+      "contact_actions": [
+        {
+          "question": "Can students arrange their own internship host?",
+          "who": "placement lead",
+          "channel": "email"
+        }
+      ],
+      "household_fit": {
+        "dependants_allowed": "conditional",
+        "partner_work_rights": "yes",
+        "family_allowance": "",
+        "notes": "Income threshold applies to partners.",
+        "confidence": "inferred"
+      }
+    }
+  ],
+  "ranked_out": [],
+  "corrections_to_prior": [],
+  "searched_not_surfaced": [],
+  "country_context": {
+    "funding_system": "Low tuition; no stipends.",
+    "home_country_schemes": "None found.",
+    "residence_pathway": "Post-study permit 12 months.",
+    "dependant_pathway": "Partner permit above an income threshold.",
+    "application_cycle": "March."
+  },
+  "country_summary": "Westmarch is cheap but thin on placements.",
+  "run_meta": {
+    "agent_model": "synthetic-agent",
+    "started_at": "2026-10-21T09:00:00Z",
+    "ended_at": "2026-10-21T09:45:00Z",
+    "limit_events": []
+  }
+}

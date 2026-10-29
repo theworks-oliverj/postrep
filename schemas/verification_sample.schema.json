@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://virgil-protocol.example/schemas/verification_sample.schema.json",
+  "title": "Verification sample",
+  "description": "Sample document.",
+  "type": "object",
+  "properties": {
+    "generated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When drawn."
+    },
+    "seed": {
+      "type": "integer",
+      "description": "Random seed (reproducible draw)."
+    },
+    "top_n": {
+      "type": "integer",
+      "description": "Records taken from the top of the ranking.",
+      "minimum": 0
+    },
+    "random_m": {
+      "type": "integer",
+      "description": "Records drawn at random from the rest.",
+      "minimum": 0
+    },
+    "population_size": {
+      "type": "integer",
+      "description": "Candidates available.",
+      "minimum": 0
+    },
+    "method": {
+      "type": "string",
+      "description": "Plain-language description of the sampling method."
+    },
+    "extrapolable": {
+      "type": "boolean",
+      "description": "true only if the sample contains a random draw (random_m > 0). false = top-N only: the error rate must NOT be extrapolated to records outside the sample."
+    },
+    "warnings": {
+      "type": "array",
+      "description": "Problems with the sample, e.g. population smaller than top + random.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "items": {
+      "type": "array",
+      "description": "Claims to check.",
+      "items": {
+        "type": "object",
+        "description": "One claim to check.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Candidate id."
+          },
+          "claim_type": {
+            "enum": [
+              "fee",
+              "deadline",
+              "people_partner",
+              "language",
+              "funding",
+              "curriculum",
+              "other"
+            ],
+            "description": "Kind of claim."
+          },
+          "claim": {
+            "type": "string",
+            "description": "The claim as stated in the record."
+          },
+          "value": {
+            "type": "string",
+            "description": "The exact value to confirm (fee text, date, name...)."
+          },
+          "source_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Where the record says it came from."
+          },
+          "sampled_by": {
+            "enum": [
+              "top_n",
+              "random"
+            ],
+            "description": "How the record entered the sample."
+          }
+        },
+        "required": [
+          "id",
+          "claim_type",
+          "claim",
+          "source_url",
+          "sampled_by"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "generated",
+    "seed",
+    "top_n",
+    "random_m",
+    "items"
+  ],
+  "additionalProperties": false
+}

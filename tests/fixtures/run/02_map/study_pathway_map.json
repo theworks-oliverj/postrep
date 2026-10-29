@@ -1,0 +1,121 @@
+{
+  "schema_version": "1.0",
+  "generated": "2026-10-02",
+  "objective": {
+    "one_line": "Learn to model neural population activity and move into a doctorate.",
+    "nearest_frameworks": [
+      "computational neuroscience master's"
+    ],
+    "commitments": [
+      "thesis-based master's"
+    ],
+    "non_goals": [
+      "pure software engineering degrees"
+    ]
+  },
+  "domains": [
+    {
+      "id": "NEURO",
+      "label": "Domain NEURO",
+      "priority": "critical",
+      "coverage_keywords": [
+        "neuro"
+      ],
+      "self_teachable": "no"
+    },
+    {
+      "id": "STAT",
+      "label": "Domain STAT",
+      "priority": "critical",
+      "coverage_keywords": [
+        "stat"
+      ],
+      "self_teachable": "no"
+    },
+    {
+      "id": "LEARN",
+      "label": "Domain LEARN",
+      "priority": "high",
+      "coverage_keywords": [
+        "learn"
+      ],
+      "self_teachable": "partly"
+    },
+    {
+      "id": "SIG",
+      "label": "Domain SIG",
+      "priority": "high",
+      "coverage_keywords": [
+        "sig"
+      ],
+      "self_teachable": "yes"
+    },
+    {
+      "id": "PROG",
+      "label": "Domain PROG",
+      "priority": "high",
+      "coverage_keywords": [
+        "prog"
+      ],
+      "self_teachable": "unknown"
+    }
+  ],
+  "pathway_signals": {
+    "people_topic_signals": [
+      "spiking network models",
+      "neural population dynamics",
+      "Bayesian inference for neural data",
+      "brain-computer interfaces",
+      "neuroimaging analysis"
+    ],
+    "organisation_type_signals": [
+      "neuroscience institutes",
+      "computational neuroscience centres"
+    ],
+    "known_people_or_orgs": []
+  },
+  "practical_component_needed": {
+    "type": "thesis",
+    "credits": 30,
+    "credit_system": "ECTS",
+    "notes": "Self-proposed topic preferred."
+  },
+  "false_positive_traps": [
+    "generic 'AI' degrees without neuroscience content"
+  ],
+  "connectedness_check": {
+    "connected": true,
+    "notes": "Domains cover modelling, inference and data skills."
+  },
+  "progression": {
+    "intent": "doctorate",
+    "notes": "Thesis group should be able to host doctoral applicants."
+  },
+  "scoring_anchors": {
+    "funding": {
+      "0": "none",
+      "1": "weak",
+      "2": "good",
+      "3": "benchmark level"
+    },
+    "programme": {
+      "0": "none",
+      "1": "weak",
+      "2": "good",
+      "3": "benchmark level"
+    },
+    "pathway": {
+      "0": "none",
+      "1": "weak",
+      "2": "good",
+      "3": "benchmark level"
+    }
+  },
+  "screening_rule": {
+    "description": "Pass if curriculum covers >= 2 critical domains OR a named person's recent work hits a pathway signal.",
+    "min_domains_for_pass": 2,
+    "research_signal_pass": true,
+    "unsure_policy": "pass"
+  },
+  "benchmarks_ref": "02_map/benchmarks.json"
+}

@@ -1,0 +1,35 @@
+{
+  "items": [
+    {
+      "id": "NL26-01",
+      "claim": "Tuition EUR 1,000",
+      "claim_type": "fee",
+      "verdict": "confirmed",
+      "evidence_url": "https://example.edu/nl26-01/fees",
+      "note": "matches",
+      "sampled_by": "top_n"
+    },
+    {
+      "id": "NL26-01",
+      "claim": "Deadline 1 Dec 2026",
+      "claim_type": "deadline",
+      "verdict": "wrong",
+      "evidence_url": "https://example.edu/nl26-01/dates",
+      "note": "1 Nov 2026",
+      "sampled_by": "top_n"
+    },
+    {
+      "id": "EA26-01",
+      "claim": "Group supervises MSc",
+      "claim_type": "people_partner",
+      "verdict": "not_found",
+      "evidence_url": null,
+      "note": "no page",
+      "sampled_by": "random"
+    }
+  ],
+  "summary": {
+    "notes": "synthetic",
+    "checked_by": "verifier-agent"
+  }
+}

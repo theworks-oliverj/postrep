@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "applicant_alias": "Applicant T",
+  "profile_summary": "Applicant T, first degree in Biology, residence Exampleland",
+  "updated_at": "2026-10-01T09:00:00Z",
+  "purpose_horizon": {
+    "purpose": "Research career in computational neuroscience",
+    "horizon_years": 5
+  },
+  "post_degree_intent": {
+    "intent": "doctorate",
+    "routes_open": [
+      "doctorate"
+    ],
+    "detail": "Doctorate within 2 years of the master's"
+  },
+  "money": {
+    "funded_type": "tuition_only",
+    "max_total_tuition": 4000,
+    "max_out_of_pocket": 9000,
+    "living_support_required_monthly": null,
+    "household_size": 1,
+    "currency": "EUR",
+    "debt_acceptable": false,
+    "debt_limit": null,
+    "income_during_degree": 0,
+    "dependants_on_income": 0,
+    "hardness": "keep_and_flag",
+    "notes": "Savings cover living costs."
+  },
+  "eligibility_facts": {
+    "citizenships": [
+      "Exampleland"
+    ],
+    "residence_country": "Exampleland",
+    "residence_region": "",
+    "highest_degree": {
+      "field": "Biology",
+      "country": "Exampleland",
+      "graduation_year": 2020,
+      "grade": "first class",
+      "grade_scale": "honours classes"
+    },
+    "language_certificates": [
+      {
+        "test": "IELTS Academic",
+        "score": "7.0",
+        "date_taken": "2026-03-10",
+        "expires": "2028-03-10"
+      }
+    ],
+    "age_bracket": "30-34",
+    "fee_status": "international"
+  },
+  "geography": {
+    "considered": [
+      "Northland",
+      "Eastmark"
+    ],
+    "excluded": [
+      {
+        "country": "Westland",
+        "reason": "excluded by the applicant"
+      }
+    ],
+    "languages_willing_c1": [],
+    "teaching_languages_accepted": [
+      "English"
+    ]
+  },
+  "timeline": {
+    "earliest_start": "2027-09",
+    "latest_start": "2028-09",
+    "immovable_dates": [],
+    "wait_one_cycle": true
+  },
+  "household": {
+    "dependants": 0,
+    "partner_moves": false,
+    "partner_work_needed": null,
+    "return_obligation_stance": "depends",
+    "deal_breakers": [
+      "tuition above 4000 EUR total"
+    ]
+  },
+  "risk_tolerance": {
+    "money": "low",
+    "long_shots": "medium"
+  }
+}

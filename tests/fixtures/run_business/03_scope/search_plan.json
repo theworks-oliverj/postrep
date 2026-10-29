@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "rubric_version": "1.0",
+  "created": "2026-10-03",
+  "countries": [
+    {
+      "slug": "southvale",
+      "name": "Southvale",
+      "depth": "deep",
+      "cap_n": 4,
+      "wave": 1
+    },
+    {
+      "slug": "westmarch",
+      "name": "Westmarch",
+      "depth": "quick",
+      "cap_n": 4,
+      "wave": 1
+    }
+  ],
+  "crosscuts": [],
+  "benchmarks_ref": "02_map/benchmarks.json",
+  "funded_definition": {
+    "type": "affordable",
+    "max_total_tuition": null,
+    "max_out_of_pocket": 20000,
+    "living_support_required_monthly": 1200,
+    "household_size": 2,
+    "currency": "GBP",
+    "min_funding_score": 2
+  },
+  "overlay_policy": "overlay only: never raise the base funding score; show effect and obligations next to it",
+  "eligibility_facts_ref": "01_life_plan/life_plan.json#eligibility_facts",
+  "exclusions": [],
+  "session_plan": {
+    "waves": [
+      {
+        "wave": 1,
+        "countries": [
+          "southvale",
+          "westmarch"
+        ],
+        "expected_windows": 1
+      }
+    ],
+    "agents_per_window_estimate": 4
+  }
+}

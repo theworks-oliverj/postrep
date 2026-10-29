@@ -1,0 +1,37 @@
+name: Protocol improvement
+description: Suggest a change to a protocol module, gate, rubric or the interview flow, based on your experience of a run.
+labels: ["protocol"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Improvements grounded in a real run are the most valuable. **Do not paste personal data**; describe your situation in general terms.
+  - type: input
+    id: module
+    attributes:
+      label: Which module or session?
+      description: The module id or file, and the session (S0 to S9) where the problem showed up.
+      placeholder: "protocol/s2_pathway_map.md, session S2"
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened in your run?
+      description: What Virgil or the agents did, and where it fell short (confusing question, missed option, wasted usage, wrong score).
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: The wording, rule, rubric item or step you would add, remove or change.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Anonymised excerpts, counts or metrics that support the change (for example how many records were affected, or how much of a usage window it cost).
+    validations:
+      required: false

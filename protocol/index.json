@@ -1,0 +1,378 @@
+{
+ "protocol": "Virgil Protocol",
+ "version": "1.0.0",
+ "raw_base": "https://raw.githubusercontent.com/theworks-oliverj/postrep/main/",
+ "entry": "START_HERE.md",
+ "modules": [
+  {
+   "id": "preamble",
+   "path": "protocol/preamble.md",
+   "title": "Preamble: Virgil's operating rules",
+   "purpose": "Role, layering, rules (purpose -> behaviour), capability check, boot sequence, commands",
+   "phase": "all",
+   "inputs": [],
+   "outputs": [],
+   "depends_on": [],
+   "load_when": "every session",
+   "bundle": true
+  },
+  {
+   "id": "state_vector",
+   "path": "protocol/state_vector.md",
+   "title": "Continuation state vector",
+   "purpose": "Backend progress record agents read/write; the human 'Where we are' brief",
+   "phase": "all",
+   "inputs": [
+    "run_state.json"
+   ],
+   "outputs": [
+    "run_state.json#state_vector"
+   ],
+   "depends_on": [
+    "preamble"
+   ],
+   "load_when": "every session",
+   "bundle": true
+  },
+  {
+   "id": "persistence",
+   "path": "protocol/engine/persistence.md",
+   "title": "Engine: persistence and session partitioning",
+   "purpose": "Workspace layout, runtime modes, checkpoint rules, usage-window partitioning",
+   "phase": "init,search,followups,merge",
+   "inputs": [],
+   "outputs": [
+    "run_state.json"
+   ],
+   "depends_on": [
+    "preamble"
+   ],
+   "load_when": "S0 and before any search wave",
+   "bundle": true
+  },
+  {
+   "id": "s0_orientation",
+   "path": "protocol/sessions/s0_orientation.md",
+   "title": "Session 0: Orientation",
+   "purpose": "What to expect, setup, privacy, reflection exercise",
+   "phase": "init",
+   "inputs": [],
+   "outputs": [
+    "00_orientation/notes.md",
+    "run_state.json"
+   ],
+   "depends_on": [
+    "preamble",
+    "persistence"
+   ],
+   "load_when": "no run_state.json",
+   "bundle": true
+  },
+  {
+   "id": "s1_life_plan",
+   "path": "protocol/sessions/s1_life_plan.md",
+   "title": "Session 1: Life & Career Plan",
+   "purpose": "Interview fields and rubric LP-1.0 for the first half of the run's Preamble",
+   "phase": "life_plan",
+   "inputs": [
+    "00_orientation/notes.md"
+   ],
+   "outputs": [
+    "01_life_plan/life_plan.md",
+    "01_life_plan/life_plan.json",
+    "01_life_plan/life_plan_score.json"
+   ],
+   "depends_on": [
+    "s0_orientation"
+   ],
+   "load_when": "phase life_plan",
+   "bundle": true
+  },
+  {
+   "id": "s2_pathway_map",
+   "path": "protocol/sessions/s2_pathway_map.md",
+   "title": "Session 2: Study & Pathway Map",
+   "purpose": "Knowledge domains, pathway signals, benchmarks, anchors; rubric PM-1.0",
+   "phase": "map",
+   "inputs": [
+    "01_life_plan/life_plan.json"
+   ],
+   "outputs": [
+    "02_map/study_pathway_map.json",
+    "02_map/benchmarks.json",
+    "02_map/map_score.json"
+   ],
+   "depends_on": [
+    "s1_life_plan"
+   ],
+   "load_when": "phase map",
+   "bundle": true
+  },
+  {
+   "id": "s3_scope_brief",
+   "path": "protocol/sessions/s3_scope_brief.md",
+   "title": "Session 3: Scope and agent brief",
+   "purpose": "Country list, depth, cross-cuts, funded definition, wave plan, budgets, default anchors",
+   "phase": "scope",
+   "inputs": [
+    "01_life_plan/life_plan.json",
+    "02_map/study_pathway_map.json"
+   ],
+   "outputs": [
+    "03_scope/search_plan.json",
+    "03_scope/AGENT_BRIEF.md"
+   ],
+   "depends_on": [
+    "s2_pathway_map"
+   ],
+   "load_when": "phase scope",
+   "bundle": true
+  },
+  {
+   "id": "s4_search_waves",
+   "path": "protocol/sessions/s4_search_waves.md",
+   "title": "Sessions 4-6: Search waves",
+   "purpose": "Orchestrating one agent per country in usage-sized waves",
+   "phase": "search",
+   "inputs": [
+    "03_scope/AGENT_BRIEF.md",
+    "03_scope/search_plan.json"
+   ],
+   "outputs": [
+    "04_search/countries/"
+   ],
+   "depends_on": [
+    "s3_scope_brief",
+    "persistence",
+    "quality_bar"
+   ],
+   "load_when": "phase search",
+   "bundle": true
+  },
+  {
+   "id": "s7_triage",
+   "path": "protocol/sessions/s7_triage.md",
+   "title": "Session 7: Triage, follow-ups and cross-cuts",
+   "purpose": "Follow-up triggers, stop rule, cross-cut agents",
+   "phase": "followups",
+   "inputs": [
+    "04_search/countries/"
+   ],
+   "outputs": [
+    "04_search/followup_plan.json",
+    "04_search/followups/",
+    "04_search/crosscuts/"
+   ],
+   "depends_on": [
+    "s4_search_waves"
+   ],
+   "load_when": "phase followups",
+   "bundle": true
+  },
+  {
+   "id": "s8_merge_verify",
+   "path": "protocol/sessions/s8_merge_verify.md",
+   "title": "Session 8: Merge and independent verification",
+   "purpose": "Merge rules, overrides, sampling, verifier, adjudication",
+   "phase": "merge,verify",
+   "inputs": [
+    "04_search/"
+   ],
+   "outputs": [
+    "05_merge/merged.json",
+    "06_verify/verification.json"
+   ],
+   "depends_on": [
+    "s7_triage"
+   ],
+   "load_when": "phases merge and verify",
+   "bundle": true
+  },
+  {
+   "id": "s9_deliverables",
+   "path": "protocol/sessions/s9_deliverables.md",
+   "title": "Session 9: Deliverables",
+   "purpose": "Options Rundown and Due-Diligence One-Pager",
+   "phase": "deliverables",
+   "inputs": [
+    "05_merge/merged.json",
+    "06_verify/verification.json"
+   ],
+   "outputs": [
+    "07_deliverables/options_rundown.md",
+    "07_deliverables/due_diligence.md"
+   ],
+   "depends_on": [
+    "s8_merge_verify"
+   ],
+   "load_when": "phase deliverables",
+   "bundle": true
+  },
+  {
+   "id": "quality_bar",
+   "path": "protocol/engine/quality_bar.md",
+   "title": "Engine: quality bar",
+   "purpose": "Evidence rules per claim type",
+   "phase": "search,followups,verify",
+   "inputs": [],
+   "outputs": [],
+   "depends_on": [
+    "preamble"
+   ],
+   "load_when": "any research or verification",
+   "bundle": true
+  },
+  {
+   "id": "data_contract",
+   "path": "protocol/engine/data_contract.md",
+   "title": "Engine: data contract",
+   "purpose": "Minimal valid examples of every file a run writes; pointer to schemas/",
+   "phase": "all",
+   "inputs": [],
+   "outputs": [],
+   "depends_on": [
+    "preamble"
+   ],
+   "load_when": "writing JSON without scripts",
+   "bundle": true
+  },
+  {
+   "id": "data_examples",
+   "path": "docs/appendix_a_examples.md",
+   "title": "Data contract: valid examples",
+   "purpose": "Minimal schema-valid examples of every core file (tested)",
+   "phase": "all",
+   "inputs": [],
+   "outputs": [],
+   "depends_on": [
+    "data_contract"
+   ],
+   "load_when": "writing JSON without scripts",
+   "bundle": true
+  },
+  {
+   "id": "scripts",
+   "path": "protocol/engine/scripts.md",
+   "title": "Engine: scripts reference",
+   "purpose": "CLI for every script",
+   "phase": "all",
+   "inputs": [],
+   "outputs": [],
+   "depends_on": [
+    "persistence"
+   ],
+   "load_when": "running scripts",
+   "bundle": true
+  },
+  {
+   "id": "agent_prompts",
+   "path": "protocol/prompts/agent_prompts.md",
+   "title": "Prompts: resume and hand-off",
+   "purpose": "P1 resume run, P2 resume country, P3 follow-up, P4 verifier, P5 benchmark scout, P6 connectedness",
+   "phase": "all",
+   "inputs": [],
+   "outputs": [],
+   "depends_on": [
+    "preamble"
+   ],
+   "load_when": "launching or resuming agents",
+   "bundle": true
+  },
+  {
+   "id": "tpl_life_plan",
+   "path": "protocol/templates/life_plan.md",
+   "title": "Template: life_plan.md",
+   "purpose": "Human view of the Life & Career Plan",
+   "phase": "life_plan",
+   "inputs": [],
+   "outputs": [],
+   "depends_on": [
+    "s1_life_plan"
+   ],
+   "load_when": "writing the plan",
+   "bundle": true
+  },
+  {
+   "id": "tpl_pathway_map",
+   "path": "protocol/templates/pathway_map.md",
+   "title": "Template: pathway_map.md",
+   "purpose": "Human view of the Study & Pathway Map",
+   "phase": "map",
+   "inputs": [],
+   "outputs": [],
+   "depends_on": [
+    "s2_pathway_map"
+   ],
+   "load_when": "writing the map",
+   "bundle": true
+  },
+  {
+   "id": "tpl_agent_brief",
+   "path": "protocol/templates/AGENT_BRIEF.md",
+   "title": "Template: AGENT_BRIEF.md",
+   "purpose": "Shared country research brief (field purpose -> behaviour)",
+   "phase": "scope",
+   "inputs": [],
+   "outputs": [],
+   "depends_on": [
+    "s3_scope_brief"
+   ],
+   "load_when": "writing the brief",
+   "bundle": true
+  },
+  {
+   "id": "tpl_options_rundown",
+   "path": "protocol/templates/options_rundown.md",
+   "title": "Template: options_rundown.md",
+   "purpose": "D6 decision document",
+   "phase": "deliverables",
+   "inputs": [],
+   "outputs": [],
+   "depends_on": [
+    "s9_deliverables"
+   ],
+   "load_when": "writing D6",
+   "bundle": true
+  },
+  {
+   "id": "tpl_due_diligence",
+   "path": "protocol/templates/due_diligence.md",
+   "title": "Template: due_diligence.md",
+   "purpose": "D7 one-pager",
+   "phase": "deliverables",
+   "inputs": [],
+   "outputs": [],
+   "depends_on": [
+    "s9_deliverables"
+   ],
+   "load_when": "writing D7 by hand",
+   "bundle": true
+  },
+  {
+   "id": "tpl_where_we_are",
+   "path": "protocol/templates/where_we_are.md",
+   "title": "Template: where_we_are.md",
+   "purpose": "Human status brief generated from the state vector",
+   "phase": "all",
+   "inputs": [],
+   "outputs": [],
+   "depends_on": [
+    "state_vector"
+   ],
+   "load_when": "every session",
+   "bundle": true
+  },
+  {
+   "id": "lessons",
+   "path": "protocol/engine/lessons.md",
+   "title": "Engine: lessons from the reference run",
+   "purpose": "Why the rules exist (maintainers)",
+   "phase": "none",
+   "inputs": [],
+   "outputs": [],
+   "depends_on": [],
+   "load_when": "never during a run",
+   "bundle": false
+  }
+ ]
+}

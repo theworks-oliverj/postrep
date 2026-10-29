@@ -1,0 +1,360 @@
+{
+  "crosscut_kind": "programme_scan",
+  "country": "Joint master's catalogue",
+  "slug": "joint_masters",
+  "run_date": "2026-10-23",
+  "status": "complete",
+  "path_b_done": true,
+  "catalogue_scan": [
+    {
+      "institution": "Joint consortium Northfield-Eastmark",
+      "programmes_considered": "MSc programmes",
+      "decision": "pass",
+      "entry_path": "A",
+      "reason": "joint degree"
+    }
+  ],
+  "screening": [
+    {
+      "institution": "Joint consortium Northfield-Eastmark",
+      "programmes_considered": "MSc programmes",
+      "decision": "pass",
+      "entry_path": "A",
+      "reason": "joint degree"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "XC26-01",
+      "prior_id": null,
+      "status": "net_new",
+      "institution": "Joint consortium Northfield-Eastmark",
+      "programme": "Joint MSc Data and Brain Science",
+      "track": "Mobility track A",
+      "city": "Multiple",
+      "degree_type_and_length": "MSc 120 ECTS / 2 yrs",
+      "sources": [
+        {
+          "claim_field": "programme",
+          "url": "https://example.edu/xc26-01/programme",
+          "note": "programme page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "study_plan",
+          "url": "https://example.edu/xc26-01/study_plan",
+          "note": "study_plan page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "pathway",
+          "url": "https://example.edu/xc26-01/pathway",
+          "note": "pathway page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "admissions_language",
+          "url": "https://example.edu/xc26-01/admissions_language",
+          "note": "admissions_language page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "tuition",
+          "url": "https://example.edu/xc26-01/tuition",
+          "note": "tuition page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "scholarship",
+          "url": "https://example.edu/xc26-01/scholarship",
+          "note": "scholarship page",
+          "source_type": "aggregator",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "deadline",
+          "url": null,
+          "source_type": "other",
+          "accessed_date": "2026-10-20",
+          "note": "not located"
+        }
+      ],
+      "axis_1_curriculum": {
+        "NEURO": {
+          "grade": "Moderate",
+          "evidence": "module list for NEURO",
+          "confidence": "confirmed"
+        },
+        "STAT": {
+          "grade": "Strong",
+          "evidence": "module list for STAT",
+          "confidence": "inferred"
+        },
+        "LEARN": {
+          "grade": "None",
+          "evidence": "module list for LEARN",
+          "confidence": "confirmed"
+        },
+        "SIG": {
+          "grade": "Weak",
+          "evidence": "module list for SIG",
+          "confidence": "inferred"
+        },
+        "PROG": {
+          "grade": "Moderate",
+          "evidence": "module list for PROG",
+          "confidence": "confirmed"
+        }
+      },
+      "axis_1_verdict": "Synthetic verdict.",
+      "axis_2_pathway": {
+        "people_and_partners": [
+          {
+            "name": "Group of Joint consortium Northfield-Eastmark",
+            "type": "research_group",
+            "url": "https://example.edu/xc26-01/group",
+            "contacts": [
+              {
+                "name": "Contact 1 (role: modelling lead)",
+                "role": "modelling lead",
+                "focus": "neural population models",
+                "recent_work": "n/a",
+                "url": null,
+                "takes_students": "confirmed"
+              }
+            ]
+          }
+        ],
+        "summary": "Synthetic pathway summary."
+      },
+      "practical_component": {
+        "type": "thesis",
+        "credits": 30,
+        "self_proposed": false,
+        "external_host_allowed": false,
+        "notes": "30 ECTS thesis"
+      },
+      "progression": "Informal via thesis group.",
+      "language": {
+        "core": "English",
+        "electives": "English",
+        "admission_requirement": "IELTS 6.5",
+        "source_url": "https://example.edu/xc26-01/lang",
+        "source_note": "admissions page"
+      },
+      "tuition": {
+        "amount_text": "EUR 1,000 per year (2026/27)",
+        "applies_to": "international",
+        "currency": "EUR",
+        "annual_amount": 1000,
+        "academic_year": "2026/27",
+        "confidence": "confirmed"
+      },
+      "funding": {
+        "routes": [
+          {
+            "name": "Excellence scholarship",
+            "amount": "EUR 10,000/yr",
+            "applicant_eligible": "confirmed",
+            "eligibility_detail": "open to all international master's applicants",
+            "competitiveness": "competitive",
+            "url": "https://example.edu/xc26-01/schol"
+          }
+        ],
+        "verdict": "funded_confirmed"
+      },
+      "deadlines": [],
+      "state_vector": {
+        "funding": 3,
+        "programme": 2,
+        "pathway": 2,
+        "rubric_version": "1.0",
+        "notes": "synthetic"
+      },
+      "benchmark_comparison": {
+        "vs_funding_benchmark": "weaker",
+        "vs_programme_benchmark": "similar",
+        "vs_pathway_benchmark": "weaker"
+      },
+      "confidence": {
+        "curriculum": "confirmed",
+        "pathway": "inferred",
+        "funding": "inferred"
+      },
+      "open_questions": [
+        "Does the group take MSc students?",
+        "Is the scholarship open to the applicant?"
+      ],
+      "contact_actions": [
+        {
+          "question": "Do you supervise MSc theses on neural data analysis?",
+          "who": "PI of the group",
+          "channel": "email"
+        }
+      ],
+      "consortium": {
+        "full_members": [
+          "Northfield University",
+          "Eastmark Polytechnic"
+        ],
+        "path": "year 1 Northfield, year 2 Eastmark",
+        "source": "https://example.edu/joint"
+      },
+      "overlays": [
+        {
+          "scheme": "Home-country outbound scholarship",
+          "effect": 3,
+          "obligations": "return within 12 months",
+          "status": "unknown"
+        }
+      ]
+    },
+    {
+      "id": "XC26-02",
+      "prior_id": null,
+      "status": "net_new",
+      "institution": "Lakeside University",
+      "programme": "MSc Complex Systems Science",
+      "track": "",
+      "city": "Springfield",
+      "degree_type_and_length": "MSc 120 ECTS / 2 yrs",
+      "sources": [
+        {
+          "claim_field": "programme",
+          "url": "https://example.edu/xc26-02/programme",
+          "note": "programme page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        },
+        {
+          "claim_field": "study_plan",
+          "url": "https://example.edu/xc26-02/study_plan",
+          "note": "study_plan page",
+          "source_type": "official",
+          "accessed_date": "2026-10-20"
+        }
+      ],
+      "axis_1_curriculum": {
+        "NEURO": {
+          "grade": "Weak",
+          "evidence": "module list for NEURO",
+          "confidence": "confirmed"
+        },
+        "STAT": {
+          "grade": "Moderate",
+          "evidence": "module list for STAT",
+          "confidence": "inferred"
+        },
+        "LEARN": {
+          "grade": "Strong",
+          "evidence": "module list for LEARN",
+          "confidence": "confirmed"
+        },
+        "SIG": {
+          "grade": "None",
+          "evidence": "module list for SIG",
+          "confidence": "inferred"
+        },
+        "PROG": {
+          "grade": "Weak",
+          "evidence": "module list for PROG",
+          "confidence": "confirmed"
+        }
+      },
+      "axis_1_verdict": "Synthetic verdict.",
+      "axis_2_pathway": {
+        "people_and_partners": [
+          {
+            "name": "Group of Lakeside University",
+            "type": "research_group",
+            "url": "https://example.edu/xc26-02/group",
+            "contacts": [
+              {
+                "name": "Contact 1 (role: modelling lead)",
+                "role": "modelling lead",
+                "focus": "neural population models",
+                "recent_work": "n/a",
+                "url": null,
+                "takes_students": "inferred"
+              }
+            ]
+          }
+        ],
+        "summary": "Synthetic pathway summary."
+      },
+      "practical_component": {
+        "type": "thesis",
+        "credits": 30,
+        "self_proposed": false,
+        "external_host_allowed": false,
+        "notes": "30 ECTS thesis"
+      },
+      "progression": "Informal via thesis group.",
+      "language": {
+        "core": "English",
+        "electives": "English",
+        "admission_requirement": "IELTS 6.5",
+        "source_url": "https://example.edu/xc26-02/lang",
+        "source_note": "admissions page"
+      },
+      "tuition": {
+        "amount_text": "EUR 1,000 per year (2026/27)",
+        "applies_to": "international",
+        "currency": "EUR",
+        "annual_amount": 1000,
+        "academic_year": "2026/27",
+        "confidence": "confirmed"
+      },
+      "funding": {
+        "routes": [
+          {
+            "name": "Excellence scholarship",
+            "amount": "EUR 10,000/yr",
+            "applicant_eligible": "inferred",
+            "eligibility_detail": "open to all international master's applicants",
+            "competitiveness": "competitive",
+            "url": "https://example.edu/xc26-02/schol"
+          }
+        ],
+        "verdict": "competitive_scholarship_only"
+      },
+      "deadlines": [],
+      "state_vector": {
+        "funding": 1,
+        "programme": 1,
+        "pathway": 1,
+        "rubric_version": "1.0",
+        "notes": "synthetic"
+      },
+      "benchmark_comparison": {
+        "vs_funding_benchmark": "weaker",
+        "vs_programme_benchmark": "similar",
+        "vs_pathway_benchmark": "weaker"
+      },
+      "confidence": {
+        "curriculum": "confirmed",
+        "pathway": "inferred",
+        "funding": "inferred"
+      },
+      "open_questions": [
+        "Does the group take MSc students?"
+      ],
+      "contact_actions": [
+        {
+          "question": "Do you supervise MSc theses on neural data analysis?",
+          "who": "PI of the group",
+          "channel": "email"
+        }
+      ]
+    }
+  ],
+  "ranked_out": [],
+  "searched_not_surfaced": [],
+  "country_summary": "One joint master's of interest.",
+  "scope_note": "Spans countries."
+}

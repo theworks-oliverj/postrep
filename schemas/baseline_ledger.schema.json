@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://virgil-protocol.example/schemas/baseline_ledger.schema.json",
+  "title": "Baseline ledger",
+  "description": "Baseline.",
+  "type": "object",
+  "properties": {
+    "generated": {
+      "type": "string",
+      "format": "date",
+      "description": "Date."
+    },
+    "rubric_version": {
+      "type": "string",
+      "description": "Rubric version the vectors were scored with."
+    },
+    "rows": {
+      "type": "array",
+      "description": "Prior programmes.",
+      "items": {
+        "type": "object",
+        "description": "One row.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Prior id (as referenced by candidate.prior_id)."
+          },
+          "country": {
+            "type": "string",
+            "description": "Country name or slug."
+          },
+          "label": {
+            "type": "string",
+            "description": "Institution + programme label."
+          },
+          "funding": {
+            "$ref": "state_vector.schema.json#/properties/funding"
+          },
+          "programme": {
+            "$ref": "state_vector.schema.json#/properties/programme"
+          },
+          "basis": {
+            "type": "string",
+            "description": "One-line basis for the scores."
+          },
+          "benchmark": {
+            "type": "boolean",
+            "description": "Is this a run benchmark?"
+          },
+          "in_scope": {
+            "type": "boolean",
+            "description": "Within this run's countries, so it should be revisited."
+          },
+          "pathway": {
+            "$ref": "state_vector.schema.json#/properties/pathway"
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "funding",
+          "programme",
+          "pathway"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "rows"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://virgil-protocol.example/schemas/session_log_entry.schema.json",
+  "title": "Session log entry",
+  "description": "Log line.",
+  "type": "object",
+  "properties": {
+    "ts": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time."
+    },
+    "session": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Session number or null."
+    },
+    "event": {
+      "enum": [
+        "session_start",
+        "session_end",
+        "limit_hit",
+        "agent_start",
+        "agent_end",
+        "checkpoint",
+        "note",
+        "error"
+      ],
+      "description": "Event type."
+    },
+    "phase": {
+      "type": "string",
+      "description": "Phase name."
+    },
+    "country": {
+      "type": "string",
+      "description": "Country/cross-cut slug if relevant."
+    },
+    "agent": {
+      "type": "string",
+      "description": "Agent label."
+    },
+    "detail": {
+      "type": "string",
+      "description": "What happened."
+    }
+  },
+  "required": [
+    "ts",
+    "event",
+    "detail"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "applicant_alias": "Applicant B",
+  "profile_summary": "Applicant B, BA Design Management, six years in product teams, partner moves too",
+  "updated_at": "2026-10-01T09:00:00Z",
+  "purpose_horizon": {
+    "purpose": "Move from product management into service design leadership",
+    "horizon_years": 7
+  },
+  "post_degree_intent": {
+    "intent": "career_switch",
+    "routes_open": [
+      "industry",
+      "own_venture"
+    ],
+    "keep_open_is": "hedge",
+    "detail": "A leadership role at a design consultancy within a year"
+  },
+  "money": {
+    "funded_type": "affordable",
+    "max_total_tuition": null,
+    "max_out_of_pocket": 20000,
+    "living_support_required_monthly": 1200,
+    "household_size": 2,
+    "currency": "GBP",
+    "debt_acceptable": true,
+    "debt_limit": 10000,
+    "income_during_degree": 800,
+    "dependants_on_income": 0,
+    "hardness": "hard",
+    "notes": "A paid internship counts towards living costs."
+  },
+  "eligibility_facts": {
+    "citizenships": [
+      "Exampleland"
+    ],
+    "residence_country": "Exampleland",
+    "residence_region": "",
+    "highest_degree": {
+      "field": "Design Management",
+      "country": "Exampleland",
+      "graduation_year": 2018,
+      "grade": "upper second",
+      "grade_scale": "UK-style classes"
+    },
+    "language_certificates": [],
+    "language_certificates_note": "None needed: degree taught in English",
+    "age_bracket": "30-34",
+    "fee_status": "overseas"
+  },
+  "geography": {
+    "considered": [
+      "Southvale",
+      "Westmarch"
+    ],
+    "excluded": [],
+    "languages_willing_c1": [],
+    "teaching_languages_accepted": [
+      "English"
+    ]
+  },
+  "timeline": {
+    "earliest_start": "2027-09",
+    "latest_start": "2027-09",
+    "immovable_dates": [
+      "Partner's contract ends 2027-06"
+    ],
+    "wait_one_cycle": false
+  },
+  "household": {
+    "dependants": 0,
+    "partner_moves": true,
+    "partner_work_needed": true,
+    "return_obligation_stance": "acceptable",
+    "deal_breakers": [
+      "no work rights for the partner"
+    ]
+  },
+  "risk_tolerance": {
+    "money": "medium",
+    "long_shots": "low"
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://virgil-protocol.example/schemas/followup_trigger.schema.json",
+  "title": "Follow-up plan",
+  "description": "Follow-up plan document.",
+  "type": "object",
+  "properties": {
+    "generated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When computed."
+    },
+    "today": {
+      "type": "string",
+      "format": "date",
+      "description": "Reference date for deadline checks."
+    },
+    "params": {
+      "type": "object",
+      "description": "Parameters used.",
+      "properties": {
+        "top_n": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Top-N override (null = per-country cap_n)."
+        },
+        "deadline_days": {
+          "type": "integer",
+          "description": "Window for deadline_soon."
+        },
+        "min_funding_score": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Plan's minimum funding score used by the stop rule."
+        }
+      }
+    },
+    "triggers": {
+      "type": "array",
+      "description": "All triggers.",
+      "items": {
+        "type": "object",
+        "description": "One follow-up trigger.",
+        "properties": {
+          "country": {
+            "type": "string",
+            "description": "Country slug (or cross-cut slug)."
+          },
+          "trigger_type": {
+            "enum": [
+              "budget_exhausted",
+              "path_b_missing",
+              "unscored_axis",
+              "promote_flag",
+              "deadline_soon",
+              "suspected_false_negative",
+              "complete_with_gaps"
+            ],
+            "description": "Why a follow-up is suggested."
+          },
+          "detail": {
+            "type": "string",
+            "description": "Human-readable explanation with the numbers."
+          },
+          "record_ids": {
+            "type": "array",
+            "description": "Candidate ids, or 'ranked_out:<institution> | <programme>' / institution names, the trigger refers to.",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "country",
+          "trigger_type",
+          "detail",
+          "record_ids"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "stop_rule_decisions": {
+      "type": "array",
+      "description": "Countries where a follow-up is not worth it.",
+      "items": {
+        "type": "object",
+        "description": "A 'decision cannot flip' conclusion.",
+        "properties": {
+          "country": {
+            "type": "string",
+            "description": "Country slug."
+          },
+          "decision": {
+            "const": "no_followup",
+            "description": "Always 'no_followup'."
+          },
+          "reason": {
+            "type": "string",
+            "description": "Numbers behind the conclusion (max achievable funding vs plan minimum; max pathway)."
+          },
+          "confirmed_by": {
+            "type": "string",
+            "description": "Filled by the orchestrator when the suggestion is accepted; empty when only suggested."
+          }
+        },
+        "required": [
+          "country",
+          "decision",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "countries_needing_followup": {
+      "type": "array",
+      "description": "Slugs with at least one trigger and no stop-rule suggestion.",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "generated",
+    "today",
+    "triggers",
+    "stop_rule_decisions",
+    "countries_needing_followup"
+  ],
+  "additionalProperties": false
+}

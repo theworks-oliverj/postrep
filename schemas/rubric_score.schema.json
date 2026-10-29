@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://virgil-protocol.example/schemas/rubric_score.schema.json",
+  "title": "Rubric score",
+  "description": "Score document.",
+  "type": "object",
+  "properties": {
+    "rubric": {
+      "enum": [
+        "life_plan",
+        "pathway_map"
+      ],
+      "description": "Which rubric."
+    },
+    "rubric_version": {
+      "type": "string",
+      "description": "Rubric version."
+    },
+    "gates": {
+      "type": "array",
+      "description": "Pass/fail gates.",
+      "items": {
+        "type": "object",
+        "description": "One gate.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Gate id.",
+            "pattern": "^(LP|PM)-G[0-9]+$"
+          },
+          "status": {
+            "enum": [
+              "pass",
+              "declared_unknown",
+              "fail"
+            ],
+            "description": "pass; declared_unknown = the applicant consciously leaves it open (max 2; not allowed for LP-G3/LP-G4 unless user_accepted_consequence is true); fail."
+          },
+          "note": {
+            "type": "string",
+            "description": "Evidence for the status."
+          },
+          "user_accepted_consequence": {
+            "type": "boolean",
+            "description": "true when the applicant explicitly accepted the consequence of leaving this gate unknown (needed for LP-G3/LP-G4)."
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "note"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "soft": {
+      "type": "array",
+      "description": "Weighted soft criteria.",
+      "items": {
+        "type": "object",
+        "description": "One soft criterion.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Soft id.",
+            "pattern": "^(LP|PM)-S[0-9]+$"
+          },
+          "weight": {
+            "type": "integer",
+            "description": "Weight (1 or 2).",
+            "minimum": 1,
+            "maximum": 2
+          },
+          "score": {
+            "type": "integer",
+            "description": "0 = absent, 1 = partial, 2 = complete.",
+            "minimum": 0,
+            "maximum": 2
+          },
+          "note": {
+            "type": "string",
+            "description": "Evidence."
+          }
+        },
+        "required": [
+          "id",
+          "weight",
+          "score",
+          "note"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "soft_pct": {
+      "type": "number",
+      "description": "Weighted percentage 0-100, computed by rubric.py.",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "passed": {
+      "type": "boolean",
+      "description": "Computed by rubric.py: all gates pass/declared_unknown (<= 2 declared, LP-G3/G4 only if accepted), mechanical checks ok, and soft_pct >= 70."
+    },
+    "scored_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When scored."
+    },
+    "auto_checks": {
+      "type": "array",
+      "description": "Mechanical cross-checks run by rubric.py (pathway_map only).",
+      "items": {
+        "type": "object",
+        "description": "One check.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Gate id checked."
+          },
+          "ok": {
+            "type": "boolean",
+            "description": "Result."
+          },
+          "detail": {
+            "type": "string",
+            "description": "What was counted."
+          }
+        },
+        "required": [
+          "id",
+          "ok",
+          "detail"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "problems": {
+      "type": "array",
+      "description": "Reasons for passed=false, computed by rubric.py.",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "rubric",
+    "rubric_version",
+    "gates",
+    "soft",
+    "soft_pct",
+    "passed",
+    "scored_at"
+  ],
+  "additionalProperties": false
+}
